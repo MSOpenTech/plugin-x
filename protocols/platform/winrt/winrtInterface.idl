@@ -1,0 +1,30 @@
+import "inspectable.idl";
+import "Windows.Foundation.idl";
+
+#define COMPONENT_VERSION 1.0
+
+namespace winrtInterface
+{
+  interface IProtocol;
+  [uuid(64b0eac7-f5e7-4787-90a2-940f5297570a), version(COMPONENT_VERSION)]
+  interface IProtocol : IInspectable
+  {
+    HRESULT getPluginVersion([out, retval] HSTRING *value);
+    HRESULT getSDKVersion([out, retval] HSTRING *value);
+    HRESULT setDebugMode([in] boolean bDebug);
+  }
+
+  interface IProtocolAnalytics;
+  [uuid(666997f8-53a1-4c9c-b7c7-e7b3f248e9f5), version(COMPONENT_VERSION)]
+  interface IProtocolAnalytics : IInspectable
+  {
+    HRESULT startSession([in] HSTRING appKey);
+    HRESULT stopSession();
+    HRESULT setSessionContinueMillis([in] int millis);
+    HRESULT logError([in] HSTRING errorId, [in] HSTRING message);
+    HRESULT logEvent([in] HSTRING eventId, [in] Windows.Foundation.Collections.IMap<HSTRING, HSTRING>* paramMap);
+    HRESULT logTimedEventBegin([in] HSTRING eventId);
+    HRESULT logTimedEventEnd([in] HSTRING eventId);
+    HRESULT setCaptureUncaughtException([in] boolean enabled);
+  }
+}
