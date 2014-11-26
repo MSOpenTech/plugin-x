@@ -100,9 +100,9 @@ bool TestSocial::init()
 
     // create optional menu
     // cases item
-    _caseItem = MenuItemToggle::createWithCallback(NULL,
-                                                MenuItemFont::create( s_aTestCases[0].c_str() ),
-                                                NULL );
+#if WINDOWS
+    _caseItem = MenuItemToggle::createWithCallback(NULL, MenuItemFont::create( s_aTestCases[0].c_str() ), NULL );
+#endif
     int caseLen = sizeof(s_aTestCases) / sizeof(std::string);
     for (int i = 1; i < caseLen; ++i)
     {

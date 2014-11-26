@@ -1,13 +1,13 @@
 #include "HelloWorldScene.h"
-#include "TestAdsScene.h"
-#include "TestAnalyticsScene.h"
-#include "TestShareScene.h"
-#include "TestIAPScene.h"
-#include "TestIAPOnlineScene.h"
-#include "TestUserScene.h"
-#include "TestSocialScene.h"
-#include "TestFacebookUserScene.h"
-#include "TestFacebookShare.h"
+#include "TestAds\TestAdsScene.h"
+#include "TestAnalytics\TestAnalyticsScene.h"
+#include "TestShare\TestShareScene.h"
+#include "TestIAP\TestIAPScene.h"
+#include "TestIAPOnline\TestIAPOnlineScene.h"
+#include "TestUser\TestUserScene.h"
+#include "TestSocial\TestSocialScene.h"
+#include "TestFacebookUser\TestFacebookUserScene.h"
+#include "TestFacebookShare\TestFacebookShare.h"
 
 USING_NS_CC;
 
