@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <ItemsProjectGuid>{5419e2ca-4b8f-411d-b6b1-54c415ed17b0}</ItemsProjectGuid>
+    <ItemsProjectGuid>{79c306c0-1e5b-4158-913a-4443fd4289b4}</ItemsProjectGuid>
     <ItemsRootNamespace>pluginx</ItemsRootNamespace>
     <ItemsProjectName>pluginx.Shared</ItemsProjectName>
     <CodeSharingProject>248F659F-DAC5-46E8-AC09-60EC9FC95053</CodeSharingProject>
@@ -14,26 +14,30 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectCapability Include="SourceItemsFromImports" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\IPluginMapCallback.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\IProtocol.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\IProtocolAnalytics.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\IProtocolCallback.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\IProtocols.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\util.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)pluginx.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\FacebookAgent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginFactory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginMap.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginProtocol.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolAds.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolAnalytics.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolIAP.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolShare.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolSocial.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolUser.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\util.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\PluginManager.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\PluginParam.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)pluginx.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginMap.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolHelper.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\util.h" />
+    <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
 </Project>

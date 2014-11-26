@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>e956c24b-f04e-47bf-bf00-746681ae1301</SharedGUID>
+    <ItemsProjectGuid>{a3ad93e4-0b2f-4c58-9181-69bed2e42e3e}</ItemsProjectGuid>
+    <ItemsRootNamespace>HelloPlugins</ItemsRootNamespace>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestAds\TestAdsScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestAnalytics\TestAnalyticsScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestFacebookShare\TestFacebookShare.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestFacebookUser\TestFacebookUserScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAPOnline\MyIAPOLManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAPOnline\TestIAPOnlineScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAP\MyPurchase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAP\TestIAPScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestShare\MyShareManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestShare\TestShareScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestSocial\MySocialManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestSocial\TestSocialScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestUser\MyUserManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestUser\TestUserScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)App.xaml.cpp">
+      <DependentUpon>$(MSBuildThisFileDirectory)App.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Cocos2dRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OpenGLES.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OpenGLESPage.xaml.cpp">
+      <DependentUpon>$(MSBuildThisFileDirectory)OpenGLESPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\AppDelegate.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\AppMacros.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestAds\TestAdsScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestAnalytics\TestAnalyticsScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestFacebookShare\TestFacebookShare.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestFacebookUser\TestFacebookUserScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAPOnline\MyIAPOLManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAPOnline\TestIAPOnlineScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAP\MyPurchase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAP\TestIAPScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestShare\MyShareManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestShare\TestShareScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestSocial\MySocialManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestSocial\TestSocialScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestUser\MyUserManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestUser\TestUserScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)App.xaml.h">
+      <DependentUpon>$(MSBuildThisFileDirectory)App.xaml</DependentUpon>
+    </ClInclude>
+    <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClInclude Include="$(MSBuildThisFileDirectory)OpenGLES.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)OpenGLESPage.xaml.h">
+      <DependentUpon>$(MSBuildThisFileDirectory)OpenGLESPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <_CustomResource Include="$(MSBuildThisFileDirectory)..\..\Resources\**\*">
+      <Link>Assets\Resources\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <DeploymentContent>true</DeploymentContent>
+    </_CustomResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)OpenGLESPage.xaml" />
+  </ItemGroup>
+  <Target Name="_CollectCustomResources" BeforeTargets="AssignTargetPaths">
+    <Message Text="Adding resource: %(_CustomResource.Identity) -&gt; %(_CustomResource.Link)" />
+    <ItemGroup>
+      <None Include="@(_CustomResource)" />
+    </ItemGroup>
+  </Target>
+</Project>

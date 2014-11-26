@@ -6,17 +6,39 @@
 using namespace cocos2d::plugin;
 using namespace pluginx;
 
-ProtocolSocial::ProtocolSocial() {
-  _listener = nullptr;
+/**
+@brief config the share developer info
+@param devInfo This parameter is the info of developer,
+different plugin have different format
+@warning Must invoke this interface before other interfaces.
+And invoked only once.
+*/
+void ProtocolSocial::configDeveloperInfo(TSocialDeveloperInfo devInfo){
+
 }
 
-void ProtocolSocial::configDeveloperInfo(TSocialDeveloperInfo devInfo) {
-	//ProtocolHelper::GlobalCallback->configSocialDeveloperInfo(util::charArrayToPlatformString(const_cast<char*>(getPluginName())), util::stdStrMapToPlatformStrMap(&devInfo));
+/**
+* @brief methods of leaderboard feature
+*/
+void ProtocolSocial::submitScore(const char* leadboardID, long score){
+
+}
+void ProtocolSocial::submitScore(const char* leadboardID, long score, ProtocolSocialCallback cb){
+
+}
+void ProtocolSocial::showLeaderboard(const char* leaderboardID){
+
 }
 
-//void ProtocolSocial::share(TShareInfo info) {
-//	ProtocolHelper::GlobalCallback->share(util::charArrayToPlatformString(const_cast<char*>(getPluginName())), util::stdStrMapToPlatformStrMap(&info));
-//}
+/**
+* @brief methods of achievement feature
+*/
+void ProtocolSocial::unlockAchievement(TAchievementInfo achInfo){
 
-ProtocolSocial::~ProtocolSocial(){
+}
+void ProtocolSocial::unlockAchievement(TAchievementInfo achInfo, ProtocolSocialCallback cb){
+
+}
+void ProtocolSocial::showAchievements(){
+
 }
