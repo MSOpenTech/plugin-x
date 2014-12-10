@@ -43,6 +43,7 @@ void PluginFactory::purgeFactory() {
 		s_pFactory = nullptr;
 	}
 }
+
 typedef HRESULT (WINAPI *DllActivationFactoryPtr)(HSTRING, IActivationFactory **);
 // TODO should return correct protocol object
 PluginProtocol* PluginFactory::createPlugin(const char* name) {
