@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ApplicationInsights.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -34,13 +33,14 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{d70ca2f2-b46a-47f6-bc9f-db5c655266af}</ProjectGuid>
-    <RootNamespace>MicrosoftApplicationInsights</RootNamespace>
+    <RootNamespace>microsoftapplicationinsights</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Phone</ApplicationType>
     <ApplicationTypeRevision>8.1</ApplicationTypeRevision>
     <ConvergedProjectType>CodeSharingWindowsRuntimeComponent</ConvergedProjectType>
+    <ProjectName>microsoftapplicationinsights.WindowsPhone</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

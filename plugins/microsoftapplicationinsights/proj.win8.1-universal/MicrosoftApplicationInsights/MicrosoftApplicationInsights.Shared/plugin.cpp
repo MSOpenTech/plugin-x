@@ -6,9 +6,9 @@ using namespace Platform::Collections;
 using namespace Microsoft::ApplicationInsights::Telemetry::WindowsStore;
 #include <unordered_map>
 using namespace std;
-namespace MicrosoftApplicationInsights
+namespace microsoftapplicationinsights
 {
-  public ref class MicrosoftApplicationInsights sealed : public IProtocolAnalytics, IProtocol
+  public ref class microsoftapplicationinsights sealed : public IProtocolAnalytics, IProtocol
   {
     private:
       unordered_map<String^, TimedAnalyticsEvent ^>timedEvents;
