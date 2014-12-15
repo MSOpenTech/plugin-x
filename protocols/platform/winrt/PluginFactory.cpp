@@ -58,14 +58,14 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
   HMODULE module = LoadPackagedLibrary((wname +suffix).c_str(), 0);
   if (module == nullptr)
   {
-    OutputDebugString(L"Failed to load Plugin");
+    OutputDebugStringA("Failed to load Plugin");
     OutputDebugStringA(name);
     return nullptr;
   }
   DllActivationFactoryPtr _DllActivationFactory = (DllActivationFactoryPtr) GetProcAddress(module, "DllGetActivationFactory");
   if (!_DllActivationFactory)
   {
-    OutputDebugString(L"Failed to load Plugin ActivationFactory entrypoint");
+    OutputDebugStringA("Failed to load Plugin ActivationFactory entrypoint");
     return nullptr;
   }
   
@@ -76,21 +76,21 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 
   if (factoryPlugin.Get() == nullptr)
   {
-    OutputDebugString((L"Plugin failed to implement class " + wname+L"." +wname).c_str());
+    OutputDebugStringW((L"Plugin failed to implement class " + wname+L"." +wname).c_str());
     return nullptr;
   }
   ComPtr<IInspectable> instance;
   factoryPlugin.Get()->ActivateInstance(instance.GetAddressOf());
   if (instance.Get() == nullptr)
   {
-    OutputDebugString(L"Failed to create instance of plugin");
+    OutputDebugStringA("Failed to create instance of plugin");
     return nullptr;
   }
   ComPtr<IProtocol> base;
   instance.As(&base);
   if (base.Get() == nullptr)
   {
-    OutputDebugString(L"Plugin Fails to Implement IProtocol");
+    OutputDebugStringA("Plugin Fails to Implement IProtocol");
     return nullptr;
   }
   // Try all protocols to see which one implements
@@ -103,7 +103,7 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
     PluginMap::mapIProtocolAnalytics[out] = dynamic_cast<winrtInterface::IProtocolAnalytics^>(PluginMap::mapIProtocol[out]);
     return out;
   }
-  OutputDebugString(L"Protocol Failed to Load ...");
+  OutputDebugStringA("Protocol Failed to Load ...");
   return nullptr;
   {
     /*

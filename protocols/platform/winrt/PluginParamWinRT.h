@@ -1,6 +1,6 @@
 
 #pragma once
-#include "..\..\..\..\include\PluginParam.h"
+#include "PluginParam.h"
 #include <collection.h>
 using namespace Windows::Foundation::Collections;
 
