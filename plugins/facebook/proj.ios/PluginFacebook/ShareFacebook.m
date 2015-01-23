@@ -178,6 +178,10 @@
     return [FBSettings sdkVersion];
 }
 
+- (void) setSDKVersion: (NSString *)sdkVersion{
+     [FBSettings setSDKVersion:sdkVersion];
+}
+
 - (NSString*) getPluginVersion
 {
     return @"0.2.0";
