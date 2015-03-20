@@ -11,6 +11,7 @@ public:
 	void addPlugin(std::string name);
   static std::unordered_map<void*, winrtInterface::IProtocol^ > mapIProtocol;
   static std::unordered_map<void*, winrtInterface::IProtocolAnalytics^ > mapIProtocolAnalytics;
+  static std::unordered_map<void*, winrtInterface::IProtocolIAP^ > mapIProtocolIAP;
 private:
   PluginMap(){}
 };
