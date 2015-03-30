@@ -11,7 +11,8 @@ using namespace Windows::Storage;
 
 using namespace winrtInterface;
 
-#define TESTING 
+#define PRODUCT_KEY "product"
+#define PROXY_STORE_KEY "windows_store_proxy"
 
 namespace microsoftiap {
 
@@ -73,10 +74,10 @@ namespace microsoftiap {
 
 		virtual void configDeveloperInfo(IMap<Platform::String^, Platform::String^>^ devInfo) {
 			log("configuring developer info");
-			// The path looked up by "windows_store_proxy" must use \ to split directories and not /
-#ifdef TESTING
-			loadWindowsStoreProxyFile(devInfo->Lookup("windows_store_proxy"));
-#endif
+			// The path looked up by PROXY_STORE_KEY must use \ to split directories and not /
+            if (debugMode) {
+                loadWindowsStoreProxyFile(devInfo->Lookup(PROXY_STORE_KEY)); // TODO how should this fail if key isn't found?
+            }
 		}
 
         // checks that the product can in fact be purchased before attempting to buy
@@ -85,21 +86,21 @@ namespace microsoftiap {
 			bool foundProduct = false;
 			bool activeProduct;
 			LicenseInformation^ licensingInfo = getLicenseInformation();
-			if (info->HasKey("product")) {
-				product = info->Lookup("product");
+			if (info->HasKey(PRODUCT_KEY)) {
+				product = info->Lookup(PRODUCT_KEY);
 			}
 			if (product != nullptr && licensingInfo->ProductLicenses->HasKey(product)) {
 				foundProduct = true;
 				activeProduct = licensingInfo->ProductLicenses->Lookup(product)->IsActive;
 			}
 			if (product == nullptr) {
-				sendPayResult(PayResultCodeEnum::kPayFail, "product key not found");
+				OnPayResult(PayResultCodeEnum::kPayFail, "product key not found");
 			}
 			else if (foundProduct == false) {
-				sendPayResult(PayResultCodeEnum::kPayFail, "product not found");
+				OnPayResult(PayResultCodeEnum::kPayFail, "product not found");
 			}
 			else if (activeProduct == true) {
-				sendPayResult(PayResultCodeEnum::kPayFail, "product already purchased");
+				OnPayResult(PayResultCodeEnum::kPayFail, "product already purchased");
 			}
 			else {
 				log("purchasing product");
@@ -107,57 +108,40 @@ namespace microsoftiap {
 			}
 		}
 
-        // send payment result to cocos app
-		void sendPayResult(PayResultCodeEnum ret, Platform::String^ msg) {
-            log(msg);
-            log("calling listener");
-            OnPayResult(ret, msg);
-		}
-
-        void loadWindowsStoreProxyFile(Platform::String^ filePath) {
-            StorageFolder^ installationFolder = Windows::ApplicationModel::Package::Current->InstalledLocation;
-            create_task(installationFolder->GetFileAsync(filePath)).then([this](task<StorageFile^> currentTask) {
-                StorageFile^ file;
-                try {
-                    file = currentTask.get();
-                    create_task(CurrentAppSimulator::ReloadSimulatorAsync(file)).then([this] {
-                    }).wait();
-                }
-                catch (Platform::Exception^ e) {
-                    OutputDebugString(e->Message->Data());
-                }
-            }).wait();
-        }
-
-        // waits on async action
-        void sendResult(Windows::Foundation::IAsyncOperation <Platform::String^> ^ action, Platform::String^ product) {
+        // waits on async action, then sends result to cocos app
+        void sendResult(Windows::Foundation::IAsyncOperation <Platform::String^> ^ asyncOp, Platform::String^ product) {
             try {
-                create_task(action).then([this, product](Platform::String^ msg) {
-                    LicenseInformation^ licenseInfo = this->getLicenseInformation();
+                create_task(asyncOp).then([this, product](Platform::String^ receipt) {
+                    LicenseInformation^ licenseInfo = getLicenseInformation();
                     if (licenseInfo->ProductLicenses->Lookup(product)->IsActive) {
-                        sendPayResult(PayResultCodeEnum::kPaySuccess, msg); // TODO what should the msg be?
+                        OnPayResult(PayResultCodeEnum::kPaySuccess, receipt);
                     }
                     else {
-                        sendPayResult(PayResultCodeEnum::kPayFail, "product was not purchased");
+                        OnPayResult(PayResultCodeEnum::kPayFail, "product was not purchased");
                     }
                 });
             }
             catch (Exception^ e) {
                 // TODO do something with exception
-                this->sendPayResult(PayResultCodeEnum::kPayFail, "product was not purchased");
+                OnPayResult(PayResultCodeEnum::kPayFail, "product was not purchased");
             }
         }
 
 		LicenseInformation^ getLicenseInformation() {
-#ifdef TESTING
-			return CurrentAppSimulator::LicenseInformation;
-#else
-			return CurrentApp::LicenseInformation;
-#endif
+            if (debugMode) {
+                return CurrentAppSimulator::LicenseInformation;
+            }
+            else {
+                return CurrentApp::LicenseInformation;
+            }
 		}
 
         virtual void setDispatcher(Windows::UI::Core::CoreDispatcher^ dispatcher) {
             this->dispatcher = dispatcher;
+        }
+
+        bool getDebugMode() {
+            return debugMode;
         }
 
 	private:
@@ -173,15 +157,36 @@ namespace microsoftiap {
                 Windows::UI::Core::CoreDispatcherPriority::Normal,
                 ref new Windows::UI::Core::DispatchedHandler([this, product]() {
                 try {
-                    auto ret = CurrentAppSimulator::RequestProductPurchaseAsync(product, true);
-                    this->sendResult(ret, product);
+                    Windows::Foundation::IAsyncOperation <Platform::String^>^ asyncOp = nullptr;
+                    if (this->getDebugMode()) {
+                        asyncOp = CurrentAppSimulator::RequestProductPurchaseAsync(product, true);
+                    }
+                    else {
+                        asyncOp = CurrentApp::RequestProductPurchaseAsync(product, true);
+                    }
+                    this->sendResult(asyncOp, product);
                 }
                 catch (Exception^ e) {
                     // TODO do something with exception
-                    this->sendPayResult(PayResultCodeEnum::kPayFail, "product was not purchased");
+                    this->OnPayResult(PayResultCodeEnum::kPayFail, "product was not purchased");
                 }
             }));
 
+        }
+
+        void loadWindowsStoreProxyFile(Platform::String^ filePath) {
+            StorageFolder^ installationFolder = Windows::ApplicationModel::Package::Current->InstalledLocation;
+            create_task(installationFolder->GetFileAsync(filePath)).then([this](task<StorageFile^> currentTask) {
+                StorageFile^ storeProxyFile;
+                try {
+                    storeProxyFile = currentTask.get();
+                    create_task(CurrentAppSimulator::ReloadSimulatorAsync(storeProxyFile)).then([this] {
+                    }).wait();
+                }
+                catch (Platform::Exception^ e) {
+                    OutputDebugString(e->Message->Data());
+                }
+            }).wait();
         }
 
 	};
