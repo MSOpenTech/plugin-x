@@ -27,9 +27,6 @@ void ProtocolIAP::payForProduct(TProductInfo info) {
 
 void ProtocolIAP::setResultListener(PayResultListener* pListener) {
     _listener = pListener;
-    PluginMap::mapIProtocolIAP[this]->OnPayResult += ref new OnPayResultHandler([this](PayResultCodeEnum ret, Platform::String^ msg) {
-        this->onPayResult((PayResultCode)ret, util::PlatformStringToStdString(msg).c_str());
-    });
 }
 
 void ProtocolIAP::onPayResult(PayResultCode ret, const char* msg) {

@@ -122,6 +122,10 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
             auto iDispatcher = (ABI::Windows::UI::Core::ICoreDispatcher*)dispatcher;
             iap->setDispatcher(iDispatcher);
 #endif
+            // register protocol for plugin event
+            PluginMap::mapIProtocolIAP[out]->OnPayResult += ref new winrtInterface::OnPayResultHandler([out](winrtInterface::PayResultCodeEnum ret, Platform::String^ msg) {
+                out->onPayResult((PayResultCode)ret, pluginx::util::PlatformStringToStdString(msg).c_str());
+            });
 			return out;
 		}
 	}
