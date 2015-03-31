@@ -131,30 +131,4 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 	}
 	OutputDebugStringA("Protocol Failed to Load ...");
 	return nullptr;
-	//{
-	/*
-	ComPtr<IActivationFactory>factory;
-
-	ProtocolAnalytics* out = new ProtocolAnalytics();
-	factoryPlugin.Get()->ActivateInstance(instance.GetAddressOf());
-	factory.Get()->ActivateInstance(&out->winrtProtocolAnalytics);
-	ComPtr<IProtocol> protocol;
-	instance.As(&protocol);
-	HSTRING val;
-	auto str = protocol.Get()->getPluginVersion(&val);
-	const wchar_t* buffer = WindowsGetStringRawBuffer(val, nullptr);
-	OutputDebugString(buffer);
-	out->winrtProtocolAnalytics->AddRef();
-	out->winrtProtocol->AddRef();
-	//auto protocolAnalytics = reinterpret_cast<IProtocolAnalytics^>(out->winrtProtocolAnalytics);
-	//auto protocol = reinterpret_cast<IProtocol^>(out->winrtProtocol);
-
-	//auto str = protocol->getPluginVersion();
-	//protocol->startSession(util::stdStringToPlatformString(appKey));
-	//protocolAnalytics->startSession(L"6e6ef650-2296-4cc6-8c1b-fa80d37df07d");
-	return out;
-	*/
-
-	//}
-	//return nullptr;
 }
