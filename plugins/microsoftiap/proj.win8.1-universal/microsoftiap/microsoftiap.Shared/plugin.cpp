@@ -110,8 +110,13 @@ namespace microsoftiap {
 
         // waits on async action, then sends result to cocos app
         void sendResult(Windows::Foundation::IAsyncOperation <Platform::String^> ^ asyncOp, Platform::String^ product) {
-            try {
-                create_task(asyncOp).then([this, product](Platform::String^ receipt) {
+            auto purchaseTask = create_task(asyncOp);
+            auto wrapperTask = create_task([purchaseTask]() {
+                return purchaseTask;
+            });
+            wrapperTask.then([this, product](task<Platform::String^> t) {
+                try {
+                    Platform::String^ receipt = t.get();
                     LicenseInformation^ licenseInfo = getLicenseInformation();
                     if (licenseInfo->ProductLicenses->Lookup(product)->IsActive) {
                         OnPayResult(PayResultCodeEnum::kPaySuccess, receipt);
@@ -119,12 +124,11 @@ namespace microsoftiap {
                     else {
                         OnPayResult(PayResultCodeEnum::kPayFail, "product was not purchased");
                     }
-                });
-            }
-            catch (Exception^ e) {
-                // TODO do something with exception
-                OnPayResult(PayResultCodeEnum::kPayFail, "product was not purchased");
-            }
+                }
+                catch (Exception^ e) {
+                    OnPayResult(PayResultCodeEnum::kPayFail, "product was not purchased");
+                }
+            });
         }
 
 		LicenseInformation^ getLicenseInformation() {
