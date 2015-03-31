@@ -21,6 +21,5 @@ namespace pluginx {
         const char* PlatformStringToCharArray(Platform::String^);
         std::string PlatformStringToStdString(Platform::String^);
         Platform::Collections::Map<Platform::String^, Platform::String^>^ stdStrMapToPlatformStrMap(std::map<std::string, std::string>* pMap);
-
     }
 }

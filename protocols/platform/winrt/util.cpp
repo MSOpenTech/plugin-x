@@ -74,10 +74,14 @@ namespace pluginx {
             return std::string(wstr.begin(), wstr.end());
         }
 
+        // TODO doesn't work, don't use
         const char* PlatformStringToCharArray(String^ str) {
-            const wchar_t *w = str->Data();
-            std::wstring wstr(w, str->Length());
-            return std::string(wstr.begin(), wstr.end()).c_str();
+            //const wchar_t *w = str->Data();
+            //std::wstring wstr(w, str->Length());
+            //return std::string(wstr.begin(), wstr.end()).c_str();
+            std::string stdString = PlatformStringToStdString(str);
+            const char* charArray = stdString.c_str();
+            return charArray;
         }
     } // end namespace util
 } // end namespace pluginx
