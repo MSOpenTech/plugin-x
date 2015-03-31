@@ -20,6 +20,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\FacebookAgent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginFactory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginParamWinRT.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginProtocol.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolAds.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolAnalytics.cpp" />
@@ -33,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginParamWinRT.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\util.h" />
   </ItemGroup>

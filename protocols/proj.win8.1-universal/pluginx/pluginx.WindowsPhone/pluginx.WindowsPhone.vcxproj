@@ -19,6 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="microsoftiap">
+      <HintPath>..\..\..\..\plugins\microsoftiap\proj.win8.1-universal\Debug\microsoftiap.WindowsPhone\microsoftiap.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
     <Reference Include="winrtInterface">
       <HintPath>..\..\..\platform\winrt\winrtInterface.winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
