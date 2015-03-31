@@ -14,7 +14,8 @@ ProtocolIAP::ProtocolIAP() {
 }
 
 ProtocolIAP::~ProtocolIAP() {
-    // TODO
+    PluginMap::mapIProtocol.erase(this);
+    PluginMap::mapIProtocolIAP.erase(this);
 }
 
 void ProtocolIAP::configDeveloperInfo(TIAPDeveloperInfo devInfo) {
@@ -30,7 +31,6 @@ void ProtocolIAP::setResultListener(PayResultListener* pListener) {
 }
 
 void ProtocolIAP::onPayResult(PayResultCode ret, const char* msg) {
-    // TODO
     if (_listener != nullptr) {
         std::map<std::string, std::string> empty;
         _listener->onPayResult(ret, msg, empty); // TODO where does the product info come from?
