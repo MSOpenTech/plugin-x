@@ -7,6 +7,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="winrtInterface.idl" />
+    <Midl Include="$(SolutionDir)\..\winrtInterface.idl" />
   </ItemGroup>
 </Project>

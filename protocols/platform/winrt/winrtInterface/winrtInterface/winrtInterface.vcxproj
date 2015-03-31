@@ -31,7 +31,14 @@
   <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>../../../../include;../..;$(IncludePath)</IncludePath>
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PostBuildEvent>
+      <Command>copy $(MSBuildProjectDirectory)\winrtInterface.winmd $(MSBuildProjectDirectory)\..\..\
+copy $(MSBuildProjectDirectory)\winrtInterface_h.h $(MSBuildProjectDirectory)\..\..\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <Midl Include="$(SolutionDir)\..\winrtInterface.idl">
       <MetadataFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
