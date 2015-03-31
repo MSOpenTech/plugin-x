@@ -32,6 +32,9 @@ PluginFactory::PluginFactory() {
 PluginFactory::~PluginFactory() {
 }
 
+void PluginFactory::setDispatcher(Windows::UI::Core::CoreDispatcher^ d) {
+    dispatcher = d;
+}
 
 PluginFactory* PluginFactory::getInstance() {
 	if (s_pFactory == nullptr) {
@@ -113,6 +116,8 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 			ProtocolIAP *out = new ProtocolIAP();
 			PluginMap::mapIProtocol[out] = reinterpret_cast<winrtInterface::IProtocol^>(base.Detach());
 			PluginMap::mapIProtocolIAP[out] = dynamic_cast<winrtInterface::IProtocolIAP^>(PluginMap::mapIProtocol[out]);
+            auto iDispatcher = (ABI::Windows::UI::Core::ICoreDispatcher*)dispatcher;
+            iap->setDispatcher(iDispatcher);
 			return out;
 		}
 	}
