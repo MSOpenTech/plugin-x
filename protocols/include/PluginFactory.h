@@ -38,9 +38,7 @@ public:
     /** Destory the instance of PluginFactory */
     static void purgeFactory();
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
     void setDispatcher(Windows::UI::Core::CoreDispatcher^ d);
-#endif
 
 private:
     friend class PluginManager;
@@ -48,9 +46,7 @@ private:
 
     /** create the plugin by name */
     PluginProtocol* createPlugin(const char* name);
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
     Windows::UI::Core::CoreDispatcher^ dispatcher;
-#endif
 };
 
 }} //namespace cocos2d { namespace plugin {

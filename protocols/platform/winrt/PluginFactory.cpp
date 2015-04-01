@@ -32,11 +32,9 @@ PluginFactory::PluginFactory() {
 PluginFactory::~PluginFactory() {
 }
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
 void PluginFactory::setDispatcher(Windows::UI::Core::CoreDispatcher^ d) {
     dispatcher = d;
 }
-#endif
 
 PluginFactory* PluginFactory::getInstance() {
 	if (s_pFactory == nullptr) {
@@ -118,10 +116,8 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 			ProtocolIAP *out = new ProtocolIAP();
 			PluginMap::mapIProtocol[out] = reinterpret_cast<winrtInterface::IProtocol^>(base.Detach());
 			PluginMap::mapIProtocolIAP[out] = dynamic_cast<winrtInterface::IProtocolIAP^>(PluginMap::mapIProtocol[out]);
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
             auto iDispatcher = (ABI::Windows::UI::Core::ICoreDispatcher*)dispatcher;
             iap->setDispatcher(iDispatcher);
-#endif
             // register protocol for plugin event
             PluginMap::mapIProtocolIAP[out]->OnPayResult += ref new winrtInterface::OnPayResultHandler([out](winrtInterface::PayResultCodeEnum ret, Platform::String^ msg) {
                 out->onPayResult((PayResultCode)ret, pluginx::util::PlatformStringToStdString(msg).c_str());
