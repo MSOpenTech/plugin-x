@@ -1,5 +1,6 @@
+
 #include "pch.h"
-#include "IProtocol.h"
+#include "IPluginParam.h"
 
 using namespace winrtInterface;
 
