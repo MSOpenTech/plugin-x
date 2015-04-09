@@ -118,20 +118,21 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 			return out;
     }
     catch (Platform::Exception^ e) {
-        try {
-            auto analytics = safe_cast<IProtocolAnalytics^>(protocol);
-            ProtocolAnalytics *out = new ProtocolAnalytics();
-            PluginMap::mapIProtocol[out] = analytics;
-            PluginMap::mapIProtocolAnalytics[out] = dynamic_cast<winrtInterface::IProtocolAnalytics^>(PluginMap::mapIProtocol[out]);
-            return out;
-        }
-        catch (Platform::Exception^ e) {
-            // TODO add other protocols here
-            OutputDebugStringA("Plugin Fails to Implement any Protocols");
-            return nullptr;
-        }
-
+        OutputDebugString(L"Plugin does not implement IProtocolIAP");
     }
+    try {
+        auto analytics = safe_cast<IProtocolAnalytics^>(protocol);
+        ProtocolAnalytics *out = new ProtocolAnalytics();
+        PluginMap::mapIProtocol[out] = analytics;
+        PluginMap::mapIProtocolAnalytics[out] = dynamic_cast<winrtInterface::IProtocolAnalytics^>(PluginMap::mapIProtocol[out]);
+        return out;
+    }
+    catch (Platform::Exception^ e) {
+        OutputDebugString(L"Plugin does not implement IProtocolAnalytics");
+        return nullptr;
+    }
+    // TODO add other protocols here
+    OutputDebugStringA("Plugin Fails to Implement any Protocols");
 	OutputDebugStringA("Protocol Failed to Load ...");
 	return nullptr;
 }
