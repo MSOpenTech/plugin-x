@@ -1,11 +1,10 @@
 
 #include <vector>
 #include <string>
+#include <unordered_map>
+
 #include "PluginProtocol.h"
 #include "ProtocolAnalytics.h"
-//#include "winrtInterface_h.h"
-//#include "IProtocol.h"
-#include <unordered_map>
 
 class PluginMap {
 

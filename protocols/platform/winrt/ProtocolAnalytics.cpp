@@ -1,10 +1,5 @@
 
-#include "ProtocolAnalytics.h"
 #include <stdlib.h>
-#include "util.h"
-//#include "winrtInterface_h.h"
-//#include "IProtocol.h"
-#include "PluginMap.h"
 #include <wrl.h>
 #include <wrl\event.h>
 #include <wrl\wrappers\corewrappers.h>
@@ -16,7 +11,11 @@
 #include <windows.foundation.collections.h>
 #include <wrl\implements.h>
 #include <collection.h>
-//using namespace ABI::winrtInterface;
+
+#include "ProtocolAnalytics.h"
+#include "util.h"
+#include "PluginMap.h"
+
 using namespace winrtInterface;
 using namespace cocos2d::plugin;
 using namespace pluginx;

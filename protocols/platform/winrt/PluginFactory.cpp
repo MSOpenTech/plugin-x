@@ -17,15 +17,15 @@
 #include "ProtocolIAP.h"
 #include "PluginMap.h"
 #include "util.h"
-//#include "IProtocol.h"
-#include <inspectable.h>
+//#include <inspectable.h>
 
 using namespace cocos2d::plugin;
 using namespace ABI::Windows::Foundation;
 using namespace Microsoft::WRL;
 using namespace Microsoft::WRL::Wrappers;
-//using namespace ABI::winrtInterface;
 using namespace winrtInterface;
+
+typedef HRESULT(WINAPI *DllActivationFactoryPtr)(HSTRING, IActivationFactory **);
 
 static PluginFactory* s_pFactory;
 
@@ -52,8 +52,7 @@ void PluginFactory::purgeFactory() {
 		s_pFactory = nullptr;
 	}
 }
-#include <winstring.h>
-typedef HRESULT(WINAPI *DllActivationFactoryPtr)(HSTRING, IActivationFactory **);
+
 // TODO should return correct protocol object
 PluginProtocol* PluginFactory::createPlugin(const char* name) {
 	//ComPtr<IProtocol> Protocol;
@@ -135,55 +134,6 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
         }
 
     }
-	return nullptr;
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //ComPtr<IProtocol> base;
-	//instance.As(&base);
-    /*
-	if (base.Get() == nullptr)
-	{
-		OutputDebugStringA("Plugin Fails to Implement IProtocol");
-		return nullptr;
-	}
-	// Try all protocols to see which one implements
-	ComPtr<IProtocolAnalytics> analytics;
-	instance.As(&analytics);
-	if (analytics.Get() != nullptr)
-	{
-		ProtocolAnalytics *out = new ProtocolAnalytics();
-		PluginMap::mapIProtocol[out] = reinterpret_cast<winrtInterface::IProtocol^>(base.Detach());
-		PluginMap::mapIProtocolAnalytics[out] = dynamic_cast<winrtInterface::IProtocolAnalytics^>(PluginMap::mapIProtocol[out]);
-		return out;
-	}
-	else {
-		ComPtr<IProtocolIAP> iap;
-		instance.As(&iap);
-		if (iap.Get() != nullptr) {
-			ProtocolIAP *out = new ProtocolIAP();
-			PluginMap::mapIProtocol[out] = reinterpret_cast<winrtInterface::IProtocol^>(base.Detach());
-			PluginMap::mapIProtocolIAP[out] = dynamic_cast<winrtInterface::IProtocolIAP^>(PluginMap::mapIProtocol[out]);
-            //auto iDispatcher = (ABI::Windows::UI::Core::ICoreDispatcher*)dispatcher;
-            //iap->setDispatcher(iDispatcher);
-            iap->setDispatcher(dispatcher);
-            // register protocol for plugin event
-            PluginMap::mapIProtocolIAP[out]->OnPayResult += ref new winrtInterface::OnPayResultHandler([out](winrtInterface::PayResultCodeEnum ret, Platform::String^ msg) {
-                out->onPayResult((PayResultCode)ret, pluginx::util::PlatformStringToStdString(msg).c_str());
-            });
-			return out;
-		}
-	}
 	OutputDebugStringA("Protocol Failed to Load ...");
-    */
+	return nullptr;
 }

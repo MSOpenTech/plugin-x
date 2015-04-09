@@ -3,8 +3,6 @@
 
 #include <collection.h>
 
-//#include "winrtInterface_h.h"
-//#include "IProtocol.h"
 #include "PluginParam.h"
 
 using namespace Windows::Foundation::Collections;

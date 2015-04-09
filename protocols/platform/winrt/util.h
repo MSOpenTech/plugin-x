@@ -9,8 +9,6 @@
 #include "PluginParam.h"
 #include "ProtocolAnalytics.h"
 #include "PluginProtocol.h"
-//#include "winrtInterface_h.h"
-//#include "IProtocol.h"
 #include "PluginParamWinRT.h"
 
 namespace pluginx {
