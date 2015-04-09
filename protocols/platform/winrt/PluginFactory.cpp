@@ -18,6 +18,7 @@
 #include "PluginMap.h"
 #include "util.h"
 //#include "IProtocol.h"
+#include <inspectable.h>
 
 using namespace cocos2d::plugin;
 using namespace ABI::Windows::Foundation;
@@ -65,14 +66,6 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 	std::wstring wname(name, name + strlen(name));
 
     //Microsoft::WRL::Details::ComPtrRef<IProtocol> plugin = Windows::Foundation::ActivateInstance(wname + suffix);
-    void * t;
-    void ** q;
-    Platform::String^ s = pluginx::util::charArrayToPlatformString(name);
-    HSTRING* hstring;
-    //WindowsCreateString(s->Data(), s->Length(), hstring);
-    //auto plugin = Windows::Foundation::GetActivationFactory(*hstring, q);
-    return nullptr;
-    /*
 	HMODULE module = LoadPackagedLibrary((wname + suffix).c_str(), 0);
 	if (module == nullptr)
 	{
@@ -104,8 +97,61 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 		OutputDebugStringA("Failed to create instance of plugin");
 		return nullptr;
 	}
-	ComPtr<IProtocol> base;
-	instance.As(&base);
+
+    Platform::Object^ base = reinterpret_cast<Platform::Object^>(instance.Get());
+    winrtInterface::IProtocol^ protocol;
+    try {
+        protocol = safe_cast<IProtocol^>(base);
+    }
+    catch (Platform::Exception^ e) {
+		OutputDebugStringA("Plugin Fails to Implement IProtocol");
+		return nullptr;
+    }
+
+    try {
+        winrtInterface::IProtocolIAP^ iap = safe_cast<IProtocolIAP^>(protocol);
+			ProtocolIAP *out = new ProtocolIAP();
+            PluginMap::mapIProtocol[out] = iap;
+			PluginMap::mapIProtocolIAP[out] = dynamic_cast<winrtInterface::IProtocolIAP^>(PluginMap::mapIProtocol[out]);
+            iap->setDispatcher(dispatcher);
+            // register protocol for plugin event
+            PluginMap::mapIProtocolIAP[out]->OnPayResult += ref new winrtInterface::OnPayResultHandler([out](winrtInterface::PayResultCodeEnum ret, Platform::String^ msg) {
+                out->onPayResult((PayResultCode)ret, pluginx::util::PlatformStringToStdString(msg).c_str());
+            });
+			return out;
+    }
+    catch (Platform::Exception^ e) {
+        try {
+            auto analytics = safe_cast<IProtocolAnalytics^>(protocol);
+            ProtocolAnalytics *out = new ProtocolAnalytics();
+            PluginMap::mapIProtocol[out] = analytics;
+            PluginMap::mapIProtocolAnalytics[out] = dynamic_cast<winrtInterface::IProtocolAnalytics^>(PluginMap::mapIProtocol[out]);
+            return out;
+        }
+        catch (Platform::Exception^ e) {
+            // TODO add other protocols here
+            OutputDebugStringA("Plugin Fails to Implement any Protocols");
+            return nullptr;
+        }
+
+    }
+	return nullptr;
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //ComPtr<IProtocol> base;
+	//instance.As(&base);
+    /*
 	if (base.Get() == nullptr)
 	{
 		OutputDebugStringA("Plugin Fails to Implement IProtocol");
@@ -139,6 +185,5 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 		}
 	}
 	OutputDebugStringA("Protocol Failed to Load ...");
-	return nullptr;
     */
 }
