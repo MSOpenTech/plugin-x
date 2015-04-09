@@ -10,9 +10,9 @@ class PluginMap {
 
 public:
     void addPlugin(std::string name);
-    static std::unordered_map<void*, winrtInterface::IProtocol^ > mapIProtocol;
-    static std::unordered_map<void*, winrtInterface::IProtocolAnalytics^ > mapIProtocolAnalytics;
-    static std::unordered_map<void*, winrtInterface::IProtocolIAP^ > mapIProtocolIAP;
+    static std::unordered_map<void*, cocosPluginWinrtBridge::IProtocol^ > mapIProtocol;
+    static std::unordered_map<void*, cocosPluginWinrtBridge::IProtocolAnalytics^ > mapIProtocolAnalytics;
+    static std::unordered_map<void*, cocosPluginWinrtBridge::IProtocolIAP^ > mapIProtocolIAP;
 private:
     PluginMap(){}
 };

@@ -9,7 +9,7 @@ using namespace Microsoft::WRL::Wrappers;
 using namespace Platform;
 using namespace pluginparam;
 using namespace Platform::Collections;
-using namespace winrtInterface;
+using namespace cocosPluginWinrtBridge;
 
 namespace pluginx {
     namespace util {

@@ -28,21 +28,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "headers", "headers", "{D457
 		..\include\ProtocolUser.h = ..\include\ProtocolUser.h
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winrtInterface.Shared", "..\platform\winrt\winrtInterface\winrtInterface\winrtInterface.Shared\winrtInterface.Shared.vcxitems", "{B64213AF-F8E1-476F-99B3-F1E706DDF69A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cocosPluginWinrtBridge", "cocosPluginWinrtBridge", "{9E170B4E-A6AC-4ECA-93EE-A8BD2A1D58B6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winrtInterface.Windows", "..\platform\winrt\winrtInterface\winrtInterface\winrtInterface.Windows\winrtInterface.Windows.vcxproj", "{852072A7-60BC-43BF-A7E1-F967BD4A66E1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cocosPluginWinrtBridge.Shared", "..\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Shared\cocosPluginWinrtBridge.Shared.vcxitems", "{1B37C3CE-088D-4277-B750-3A1CBEB1884A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winrtInterface.WindowsPhone", "..\platform\winrt\winrtInterface\winrtInterface\winrtInterface.WindowsPhone\winrtInterface.WindowsPhone.vcxproj", "{42AFC547-BE24-4015-9669-8CB8C53BCFEB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cocosPluginWinrtBridge.Windows", "..\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Windows\cocosPluginWinrtBridge.Windows.vcxproj", "{491F4851-92BA-4AC1-9A80-241E1FF13229}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "winrtInterface", "winrtInterface", "{B7C8B363-687F-4A58-89C4-310A49985FB1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cocosPluginWinrtBridge.WindowsPhone", "..\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.WindowsPhone\cocosPluginWinrtBridge.WindowsPhone.vcxproj", "{35ACD56C-DEE1-477B-BEC0-C963C7937623}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\platform\winrt\winrtInterface\winrtInterface\winrtInterface.Shared\winrtInterface.Shared.vcxitems*{b64213af-f8e1-476f-99b3-f1e706ddf69a}*SharedItemsImports = 9
-		..\platform\winrt\winrtInterface\winrtInterface\winrtInterface.Shared\winrtInterface.Shared.vcxitems*{852072a7-60bc-43bf-a7e1-f967bd4a66e1}*SharedItemsImports = 4
+		..\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Shared\cocosPluginWinrtBridge.Shared.vcxitems*{491f4851-92ba-4ac1-9a80-241e1ff13229}*SharedItemsImports = 4
+		..\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Shared\cocosPluginWinrtBridge.Shared.vcxitems*{35acd56c-dee1-477b-bec0-c963c7937623}*SharedItemsImports = 4
+		..\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Shared\cocosPluginWinrtBridge.Shared.vcxitems*{1b37c3ce-088d-4277-b750-3a1cbeb1884a}*SharedItemsImports = 9
 		pluginx\pluginx.Shared\pluginx.Shared.vcxitems*{b9aa6c29-72bc-4607-9f0c-8a68fe84ee0e}*SharedItemsImports = 4
 		pluginx\pluginx.Shared\pluginx.Shared.vcxitems*{5419e2ca-4b8f-411d-b6b1-54c415ed17b0}*SharedItemsImports = 9
-		..\platform\winrt\winrtInterface\winrtInterface\winrtInterface.Shared\winrtInterface.Shared.vcxitems*{42afc547-be24-4015-9669-8cb8c53bcfeb}*SharedItemsImports = 4
 		pluginx\pluginx.Shared\pluginx.Shared.vcxitems*{c954925a-1a55-49ee-b1be-aecced3f08bf}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,28 +76,28 @@ Global
 		{B9AA6C29-72BC-4607-9F0C-8A68FE84EE0E}.Release|Win32.ActiveCfg = Release|Win32
 		{B9AA6C29-72BC-4607-9F0C-8A68FE84EE0E}.Release|Win32.Build.0 = Release|Win32
 		{B9AA6C29-72BC-4607-9F0C-8A68FE84EE0E}.Release|x64.ActiveCfg = Release|Win32
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1}.Debug|ARM.ActiveCfg = Debug|ARM
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1}.Debug|ARM.Build.0 = Debug|ARM
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1}.Debug|Win32.ActiveCfg = Debug|Win32
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1}.Debug|Win32.Build.0 = Debug|Win32
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1}.Debug|x64.ActiveCfg = Debug|x64
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1}.Debug|x64.Build.0 = Debug|x64
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1}.Release|ARM.ActiveCfg = Release|ARM
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1}.Release|ARM.Build.0 = Release|ARM
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1}.Release|Win32.ActiveCfg = Release|Win32
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1}.Release|Win32.Build.0 = Release|Win32
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1}.Release|x64.ActiveCfg = Release|x64
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1}.Release|x64.Build.0 = Release|x64
-		{42AFC547-BE24-4015-9669-8CB8C53BCFEB}.Debug|ARM.ActiveCfg = Debug|ARM
-		{42AFC547-BE24-4015-9669-8CB8C53BCFEB}.Debug|ARM.Build.0 = Debug|ARM
-		{42AFC547-BE24-4015-9669-8CB8C53BCFEB}.Debug|Win32.ActiveCfg = Debug|Win32
-		{42AFC547-BE24-4015-9669-8CB8C53BCFEB}.Debug|Win32.Build.0 = Debug|Win32
-		{42AFC547-BE24-4015-9669-8CB8C53BCFEB}.Debug|x64.ActiveCfg = Debug|Win32
-		{42AFC547-BE24-4015-9669-8CB8C53BCFEB}.Release|ARM.ActiveCfg = Release|ARM
-		{42AFC547-BE24-4015-9669-8CB8C53BCFEB}.Release|ARM.Build.0 = Release|ARM
-		{42AFC547-BE24-4015-9669-8CB8C53BCFEB}.Release|Win32.ActiveCfg = Release|Win32
-		{42AFC547-BE24-4015-9669-8CB8C53BCFEB}.Release|Win32.Build.0 = Release|Win32
-		{42AFC547-BE24-4015-9669-8CB8C53BCFEB}.Release|x64.ActiveCfg = Release|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|ARM.ActiveCfg = Debug|ARM
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|ARM.Build.0 = Debug|ARM
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|Win32.ActiveCfg = Debug|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|Win32.Build.0 = Debug|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|x64.ActiveCfg = Debug|x64
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|x64.Build.0 = Debug|x64
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|ARM.ActiveCfg = Release|ARM
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|ARM.Build.0 = Release|ARM
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|Win32.ActiveCfg = Release|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|Win32.Build.0 = Release|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|x64.ActiveCfg = Release|x64
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|x64.Build.0 = Release|x64
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|ARM.ActiveCfg = Debug|ARM
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|ARM.Build.0 = Debug|ARM
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|Win32.ActiveCfg = Debug|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|Win32.Build.0 = Debug|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|x64.ActiveCfg = Debug|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|ARM.ActiveCfg = Release|ARM
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|ARM.Build.0 = Release|ARM
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|Win32.ActiveCfg = Release|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|Win32.Build.0 = Release|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,8 +107,9 @@ Global
 		{C954925A-1A55-49EE-B1BE-AECCED3F08BF} = {EEA8E052-42ED-4B3E-9FC2-126F5ED1452A}
 		{B9AA6C29-72BC-4607-9F0C-8A68FE84EE0E} = {EEA8E052-42ED-4B3E-9FC2-126F5ED1452A}
 		{D45710BF-1204-4331-B24D-F3864F048EA0} = {EEA8E052-42ED-4B3E-9FC2-126F5ED1452A}
-		{B64213AF-F8E1-476F-99B3-F1E706DDF69A} = {B7C8B363-687F-4A58-89C4-310A49985FB1}
-		{852072A7-60BC-43BF-A7E1-F967BD4A66E1} = {B7C8B363-687F-4A58-89C4-310A49985FB1}
-		{42AFC547-BE24-4015-9669-8CB8C53BCFEB} = {B7C8B363-687F-4A58-89C4-310A49985FB1}
+		{9E170B4E-A6AC-4ECA-93EE-A8BD2A1D58B6} = {EEA8E052-42ED-4B3E-9FC2-126F5ED1452A}
+		{1B37C3CE-088D-4277-B750-3A1CBEB1884A} = {9E170B4E-A6AC-4ECA-93EE-A8BD2A1D58B6}
+		{491F4851-92BA-4AC1-9A80-241E1FF13229} = {9E170B4E-A6AC-4ECA-93EE-A8BD2A1D58B6}
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623} = {9E170B4E-A6AC-4ECA-93EE-A8BD2A1D58B6}
 	EndGlobalSection
 EndGlobal

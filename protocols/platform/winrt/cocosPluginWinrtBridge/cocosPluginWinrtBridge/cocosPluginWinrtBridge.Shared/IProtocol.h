@@ -3,7 +3,7 @@
 
 #include "IPluginParam.h"
 
-namespace winrtInterface {
+namespace cocosPluginWinrtBridge {
 
     public interface class IProtocol {
         Platform::String^ getPluginVersion();

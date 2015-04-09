@@ -9,7 +9,7 @@ using namespace Platform;
 using namespace Windows::ApplicationModel::Store;
 using namespace Windows::Storage;
 
-using namespace winrtInterface;
+using namespace cocosPluginWinrtBridge;
 
 
 #define PRODUCT_KEY "product"
@@ -17,7 +17,7 @@ using namespace winrtInterface;
 
 namespace microsoftiap {
 
-    public ref class microsoftiap sealed : public winrtInterface::IProtocolIAP {
+    public ref class microsoftiap sealed : public cocosPluginWinrtBridge::IProtocolIAP {
 	private:
 		bool debugMode;
         Windows::UI::Core::CoreDispatcher^ dispatcher;

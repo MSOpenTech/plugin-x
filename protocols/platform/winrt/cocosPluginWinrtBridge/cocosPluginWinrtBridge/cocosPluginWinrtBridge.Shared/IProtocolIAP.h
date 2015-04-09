@@ -2,7 +2,7 @@
 
 #include "IProtocol.h"
 
-namespace winrtInterface {
+namespace cocosPluginWinrtBridge {
     
     public enum class PayResultCodeEnum {
         kPaySuccess = 0,

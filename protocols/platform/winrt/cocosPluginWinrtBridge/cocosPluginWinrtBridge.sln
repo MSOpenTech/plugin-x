@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cocosPluginWinrtBridge", "cocosPluginWinrtBridge", "{BE08F519-6351-45C0-84CD-F609DD2E6793}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cocosPluginWinrtBridge.Shared", "cocosPluginWinrtBridge\cocosPluginWinrtBridge.Shared\cocosPluginWinrtBridge.Shared.vcxitems", "{1B37C3CE-088D-4277-B750-3A1CBEB1884A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cocosPluginWinrtBridge.Windows", "cocosPluginWinrtBridge\cocosPluginWinrtBridge.Windows\cocosPluginWinrtBridge.Windows.vcxproj", "{491F4851-92BA-4AC1-9A80-241E1FF13229}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cocosPluginWinrtBridge.WindowsPhone", "cocosPluginWinrtBridge\cocosPluginWinrtBridge.WindowsPhone\cocosPluginWinrtBridge.WindowsPhone.vcxproj", "{35ACD56C-DEE1-477B-BEC0-C963C7937623}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		cocosPluginWinrtBridge\cocosPluginWinrtBridge.Shared\cocosPluginWinrtBridge.Shared.vcxitems*{491f4851-92ba-4ac1-9a80-241e1ff13229}*SharedItemsImports = 4
+		cocosPluginWinrtBridge\cocosPluginWinrtBridge.Shared\cocosPluginWinrtBridge.Shared.vcxitems*{35acd56c-dee1-477b-bec0-c963c7937623}*SharedItemsImports = 4
+		cocosPluginWinrtBridge\cocosPluginWinrtBridge.Shared\cocosPluginWinrtBridge.Shared.vcxitems*{1b37c3ce-088d-4277-b750-3a1cbeb1884a}*SharedItemsImports = 9
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|ARM = Release|ARM
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|ARM.ActiveCfg = Debug|ARM
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|ARM.Build.0 = Debug|ARM
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|Win32.ActiveCfg = Debug|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|Win32.Build.0 = Debug|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|x64.ActiveCfg = Debug|x64
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|x64.Build.0 = Debug|x64
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|ARM.ActiveCfg = Release|ARM
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|ARM.Build.0 = Release|ARM
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|Win32.ActiveCfg = Release|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|Win32.Build.0 = Release|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|x64.ActiveCfg = Release|x64
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|x64.Build.0 = Release|x64
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|ARM.ActiveCfg = Debug|ARM
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|ARM.Build.0 = Debug|ARM
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|Win32.ActiveCfg = Debug|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|Win32.Build.0 = Debug|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|x64.ActiveCfg = Debug|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|ARM.ActiveCfg = Release|ARM
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|ARM.Build.0 = Release|ARM
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|Win32.ActiveCfg = Release|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|Win32.Build.0 = Release|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|x64.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1B37C3CE-088D-4277-B750-3A1CBEB1884A} = {BE08F519-6351-45C0-84CD-F609DD2E6793}
+		{491F4851-92BA-4AC1-9A80-241E1FF13229} = {BE08F519-6351-45C0-84CD-F609DD2E6793}
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623} = {BE08F519-6351-45C0-84CD-F609DD2E6793}
+	EndGlobalSection
+EndGlobal

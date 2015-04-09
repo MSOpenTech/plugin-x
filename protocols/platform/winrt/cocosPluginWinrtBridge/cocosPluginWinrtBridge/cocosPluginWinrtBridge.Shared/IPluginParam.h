@@ -1,7 +1,7 @@
 
 #pragma once
 
-namespace winrtInterface {
+namespace cocosPluginWinrtBridge {
 
     public enum class ParamTypeEnum {
         kParamTypeNull = 0,

@@ -3,7 +3,7 @@
 
 namespace pluginparam {
 
-	void PluginParamWinRT::setCurrentType(winrtInterface::ParamTypeEnum t) {
+	void PluginParamWinRT::setCurrentType(cocosPluginWinrtBridge::ParamTypeEnum t) {
 		paramType = t;
 	}
 
@@ -23,7 +23,7 @@ namespace pluginparam {
 		strValue = val;
 	}
 
-	void PluginParamWinRT::setMapValue(IMap<Platform::String^, winrtInterface::IPluginParam^>^ val) {
+	void PluginParamWinRT::setMapValue(IMap<Platform::String^, cocosPluginWinrtBridge::IPluginParam^>^ val) {
 		mapValue = val;
 	}
 

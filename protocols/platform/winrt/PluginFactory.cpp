@@ -21,7 +21,7 @@ using namespace cocos2d::plugin;
 using namespace ABI::Windows::Foundation;
 using namespace Microsoft::WRL;
 using namespace Microsoft::WRL::Wrappers;
-using namespace winrtInterface;
+using namespace cocosPluginWinrtBridge;
 
 typedef HRESULT(WINAPI *DllActivationFactoryPtr)(HSTRING, IActivationFactory **);
 
@@ -96,7 +96,7 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 	}
 
     Platform::Object^ base = reinterpret_cast<Platform::Object^>(instance.Get());
-    winrtInterface::IProtocol^ protocol;
+    cocosPluginWinrtBridge::IProtocol^ protocol;
     try {
         protocol = safe_cast<IProtocol^>(base);
     }
@@ -106,13 +106,13 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
     }
 
     try {
-        winrtInterface::IProtocolIAP^ iap = safe_cast<IProtocolIAP^>(protocol);
+        cocosPluginWinrtBridge::IProtocolIAP^ iap = safe_cast<IProtocolIAP^>(protocol);
 			ProtocolIAP *out = new ProtocolIAP();
             PluginMap::mapIProtocol[out] = iap;
-			PluginMap::mapIProtocolIAP[out] = dynamic_cast<winrtInterface::IProtocolIAP^>(PluginMap::mapIProtocol[out]);
+			PluginMap::mapIProtocolIAP[out] = dynamic_cast<cocosPluginWinrtBridge::IProtocolIAP^>(PluginMap::mapIProtocol[out]);
             iap->setDispatcher(dispatcher);
             // register protocol for plugin event
-            PluginMap::mapIProtocolIAP[out]->OnPayResult += ref new winrtInterface::OnPayResultHandler([out](winrtInterface::PayResultCodeEnum ret, Platform::String^ msg) {
+            PluginMap::mapIProtocolIAP[out]->OnPayResult += ref new cocosPluginWinrtBridge::OnPayResultHandler([out](cocosPluginWinrtBridge::PayResultCodeEnum ret, Platform::String^ msg) {
                 out->onPayResult((PayResultCode)ret, pluginx::util::PlatformStringToStdString(msg).c_str());
             });
 			return out;
@@ -124,7 +124,7 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
         auto analytics = safe_cast<IProtocolAnalytics^>(protocol);
         ProtocolAnalytics *out = new ProtocolAnalytics();
         PluginMap::mapIProtocol[out] = analytics;
-        PluginMap::mapIProtocolAnalytics[out] = dynamic_cast<winrtInterface::IProtocolAnalytics^>(PluginMap::mapIProtocol[out]);
+        PluginMap::mapIProtocolAnalytics[out] = dynamic_cast<cocosPluginWinrtBridge::IProtocolAnalytics^>(PluginMap::mapIProtocol[out]);
         return out;
     }
     catch (Platform::Exception^ e) {

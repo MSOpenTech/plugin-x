@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\protocols\platform\winrt\winrtInterface\winrtInterface\winrtInterface.WindowsPhone\winrtInterface.WindowsPhone.vcxproj">
-      <Project>{42afc547-be24-4015-9669-8cb8c53bcfeb}</Project>
+    <ProjectReference Include="..\..\..\..\..\protocols\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.WindowsPhone\cocosPluginWinrtBridge.WindowsPhone.vcxproj">
+      <Project>{35acd56c-dee1-477b-bec0-c963c7937623}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">

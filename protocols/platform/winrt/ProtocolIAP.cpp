@@ -5,7 +5,7 @@
 
 using namespace cocos2d::plugin;
 using namespace pluginx;
-using namespace winrtInterface;
+using namespace cocosPluginWinrtBridge;
 
 ProtocolIAP::ProtocolIAP() {
     _listener = nullptr;

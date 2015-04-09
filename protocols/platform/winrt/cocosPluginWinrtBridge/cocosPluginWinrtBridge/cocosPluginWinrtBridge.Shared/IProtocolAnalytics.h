@@ -3,7 +3,7 @@
 
 #include "IProtocol.h"
 
-namespace winrtInterface {
+namespace cocosPluginWinrtBridge {
 
     public interface class IProtocolAnalytics : IProtocol {
         void startSession(Platform::String^ appkey);
