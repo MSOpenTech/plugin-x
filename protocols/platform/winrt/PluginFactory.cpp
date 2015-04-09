@@ -11,13 +11,11 @@
 
 #include "PluginFactory.h"
 #include "PluginProtocol.h"
-#include "PluginProtocol.h"
 #include "ProtocolAds.h"
 #include "ProtocolAnalytics.h"
 #include "ProtocolIAP.h"
 #include "PluginMap.h"
 #include "util.h"
-//#include <inspectable.h>
 
 using namespace cocos2d::plugin;
 using namespace ABI::Windows::Foundation;

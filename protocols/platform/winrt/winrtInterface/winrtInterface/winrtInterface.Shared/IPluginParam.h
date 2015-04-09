@@ -3,7 +3,11 @@
 
 namespace winrtInterface {
 
+
+
     public interface class IPluginParam {
         int getCurrentType();
+
     };
+
 }

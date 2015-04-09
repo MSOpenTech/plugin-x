@@ -1,4 +1,6 @@
+
 #include "ProtocolShare.h"
+
 using namespace cocos2d::plugin;
 
 ProtocolShare::ProtocolShare(){
@@ -8,8 +10,6 @@ ProtocolShare::ProtocolShare(){
 ProtocolShare::~ProtocolShare(){
 
 }
-
-
 
   /**
   @brief config the share developer info

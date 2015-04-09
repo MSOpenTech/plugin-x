@@ -1,4 +1,6 @@
+
 #include "ProtocolUser.h"
+
 using namespace cocos2d::plugin;
 
 ProtocolUser::ProtocolUser(){

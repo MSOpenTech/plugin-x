@@ -1,10 +1,12 @@
 
 #include <cstdarg>
 #include <collection.h>
+
 #include "PluginProtocol.h"
 #include "util.h"
 #include "PluginMap.h"
 #include "PluginParamWinRT.h"
+
 using namespace cocos2d::plugin;
 using namespace pluginx;
 using namespace Microsoft::WRL;

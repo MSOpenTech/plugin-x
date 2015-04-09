@@ -1,7 +1,7 @@
 
-#include "ProtocolAds.h"
-//#include "ProtocolHelper.h"
 #include <stdlib.h>
+
+#include "ProtocolAds.h"
 #include "util.h"
 
 using namespace cocos2d::plugin;

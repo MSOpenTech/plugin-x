@@ -1,6 +1,7 @@
-#include "ProtocolSocial.h"
-//#include "ProtocolHelper.h"
+
 #include <stdlib.h>
+
+#include "ProtocolSocial.h"
 #include "util.h"
 
 using namespace cocos2d::plugin;

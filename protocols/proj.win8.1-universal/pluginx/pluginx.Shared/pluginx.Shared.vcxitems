@@ -35,7 +35,6 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginParamWinRT.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\util.h" />
   </ItemGroup>
 </Project>
