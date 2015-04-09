@@ -1,7 +1,5 @@
 ﻿#include "pch.h"
 #include "plugin.h"
-//#include "IProtocol.h"
-//#include "../../../../../protocols/platform/winrt/winrtInterface/winrtInterface/winrtInterface.Shared/IProtocol.h"
 
 #include <iostream>
 
@@ -67,6 +65,10 @@ namespace microsoftiap {
 
         // TODO
         virtual bool callBoolFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
+            if (funcName == "isProductPurchased") {
+                Platform::String^ productName = params->GetAt(0)->getStringValue();
+                return isProductPurchased(productName);
+            }
             return false;
         }
 
@@ -149,6 +151,14 @@ namespace microsoftiap {
 
         bool getDebugMode() {
             return debugMode;
+        }
+
+        bool isProductPurchased(Platform::String^ productName) {
+            LicenseInformation^ licenseInfo = getLicenseInformation();
+            if (licenseInfo->ProductLicenses->HasKey(productName)) {
+                return getLicenseInformation()->ProductLicenses->Lookup(productName)->IsActive;
+            }
+            return false;
         }
 
 	private:
