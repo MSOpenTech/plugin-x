@@ -1,5 +1,7 @@
 ﻿#include "pch.h"
 #include "plugin.h"
+//#include "IProtocol.h"
+//#include "../../../../../protocols/platform/winrt/winrtInterface/winrtInterface/winrtInterface.Shared/IProtocol.h"
 
 #include <iostream>
 
@@ -11,12 +13,13 @@ using namespace Windows::Storage;
 
 using namespace winrtInterface;
 
+
 #define PRODUCT_KEY "product"
 #define PROXY_STORE_KEY "windows_store_proxy"
 
 namespace microsoftiap {
 
-	public ref class microsoftiap sealed : public IProtocolIAP {
+    public ref class microsoftiap sealed : public winrtInterface::IProtocolIAP {
 	private:
 		bool debugMode;
         Windows::UI::Core::CoreDispatcher^ dispatcher;
@@ -151,7 +154,8 @@ namespace microsoftiap {
 	private:
 		void log(Platform::String^ msg) {
 			if (debugMode) {
-                std::wcout << msg->Data() << std::endl; // TODO should do real logging, and this doesn't seem to actually be output to console anyway
+                //std::wcout << msg->Data() << std::endl; // TODO should do real logging, and this doesn't seem to actually be output to console anyway
+                OutputDebugString(msg->Data());
 			}
 		}
 
@@ -171,7 +175,6 @@ namespace microsoftiap {
                     this->sendResult(asyncOp, product);
                 }
                 catch (Exception^ e) {
-                    // TODO do something with exception
                     this->OnPayResult(PayResultCodeEnum::kPayFail, "product was not purchased");
                 }
             }));

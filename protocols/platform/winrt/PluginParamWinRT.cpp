@@ -3,9 +3,13 @@
 
 namespace pluginparam {
 
+    
+    /*
 	int PluginParamWinRT::getCurrentType() {
 		return paramType;
 	}
+    */
+    
 
 	int PluginParamWinRT::getIntValue() {
 		return intValue;

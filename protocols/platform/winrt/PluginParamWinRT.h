@@ -3,7 +3,8 @@
 
 #include <collection.h>
 
-#include "winrtInterface_h.h"
+//#include "winrtInterface_h.h"
+//#include "IProtocol.h"
 #include "PluginParam.h"
 
 using namespace Windows::Foundation::Collections;
@@ -22,7 +23,7 @@ namespace pluginparam {
 
     public:
     
-        int getCurrentType();
+        virtual int getCurrentType() { return paramType; }
         int getIntValue();
         float getFloatValue();
         bool getBoolValue();

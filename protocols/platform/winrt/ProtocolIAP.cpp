@@ -2,7 +2,8 @@
 #include "ProtocolIAP.h"
 //#include "ProtocolHelper.h"
 #include "util.h"
-#include "winrtInterface_h.h"
+//#include "winrtInterface_h.h"
+//#include "IProtocol.h"
 #include "PluginMap.h"
 
 using namespace cocos2d::plugin;

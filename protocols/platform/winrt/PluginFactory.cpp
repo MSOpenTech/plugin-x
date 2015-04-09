@@ -17,12 +17,14 @@
 #include "ProtocolIAP.h"
 #include "PluginMap.h"
 #include "util.h"
+//#include "IProtocol.h"
 
 using namespace cocos2d::plugin;
 using namespace ABI::Windows::Foundation;
 using namespace Microsoft::WRL;
 using namespace Microsoft::WRL::Wrappers;
-using namespace ABI::winrtInterface;
+//using namespace ABI::winrtInterface;
+using namespace winrtInterface;
 
 static PluginFactory* s_pFactory;
 
@@ -49,7 +51,7 @@ void PluginFactory::purgeFactory() {
 		s_pFactory = nullptr;
 	}
 }
-
+#include <winstring.h>
 typedef HRESULT(WINAPI *DllActivationFactoryPtr)(HSTRING, IActivationFactory **);
 // TODO should return correct protocol object
 PluginProtocol* PluginFactory::createPlugin(const char* name) {
@@ -61,6 +63,16 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 	suffix = L".WindowsPhone.dll";
 #endif
 	std::wstring wname(name, name + strlen(name));
+
+    //Microsoft::WRL::Details::ComPtrRef<IProtocol> plugin = Windows::Foundation::ActivateInstance(wname + suffix);
+    void * t;
+    void ** q;
+    Platform::String^ s = pluginx::util::charArrayToPlatformString(name);
+    HSTRING* hstring;
+    //WindowsCreateString(s->Data(), s->Length(), hstring);
+    //auto plugin = Windows::Foundation::GetActivationFactory(*hstring, q);
+    return nullptr;
+    /*
 	HMODULE module = LoadPackagedLibrary((wname + suffix).c_str(), 0);
 	if (module == nullptr)
 	{
@@ -116,8 +128,9 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 			ProtocolIAP *out = new ProtocolIAP();
 			PluginMap::mapIProtocol[out] = reinterpret_cast<winrtInterface::IProtocol^>(base.Detach());
 			PluginMap::mapIProtocolIAP[out] = dynamic_cast<winrtInterface::IProtocolIAP^>(PluginMap::mapIProtocol[out]);
-            auto iDispatcher = (ABI::Windows::UI::Core::ICoreDispatcher*)dispatcher;
-            iap->setDispatcher(iDispatcher);
+            //auto iDispatcher = (ABI::Windows::UI::Core::ICoreDispatcher*)dispatcher;
+            //iap->setDispatcher(iDispatcher);
+            iap->setDispatcher(dispatcher);
             // register protocol for plugin event
             PluginMap::mapIProtocolIAP[out]->OnPayResult += ref new winrtInterface::OnPayResultHandler([out](winrtInterface::PayResultCodeEnum ret, Platform::String^ msg) {
                 out->onPayResult((PayResultCode)ret, pluginx::util::PlatformStringToStdString(msg).c_str());
@@ -127,4 +140,5 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 	}
 	OutputDebugStringA("Protocol Failed to Load ...");
 	return nullptr;
+    */
 }

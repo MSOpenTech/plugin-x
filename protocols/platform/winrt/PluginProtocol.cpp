@@ -3,17 +3,20 @@
 #include <collection.h>
 #include "PluginProtocol.h"
 #include "util.h"
-#include "winrtInterface_h.h"
+//#include "winrtInterface_h.h"
+//#include "IProtocol.h"
 #include "PluginMap.h"
 #include "PluginParamWinRT.h"
 using namespace cocos2d::plugin;
 using namespace pluginx;
 using namespace Microsoft::WRL;
 using namespace Microsoft::WRL::Wrappers;
-using namespace ABI::winrtInterface;
+//using namespace ABI::winrtInterface;
+using namespace winrtInterface;
 using namespace pluginx::util;
 using namespace Platform::Collections;
 using namespace pluginparam;
+
 PluginProtocol::~PluginProtocol() {
     // TODO
 }
