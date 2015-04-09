@@ -9,26 +9,27 @@ using namespace Microsoft::WRL::Wrappers;
 using namespace Platform;
 using namespace pluginparam;
 using namespace Platform::Collections;
+using namespace winrtInterface;
 
 namespace pluginx {
     namespace util {
 
         PluginParamWinRT^ toWinRT(PluginParam* param) {
             PluginParamWinRT^ ret = ref new PluginParamWinRT();
-            ret->setCurrentType((int)param->getCurrentType());
-            if (ret->getCurrentType() == cocos2d::plugin::PluginParam::kParamTypeInt) {
+            ret->setCurrentType((ParamTypeEnum)param->getCurrentType());
+            if (ret->getCurrentType() == ParamTypeEnum::kParamTypeInt) {
                 ret->setIntValue(param->getIntValue());
             }
-            else if (ret->getCurrentType() == cocos2d::plugin::PluginParam::kParamTypeFloat) {
+            else if (ret->getCurrentType() == ParamTypeEnum::kParamTypeFloat) {
                 ret->setFloatValue(param->getFloatValue());
             }
-            else if (ret->getCurrentType() == cocos2d::plugin::PluginParam::kParamTypeBool) {
+            else if (ret->getCurrentType() == ParamTypeEnum::kParamTypeBool) {
                 ret->setBoolValue(param->getBoolValue());
             }
-            else if (ret->getCurrentType() == cocos2d::plugin::PluginParam::kParamTypeString) {
+            else if (ret->getCurrentType() == ParamTypeEnum::kParamTypeString) {
                 ret->setStringValue(stdStringToPlatformString(param->getStringValue()));
             }
-            else if (ret->getCurrentType() == cocos2d::plugin::PluginParam::kParamTypeMap) {
+            else if (ret->getCurrentType() == ParamTypeEnum::kParamTypeMap) {
                 IMap<Platform::String^, int>^ pMap = ref new Platform::Collections::Map<Platform::String^, int>();
                 std::map<std::string, PluginParam*>::iterator it;
                 for (it = param->getMapValue().begin(); it != param->getMapValue().end(); ++it) {

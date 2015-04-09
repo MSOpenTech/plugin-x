@@ -3,13 +3,13 @@
 #include "IProtocol.h"
 
 namespace winrtInterface {
+    
     public enum class PayResultCodeEnum {
         kPaySuccess = 0,
         kPayFail,
         kPayCancel,
         kPayTimeOut
     };
-
 
     public delegate void OnPayResultHandler(PayResultCodeEnum ret, Platform::String^ msg);
 

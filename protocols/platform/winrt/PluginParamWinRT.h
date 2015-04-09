@@ -11,40 +11,33 @@ namespace pluginparam {
 
 	public ref class PluginParamWinRT sealed : public winrtInterface::IPluginParam {
 
-        static const int PARAMTYPE_NULL = 0;
-        static const int PARAMTYPE_INT = 1;
-        static const int PARAMTYPE_FLOAT = 2;
-        static const int PARAMTYPE_BOOL = 3;
-        static const int PARAMTYPE_STRING = 4;
-        static const int PARAMTYPE_STRINGMAP = 5;
-        static const int PARAMTYPE_MAP = 6;
-
     public:
     
-        virtual int getCurrentType() { return paramType; }
-        int getIntValue();
-        float getFloatValue();
-        bool getBoolValue();
-        Platform::String^ getStringValue();
-        IMap<Platform::String^, int>^ getMapValue();
-        IMap<Platform::String^, Platform::String^>^ getStrMapValue();
+        virtual winrtInterface::ParamTypeEnum getCurrentType() { return paramType; }
+        virtual int getIntValue() { return intValue; }
+        virtual float getFloatValue() { return floatValue; }
+        virtual bool getBoolValue() { return boolValue; }
+        virtual Platform::String^ getStringValue() { return strValue; }
+        virtual IMap<Platform::String^, winrtInterface::IPluginParam^>^ getMapValue() { return mapValue; }
+        virtual IMap<Platform::String^, Platform::String^>^ getStrMapValue() { return strMapValue; }
 
-        void setCurrentType(int t);
+        void setCurrentType(winrtInterface::ParamTypeEnum t);
         void setIntValue(int val);
         void setFloatValue(float val);
         void setBoolValue(bool val);
         void setStringValue(Platform::String^ val);
-        void setMapValue(IMap<Platform::String^, int>^ val);
+        void setMapValue(IMap<Platform::String^, winrtInterface::IPluginParam^>^ val);
         void setStrMapValue(IMap<Platform::String^, Platform::String^>^ val);
 
     private:
-        int paramType;
+        winrtInterface::ParamTypeEnum paramType;
         int intValue;
         float floatValue;
         bool boolValue;
         Platform::String^ strValue;
-        IMap<Platform::String^, int>^ mapValue;
+        IMap<Platform::String^, winrtInterface::IPluginParam^>^ mapValue;
         IMap<Platform::String^, Platform::String^>^ strMapValue;
         
     };
+
 }

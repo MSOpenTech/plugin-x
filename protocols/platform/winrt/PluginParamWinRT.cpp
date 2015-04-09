@@ -3,39 +3,7 @@
 
 namespace pluginparam {
 
-    
-    /*
-	int PluginParamWinRT::getCurrentType() {
-		return paramType;
-	}
-    */
-    
-
-	int PluginParamWinRT::getIntValue() {
-		return intValue;
-	}
-
-	float PluginParamWinRT::getFloatValue() {
-		return floatValue;
-	}
-
-	bool PluginParamWinRT::getBoolValue() {
-		return boolValue;
-	}
-
-	Platform::String^ PluginParamWinRT::getStringValue() {
-		return strValue;
-	}
-
-	IMap<Platform::String^, int>^ PluginParamWinRT::getMapValue() {
-		return mapValue;
-	}
-
-	IMap<Platform::String^, Platform::String^>^ PluginParamWinRT::getStrMapValue() {
-		return strMapValue;
-	}
-
-	void PluginParamWinRT::setCurrentType(int t) {
+	void PluginParamWinRT::setCurrentType(winrtInterface::ParamTypeEnum t) {
 		paramType = t;
 	}
 
@@ -55,7 +23,7 @@ namespace pluginparam {
 		strValue = val;
 	}
 
-	void PluginParamWinRT::setMapValue(IMap<Platform::String^, int>^ val) {
+	void PluginParamWinRT::setMapValue(IMap<Platform::String^, winrtInterface::IPluginParam^>^ val) {
 		mapValue = val;
 	}
 
