@@ -27,8 +27,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\platform\winrt\winrtInterface\winrtInterface\winrtInterface.Windows\winrtInterface.Windows.vcxproj">
-      <Project>{852072a7-60bc-43bf-a7e1-f967bd4a66e1}</Project>
+    <ProjectReference Include="..\..\..\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Windows\cocosPluginWinrtBridge.Windows.vcxproj">
+      <Project>{491f4851-92ba-4ac1-9a80-241e1ff13229}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -123,7 +123,7 @@
       <PrecompiledHeaderFile />
       <PrecompiledHeaderOutputFile />
       <CallingConvention>Cdecl</CallingConvention>
-      <ShowIncludes>true</ShowIncludes>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,7 +157,7 @@
       <PrecompiledHeaderOutputFile />
       <CallingConvention>Cdecl</CallingConvention>
       <BrowseInformation>true</BrowseInformation>
-      <ShowIncludes>true</ShowIncludes>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -193,7 +193,7 @@
       <PrecompiledHeaderFile />
       <PrecompiledHeaderOutputFile />
       <CallingConvention>Cdecl</CallingConvention>
-      <ShowIncludes>true</ShowIncludes>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

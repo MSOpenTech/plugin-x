@@ -3,12 +3,12 @@
 // deleted if a better way is found.
 
 #include "pch.h"
-#include "IProtocolIAP.h"
+#include "IProtocol.h"
 
-using namespace winrtInterface;
+using namespace cocosPluginWinrtBridge;
 
-namespace winrtInterface {
-    public ref class ProtocolIAPImpl sealed : public winrtInterface::IProtocolIAP {
+namespace cocosPluginWinrtBridge {
+    public ref class ProtocolImpl sealed : public cocosPluginWinrtBridge::IProtocol{
     public:
 
         virtual Platform::String^ getPluginVersion() {
@@ -17,7 +17,7 @@ namespace winrtInterface {
 
         virtual Platform::String^ getSDKVersion() {
             return L"";
-        }
+        };
 
         virtual void setDebugMode(bool bDebug) {
             return;
@@ -42,21 +42,5 @@ namespace winrtInterface {
         virtual float callFloatFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
             return 0;
         }
-
-        virtual void configDeveloperInfo(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ devInfo) {
-            return;
-        }
-
-        virtual void payForProduct(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ info) {
-            return;
-        }
-        
-        virtual void setDispatcher(Windows::UI::Core::CoreDispatcher^ dispatcher) {
-            return;
-        }
-
-        virtual event OnPayResultHandler^ OnPayResult;
     };
-
 }
-

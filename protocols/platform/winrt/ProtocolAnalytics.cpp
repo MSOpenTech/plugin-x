@@ -16,7 +16,7 @@
 #include "util.h"
 #include "PluginMap.h"
 
-using namespace winrtInterface;
+using namespace cocosPluginWinrtBridge;
 using namespace cocos2d::plugin;
 using namespace pluginx;
 using namespace Microsoft::WRL;

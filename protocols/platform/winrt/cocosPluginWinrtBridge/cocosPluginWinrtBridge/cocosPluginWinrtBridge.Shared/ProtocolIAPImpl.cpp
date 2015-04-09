@@ -3,12 +3,12 @@
 // deleted if a better way is found.
 
 #include "pch.h"
-#include "IProtocolAnalytics.h"
+#include "IProtocolIAP.h"
 
-using namespace winrtInterface;
+using namespace cocosPluginWinrtBridge;
 
-namespace winrtInterface {
-    public ref class ProtocolAnalyticsImpl sealed : public winrtInterface::IProtocolAnalytics {
+namespace cocosPluginWinrtBridge {
+    public ref class ProtocolIAPImpl sealed : public cocosPluginWinrtBridge::IProtocolIAP {
     public:
 
         virtual Platform::String^ getPluginVersion() {
@@ -43,38 +43,20 @@ namespace winrtInterface {
             return 0;
         }
 
-        virtual void startSession(Platform::String^ appkey) {
+        virtual void configDeveloperInfo(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ devInfo) {
             return;
         }
 
-        virtual void stopSession() {
+        virtual void payForProduct(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ info) {
+            return;
+        }
+        
+        virtual void setDispatcher(Windows::UI::Core::CoreDispatcher^ dispatcher) {
             return;
         }
 
-        virtual void setSessionContinueMillis(int millis) {
-            return;
-        }
-
-        virtual void logError(Platform::String^ errorId, Platform::String^ message) {
-            return;
-        }
-
-        virtual void logEvent(Platform::String^ eventId, Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ paramMap) {
-            return;
-        }
-
-        virtual void logTimedEventBegin(Platform::String^ eventId) {
-            return;
-        }
-
-        virtual void logTimedEventEnd(Platform::String^ eventId) {
-            return;
-        }
-
-        virtual void setCaptureUncaughtException(bool enabled) {
-            return;
-        }
-
+        virtual event OnPayResultHandler^ OnPayResult;
     };
 
 }
+

@@ -5,10 +5,10 @@
 #include "pch.h"
 #include "IPluginParam.h"
 
-using namespace winrtInterface;
+using namespace cocosPluginWinrtBridge;
 
-namespace winrtInterface {
-    public ref class PluginParamImpl sealed : public winrtInterface::IPluginParam{
+namespace cocosPluginWinrtBridge {
+    public ref class PluginParamImpl sealed : public cocosPluginWinrtBridge::IPluginParam{
     public:
         
         virtual ParamTypeEnum getCurrentType() {

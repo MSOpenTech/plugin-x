@@ -11,7 +11,7 @@ using namespace cocos2d::plugin;
 using namespace pluginx;
 using namespace Microsoft::WRL;
 using namespace Microsoft::WRL::Wrappers;
-using namespace winrtInterface;
+using namespace cocosPluginWinrtBridge;
 using namespace pluginx::util;
 using namespace Platform::Collections;
 using namespace pluginparam;
