@@ -1,3 +1,8 @@
+
+// Only needed in order to export tne interface classes in winmd, can be 
+// deleted if a better way is found.
+
+
 #include "pch.h"
 #include "IProtocol.h"
 
