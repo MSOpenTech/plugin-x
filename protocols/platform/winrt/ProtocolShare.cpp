@@ -1,5 +1,7 @@
 
 #include "ProtocolShare.h"
+#include "PluginMap.h"
+#include "util.h"
 
 using namespace cocos2d::plugin;
 
@@ -31,10 +33,12 @@ void ProtocolShare::configDeveloperInfo(TShareDeveloperInfo devInfo){
   Look at the manual of plugins.
   */
 void ProtocolShare::share(TShareInfo info){
-
+    PluginMap::mapIProtocolShare[this]->share(pluginx::util::stdStrMapToPlatformStrMap(&info));
 }
-void ProtocolShare::share(TShareInfo &info, ProtocolShareCallback &cb){
 
+void ProtocolShare::share(TShareInfo &info, ProtocolShareCallback &cb){
+    // TODO should figure out how cocos expects callbacks to work
+    share(info, cb);
 }
 
   /**
@@ -44,7 +48,7 @@ void ProtocolShare::share(TShareInfo &info, ProtocolShareCallback &cb){
   @wraning Must invoke this interface before share
   */
 CC_DEPRECATED_ATTRIBUTE void ProtocolShare::setResultListener(ShareResultListener* pListener){
-
+    _listener = pListener;
 }
 
   /**
@@ -54,12 +58,18 @@ CC_DEPRECATED_ATTRIBUTE void ProtocolShare::setResultListener(ShareResultListene
   @wraning Must invoke this interface before share
   */
 CC_DEPRECATED_ATTRIBUTE ShareResultListener* ProtocolShare::getResultListener(){
-  return nullptr;
+  return _listener;
 }
 
   /**
   @brief share result callback
   */
 void ProtocolShare::onShareResult(ShareResultCode ret, const char* msg){
-
+    if (_listener != nullptr) {
+        _listener->onShareResult(ret, msg);
+    }
+    if (_callback != nullptr) {
+        std::string message(msg);
+        _callback(ret, message);
+    }
 }

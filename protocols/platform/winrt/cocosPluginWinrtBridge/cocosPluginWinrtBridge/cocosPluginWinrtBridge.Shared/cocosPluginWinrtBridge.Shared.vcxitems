@@ -18,6 +18,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)IProtocol.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IProtocolAnalytics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IProtocolIAP.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IProtocolShare.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IProtocolSocial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)pch.h" />
   </ItemGroup>
@@ -29,6 +30,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ProtocolAnalyticsImpl.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ProtocolIAPImpl.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ProtocolImpl.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ProtocolShareImpl.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ProtocolSocialImpl.cpp" />
   </ItemGroup>
   <ItemGroup>

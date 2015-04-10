@@ -29,6 +29,8 @@ ProtocolAnalytics::ProtocolAnalytics() {
 }
 
 ProtocolAnalytics::~ProtocolAnalytics() {
+    PluginMap::mapIProtocol.erase(this);
+    PluginMap::mapIProtocolAnalytics.erase(this);
 }
 
 void ProtocolAnalytics::startSession(const char* appKey) {

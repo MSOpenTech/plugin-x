@@ -15,6 +15,7 @@
 #include "ProtocolAnalytics.h"
 #include "ProtocolIAP.h"
 #include "ProtocolSocial.h"
+#include "ProtocolShare.h"
 #include "PluginMap.h"
 #include "util.h"
 
@@ -123,7 +124,7 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
     }
     // ProtocolAnalytics
     try {
-        auto analytics = safe_cast<IProtocolAnalytics^>(protocol);
+        cocosPluginWinrtBridge::IProtocolAnalytics^ analytics = safe_cast<IProtocolAnalytics^>(protocol);
         ProtocolAnalytics *out = new ProtocolAnalytics();
         PluginMap::mapIProtocol[out] = analytics;
         PluginMap::mapIProtocolAnalytics[out] = dynamic_cast<cocosPluginWinrtBridge::IProtocolAnalytics^>(PluginMap::mapIProtocol[out]);
@@ -131,11 +132,10 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
     }
     catch (Platform::Exception^ e) {
         OutputDebugString(L"Plugin does not implement IProtocolAnalytics");
-        return nullptr;
     }
     // ProtocolSocial
     try {
-        auto social = safe_cast<IProtocolSocial^>(protocol);
+        cocosPluginWinrtBridge::IProtocolSocial^ social = safe_cast<IProtocolSocial^>(protocol);
         ProtocolSocial* out = new ProtocolSocial();
         PluginMap::mapIProtocol[out] = social;
         PluginMap::mapIProtocolSocial[out] = dynamic_cast<cocosPluginWinrtBridge::IProtocolSocial^>(PluginMap::mapIProtocol[out]);
@@ -157,7 +157,20 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
     }
     catch (Platform::Exception^ e) {
         OutputDebugString(L"Plugin does not implement IProtocolSocial");
-        return nullptr;
+    }
+    // ProtocolShare
+    try {
+        cocosPluginWinrtBridge::IProtocolShare^ share = safe_cast<IProtocolShare^>(protocol);
+        ProtocolShare* out = new ProtocolShare();
+        PluginMap::mapIProtocol[out] = share;
+        PluginMap::mapIProtocolShare[out] = share;
+        share->OnShareResult += ref new cocosPluginWinrtBridge::ShareResultHandler([out](cocosPluginWinrtBridge::ShareResultCodeEnum ret, Platform::String^ msg) {
+            out->onShareResult((ShareResultCode)ret, pluginx::util::PlatformStringToStdString(msg).c_str());
+        });
+        return out;
+    }
+    catch (Platform::Exception^ e) {
+        OutputDebugString(L"Plugin does not implement IProtocolShare");
     }
 
     // TODO add other protocols here
