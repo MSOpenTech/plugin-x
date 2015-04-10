@@ -111,10 +111,10 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
         cocosPluginWinrtBridge::IProtocolIAP^ iap = safe_cast<IProtocolIAP^>(protocol);
         ProtocolIAP *out = new ProtocolIAP();
         PluginMap::mapIProtocol[out] = iap;
-        PluginMap::mapIProtocolIAP[out] = dynamic_cast<cocosPluginWinrtBridge::IProtocolIAP^>(PluginMap::mapIProtocol[out]);
+        PluginMap::mapIProtocolIAP[out] = iap;
         iap->setDispatcher(dispatcher);
         // register protocol for plugin event
-        PluginMap::mapIProtocolIAP[out]->OnPayResult += ref new cocosPluginWinrtBridge::OnPayResultHandler([out](cocosPluginWinrtBridge::PayResultCodeEnum ret, Platform::String^ msg) {
+        iap->OnPayResult += ref new cocosPluginWinrtBridge::OnPayResultHandler([out](cocosPluginWinrtBridge::PayResultCodeEnum ret, Platform::String^ msg) {
             out->onPayResult((PayResultCode)ret, pluginx::util::PlatformStringToStdString(msg).c_str());
         });
         return out;
@@ -127,7 +127,7 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
         cocosPluginWinrtBridge::IProtocolAnalytics^ analytics = safe_cast<IProtocolAnalytics^>(protocol);
         ProtocolAnalytics *out = new ProtocolAnalytics();
         PluginMap::mapIProtocol[out] = analytics;
-        PluginMap::mapIProtocolAnalytics[out] = dynamic_cast<cocosPluginWinrtBridge::IProtocolAnalytics^>(PluginMap::mapIProtocol[out]);
+        PluginMap::mapIProtocolAnalytics[out] = analytics;
         return out;
     }
     catch (Platform::Exception^ e) {
@@ -138,10 +138,10 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
         cocosPluginWinrtBridge::IProtocolSocial^ social = safe_cast<IProtocolSocial^>(protocol);
         ProtocolSocial* out = new ProtocolSocial();
         PluginMap::mapIProtocol[out] = social;
-        PluginMap::mapIProtocolSocial[out] = dynamic_cast<cocosPluginWinrtBridge::IProtocolSocial^>(PluginMap::mapIProtocol[out]);
+        PluginMap::mapIProtocolSocial[out] = social;
         // TODO set up event listeners here
         // unfortunately the whole function needs to be here because ProtocolSocial doesn't have an OnResult function in its header
-        PluginMap::mapIProtocolSocial[out]->OnSocialResult += ref new cocosPluginWinrtBridge::SocialResultHandler([out](cocosPluginWinrtBridge::SocialReturnCode retCode) {
+        social->OnSocialResult += ref new cocosPluginWinrtBridge::SocialResultHandler([out](cocosPluginWinrtBridge::SocialReturnCode retCode) {
             SocialRetCode cocosRetCode = (SocialRetCode)retCode;
 #pragma warning(suppress: 4996) // getListener is deprecated, but we still need to support it
             SocialListener* listener = out->getListener();
