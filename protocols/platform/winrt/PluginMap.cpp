@@ -8,5 +8,6 @@ std::unordered_map<void*, cocosPluginWinrtBridge::IProtocolAnalytics^ > PluginMa
 std::unordered_map<void*, cocosPluginWinrtBridge::IProtocolIAP^ > PluginMap::mapIProtocolIAP;
 std::unordered_map<void*, cocosPluginWinrtBridge::IProtocolSocial^ > PluginMap::mapIProtocolSocial;
 std::unordered_map<void*, cocosPluginWinrtBridge::IProtocolShare^ > PluginMap::mapIProtocolShare;
+std::unordered_map<void*, cocosPluginWinrtBridge::IProtocolUser^ > PluginMap::mapIProtocolUser;
 
 //void PluginMap::addPlugin(st)

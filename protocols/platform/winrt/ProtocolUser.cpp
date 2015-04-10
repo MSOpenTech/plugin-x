@@ -1,13 +1,17 @@
 
 #include "ProtocolUser.h"
+#include "PluginMap.h"
+#include "util.h"
 
 using namespace cocos2d::plugin;
 
 ProtocolUser::ProtocolUser(){
 
 }
-ProtocolUser::~ProtocolUser(){
 
+ProtocolUser::~ProtocolUser(){
+    PluginMap::mapIProtocol.erase(this);
+    PluginMap::mapIProtocolUser.erase(this);
 }
 
 /**
@@ -18,44 +22,57 @@ different plugin have different format
 And invoked only once.
 */
 void ProtocolUser::configDeveloperInfo(TUserDeveloperInfo devInfo){
-
+    PluginMap::mapIProtocolUser[this]->configDeveloperInfo(pluginx::util::stdStrMapToPlatformStrMap(&devInfo));
 }
 
 /**
 @brief User login
 */
 void ProtocolUser::login(){
-
+    PluginMap::mapIProtocolUser[this]->login();
 }
-void ProtocolUser::login(ProtocolUserCallback &cb){
 
+void ProtocolUser::login(ProtocolUserCallback &cb){
+    // TODO need to figure out how cocos wants this callback handled
+    login();
 }
 
 /**
 @brief User logout
 */
 void ProtocolUser::logout(){
-
+    PluginMap::mapIProtocolUser[this]->logout();
 }
-void ProtocolUser::logout(ProtocolUserCallback &cb){
 
+void ProtocolUser::logout(ProtocolUserCallback &cb){
+    // TODO need to figure out how cocos wants this callback handled
+    logout();
 }
 
 bool ProtocolUser::isLoggedIn(){
-  return false;
+  return PluginMap::mapIProtocolUser[this]->isLoggedIn();
 }
+
 /**
 @brief Get session ID
 @return If user logined, return value is session ID;
 else return value is empty string.
 */
 std::string ProtocolUser::getSessionID(){
-  return "";
+    Platform::String^ result = PluginMap::mapIProtocolUser[this]->getSessionID();
+    return pluginx::util::PlatformStringToStdString(result);
 }
 
 /**
 @brief get Access Token
 */
 std::string ProtocolUser::getAccessToken(){
-  return "";
+    Platform::String^ result = PluginMap::mapIProtocolUser[this]->getAccessToken();
+    return pluginx::util::PlatformStringToStdString(result);
 }
+
+
+
+
+
+

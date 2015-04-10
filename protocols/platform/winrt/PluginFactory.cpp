@@ -16,6 +16,7 @@
 #include "ProtocolIAP.h"
 #include "ProtocolSocial.h"
 #include "ProtocolShare.h"
+#include "ProtocolUser.h"
 #include "PluginMap.h"
 #include "util.h"
 
@@ -171,6 +172,28 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
     }
     catch (Platform::Exception^ e) {
         OutputDebugString(L"Plugin does not implement IProtocolShare");
+    }
+    // ProtocolUser
+    try {
+        cocosPluginWinrtBridge::IProtocolUser^ user = safe_cast<IProtocolUser^>(protocol);
+        ProtocolUser* out = new ProtocolUser();
+        PluginMap::mapIProtocol[out] = user;
+        PluginMap::mapIProtocolUser[out] = user;
+        user->OnUserAction += ref new cocosPluginWinrtBridge::UserActionResultHandler([out](cocosPluginWinrtBridge::UserActionResult ret) {
+            UserActionResultCode cocosRetCode = (UserActionResultCode)ret;
+#pragma warning(suppress: 4996) // getListener is deprecated, but we still need to support it
+            UserActionListener* listener = out->getActionListener();
+            std::function<void(int, std::string&)> callback = out->getCallback();
+            if (listener != nullptr) {
+                listener->onActionResult(out, cocosRetCode, ""); // TODO what should the msg be?
+            }
+            if (callback != nullptr) {
+                callback((int)cocosRetCode, std::string("")); // TODO what should the msg be?
+            }
+        });
+    }
+    catch (Platform::Exception^ e) {
+        OutputDebugString(L"Plugin does not implement IProtocolUser");
     }
 
     // TODO add other protocols here

@@ -8,6 +8,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)IProtocolIAP.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IProtocolSocial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IProtocolShare.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IProtocolUser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
@@ -19,5 +20,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ProtocolImpl.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ProtocolSocialImpl.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ProtocolShareImpl.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ProtocolUserImpl.cpp" />
   </ItemGroup>
 </Project>

@@ -15,6 +15,7 @@ public:
     static std::unordered_map<void*, cocosPluginWinrtBridge::IProtocolIAP^ > mapIProtocolIAP;
     static std::unordered_map<void*, cocosPluginWinrtBridge::IProtocolSocial^ > mapIProtocolSocial;
     static std::unordered_map<void*, cocosPluginWinrtBridge::IProtocolShare^ > mapIProtocolShare;
+    static std::unordered_map<void*, cocosPluginWinrtBridge::IProtocolUser^ > mapIProtocolUser;
 private:
     PluginMap(){}
 };
