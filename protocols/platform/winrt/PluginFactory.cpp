@@ -69,14 +69,14 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 	HMODULE module = LoadPackagedLibrary((wname + suffix).c_str(), 0);
 	if (module == nullptr)
 	{
-		OutputDebugStringA("Failed to load Plugin ");
-		OutputDebugStringA(name);
+		OutputDebugString(L"Failed to load Plugin ");
+		OutputDebugString(wname.c_str());
 		return nullptr;
 	}
 	DllActivationFactoryPtr _DllActivationFactory = (DllActivationFactoryPtr)GetProcAddress(module, "DllGetActivationFactory");
 	if (!_DllActivationFactory)
 	{
-		OutputDebugStringA("Failed to load Plugin ActivationFactory entrypoint");
+		OutputDebugString(L"Failed to load Plugin ActivationFactory entrypoint");
 		return nullptr;
 	}
 
@@ -94,7 +94,7 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 	factoryPlugin.Get()->ActivateInstance(instance.GetAddressOf());
 	if (instance.Get() == nullptr)
 	{
-		OutputDebugStringA("Failed to create instance of plugin");
+		OutputDebugString(L"Failed to create instance of plugin");
 		return nullptr;
 	}
 
@@ -104,7 +104,7 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
         protocol = safe_cast<IProtocol^>(base);
     }
     catch (Platform::Exception^ e) {
-		OutputDebugStringA("Plugin Fails to Implement IProtocol");
+		OutputDebugString(L"Plugin Fails to Implement IProtocol");
 		return nullptr;
     }
     // ProtocolIAP
@@ -223,9 +223,7 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
         OutputDebugString(L"Plugin does not implement IProtocolAds");
     }
 
-
-    // TODO add other protocols here
-    OutputDebugStringA("Plugin Fails to Implement any Protocols");
-	OutputDebugStringA("Protocol Failed to Load ...");
+    OutputDebugString(L"Plugin Fails to Implement any Protocols");
+	OutputDebugString(L"Protocol Failed to Load ...");
 	return nullptr;
 }
