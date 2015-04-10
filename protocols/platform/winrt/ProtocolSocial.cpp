@@ -3,9 +3,20 @@
 
 #include "ProtocolSocial.h"
 #include "util.h"
+#include "PluginMap.h"
 
 using namespace cocos2d::plugin;
 using namespace pluginx;
+
+ProtocolSocial::ProtocolSocial() {
+    _listener = nullptr;
+    _callback = nullptr; // TODO should these pointers be deleted in the destructor?
+}
+
+ProtocolSocial::~ProtocolSocial() {
+    PluginMap::mapIProtocol.erase(this);
+    PluginMap::mapIProtocolSocial.erase(this);
+}
 
 /**
 @brief config the share developer info
@@ -15,31 +26,39 @@ different plugin have different format
 And invoked only once.
 */
 void ProtocolSocial::configDeveloperInfo(TSocialDeveloperInfo devInfo){
-
+    PluginMap::mapIProtocolSocial[this]->configDeveloperInfo(util::stdStrMapToPlatformStrMap(&devInfo));
 }
 
 /**
 * @brief methods of leaderboard feature
 */
 void ProtocolSocial::submitScore(const char* leadboardID, long score){
-
+    Platform::String^ platLeadboardID = pluginx::util::charArrayToPlatformString(leadboardID);
+    int64 platScore = score; 
+    PluginMap::mapIProtocolSocial[this]->submitScore(platLeadboardID, platScore);
 }
+
 void ProtocolSocial::submitScore(const char* leadboardID, long score, ProtocolSocialCallback cb){
-
+    // TODO should this be the only callback to be called, or should the others be called as well?
+    submitScore(leadboardID, score);
 }
-void ProtocolSocial::showLeaderboard(const char* leaderboardID){
 
+void ProtocolSocial::showLeaderboard(const char* leaderboardID){
+    PluginMap::mapIProtocolSocial[this]->showLeaderBoard(util::charArrayToPlatformString(leaderboardID));
 }
 
 /**
 * @brief methods of achievement feature
 */
-void ProtocolSocial::unlockAchievement(TAchievementInfo achInfo){
-
+void ProtocolSocial::unlockAchievement(TAchievementInfo achInfo) {
+    PluginMap::mapIProtocolSocial[this]->unlockAchievement(util::stdStrMapToPlatformStrMap(&achInfo));
 }
-void ProtocolSocial::unlockAchievement(TAchievementInfo achInfo, ProtocolSocialCallback cb){
 
+void ProtocolSocial::unlockAchievement(TAchievementInfo achInfo, ProtocolSocialCallback cb) {
+    // TODO should this be the only callback to be called, or should the others be called as well?
+    unlockAchievement(achInfo);
 }
-void ProtocolSocial::showAchievements(){
 
+void ProtocolSocial::showAchievements() {
+    PluginMap::mapIProtocolSocial[this]->showAchievements();
 }
