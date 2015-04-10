@@ -195,6 +195,34 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
     catch (Platform::Exception^ e) {
         OutputDebugString(L"Plugin does not implement IProtocolUser");
     }
+    // ProtocolAds
+    try {
+        cocosPluginWinrtBridge::IProtocolAds^ ads = safe_cast<IProtocolAds^>(protocol);
+        ProtocolAds* out = new ProtocolAds();
+        PluginMap::mapIProtocol[out] = ads;
+        PluginMap::mapIProtocolAds[out] = ads;
+        ads->OnAdsResult += ref new cocosPluginWinrtBridge::AdsResultHandler([out](cocosPluginWinrtBridge::AdsResultCodeEnum result, Platform::String^ msg) {
+#pragma warning(suppress: 4996) // getListener is deprecated, but we still need to support it
+            AdsListener* listener = out->getAdsListener();
+            if (listener != nullptr) {
+                listener->onAdsResult((AdsResultCode)result, pluginx::util::PlatformStringToCharArray(msg));
+            }
+            // TODO is the callback field for this callback or the other one?
+        });
+        ads->OnPlayerGetPoints += ref new cocosPluginWinrtBridge::PlayerGetPointsHandler([out](int points) {
+#pragma warning(suppress: 4996) // getListener is deprecated, but we still need to support it
+            AdsListener* listener = out->getAdsListener();
+            if (listener != nullptr) {
+                listener->onPlayerGetPoints(out, points);
+            }
+            // TODO is the callback field for this callback or the other one?
+
+        });
+    }
+    catch (Platform::Exception^ e) {
+        OutputDebugString(L"Plugin does not implement IProtocolAds");
+    }
+
 
     // TODO add other protocols here
     OutputDebugStringA("Plugin Fails to Implement any Protocols");

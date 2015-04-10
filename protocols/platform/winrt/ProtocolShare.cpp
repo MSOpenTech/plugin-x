@@ -38,7 +38,7 @@ void ProtocolShare::share(TShareInfo info){
 
 void ProtocolShare::share(TShareInfo &info, ProtocolShareCallback &cb){
     // TODO should figure out how cocos expects callbacks to work
-    share(info, cb);
+    share(info);
 }
 
   /**
