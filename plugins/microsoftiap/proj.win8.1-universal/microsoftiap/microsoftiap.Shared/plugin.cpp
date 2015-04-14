@@ -21,6 +21,7 @@ namespace microsoftiap {
 	private:
 		bool debugMode;
         Windows::UI::Core::CoreDispatcher^ dispatcher;
+        Platform::String^ unfulfilledConsumables;
 
 	public:
         virtual event OnPayResultHandler^ OnPayResult;
@@ -53,23 +54,26 @@ namespace microsoftiap {
             if (funcName == "reportConsumableFulfillment") {
                 // params[0] : productId string
                 // params[1] : transactionId string
-                Platform::String^ productId = params->GetAt(0)->getStringValue();
-                GUID guid;
-                CLSIDFromString(params->GetAt(1)->getStringValue(), (LPCLSID)&guid);
-                Platform::Guid transactionId = Guid(guid);
-                if (debugMode) {
-                    create_task(CurrentAppSimulator::ReportConsumableFulfillmentAsync(productId, transactionId)).wait();
-                }
-                else {
-                    create_task(CurrentApp::ReportConsumableFulfillmentAsync(productId, transactionId)).wait();
-                }
+                reportFulfilledConsumable(params->GetAt(0)->getStringValue(), params->GetAt(1)->getStringValue());
             }
             return;
         }
 
         // TODO
         virtual Platform::String^ callStringFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
+           // if (funcName == L"getAllListingItems") {
+                //LicenseInformation^ licenseInfo = getLicenseInformation();
+                //return magicalListOfProductLicensesToXMLFunction(licenseInfo->ProductLicenses);
+                // TODO IMapView doesn't provide a list of keys, but we might be able to iterate over it with IIterable.
+                // see: http://stackoverflow.com/questions/18331939/iterate-over-imapview-using-wrl
+                //Windows::Foundation::Collections::IIterable<Windows::Foundation::Collections::IKeyValuePair<Platform::String^, ProductLicense^>^> iterable;
+            //}
+            if (funcName == L"getUnfulfilledConsumables") {
+                fetchUnfulfilledConsumables();
+                return unfulfilledConsumables;
+            }
             return L"";
+
         }
 
         // TODO
@@ -220,6 +224,42 @@ namespace microsoftiap {
             }).wait();
         }
 
+        void reportFulfilledConsumable(Platform::String^ productId, Platform::String^ transactionId) {
+            GUID guid;
+            CLSIDFromString((LPWSTR)transactionId, (LPCLSID)&guid);
+            Platform::Guid transactionIdGuid = Guid(guid);
+            if (debugMode) {
+                create_task(CurrentAppSimulator::ReportConsumableFulfillmentAsync(productId, transactionIdGuid)).wait();
+            }
+            else {
+                create_task(CurrentApp::ReportConsumableFulfillmentAsync(productId, transactionIdGuid)).wait();
+            }
+        }
+
+        void fetchUnfulfilledConsumables() {
+            task<IVectorView<UnfulfilledConsumable^>^> consumablesTask;
+            if (debugMode) {
+                consumablesTask = create_task(CurrentAppSimulator::GetUnfulfilledConsumablesAsync()).then([this](task<IVectorView<UnfulfilledConsumable^>^> currentTask) {
+                    return currentTask;
+                });
+            }
+            else {
+                consumablesTask = create_task(CurrentApp::GetUnfulfilledConsumablesAsync()).then([this](task<IVectorView<UnfulfilledConsumable^>^> currentTask) {
+                    return currentTask;
+                });
+            }
+            consumablesTask.then([this](IVectorView<UnfulfilledConsumable^>^ consumables) {
+                UnfulfilledConsumable^ c;
+                Platform::String^ xmlString = L"<unfulfilled_consumables>";
+                for (int i = 0; i < consumables->Size; ++i) {
+                    c = consumables->GetAt(i);
+                    xmlString += L"<consumable product_id='" + c->ProductId + "' transaction_id='" + c->TransactionId + "' />";
+                }
+                xmlString += "</unfulfilled_consumables>";
+                this->unfulfilledConsumables = xmlString;
+            }).wait();
+
+        }
 	};
 } // end namespace
 
