@@ -14,7 +14,6 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Class1.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IPluginParam.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IProtocol.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IProtocolAds.h" />
@@ -26,7 +25,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Class1.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

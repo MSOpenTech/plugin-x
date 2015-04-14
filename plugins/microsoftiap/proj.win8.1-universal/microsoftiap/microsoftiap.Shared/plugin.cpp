@@ -50,6 +50,20 @@ namespace microsoftiap {
 
         // TODO
         virtual void callFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
+            if (funcName == "reportConsumableFulfillment") {
+                // params[0] : productId string
+                // params[1] : transactionId string
+                Platform::String^ productId = params->GetAt(0)->getStringValue();
+                GUID guid;
+                CLSIDFromString(params->GetAt(1)->getStringValue(), (LPCLSID)&guid);
+                Platform::Guid transactionId = Guid(guid);
+                if (debugMode) {
+                    create_task(CurrentAppSimulator::ReportConsumableFulfillmentAsync(productId, transactionId)).wait();
+                }
+                else {
+                    create_task(CurrentApp::ReportConsumableFulfillmentAsync(productId, transactionId)).wait();
+                }
+            }
             return;
         }
 
@@ -65,7 +79,7 @@ namespace microsoftiap {
 
         // TODO
         virtual bool callBoolFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
-            if (funcName == "isProductPurchased") {
+            if (funcName == L"isProductPurchased") {
                 Platform::String^ productName = params->GetAt(0)->getStringValue();
                 return isProductPurchased(productName);
             }
