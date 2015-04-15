@@ -24,6 +24,11 @@ void ProtocolIAP::payForProduct(TProductInfo info) {
     PluginMap::mapIProtocolIAP[this]->payForProduct(util::stdStrMapToPlatformStrMap(&info));
 }
 
+void ProtocolIAP::payForProduct(TProductInfo info, ProtocolIAPCallback cb) {
+    _callback = cb;
+    payForProduct(info);
+}
+
 void ProtocolIAP::setResultListener(PayResultListener* pListener) {
     _listener = pListener;
 }
