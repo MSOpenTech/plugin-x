@@ -40,8 +40,8 @@ namespace pluginx {
             return ret;
         }
 
-        Vector<PluginParamWinRT^>^ stdVectorToPlatformVector(std::vector<PluginParam*> vec) {
-            Vector<PluginParamWinRT^>^ ret = ref new Vector<PluginParamWinRT^>();
+        Vector<cocosPluginWinrtBridge::IPluginParam^>^ stdVectorToPlatformVector(std::vector<PluginParam*> vec) {
+            Vector<cocosPluginWinrtBridge::IPluginParam^>^ ret = ref new Vector<cocosPluginWinrtBridge::IPluginParam^>();
             std::vector<PluginParam*>::iterator it;
             for (it = vec.begin(); it != vec.end(); ++it) {
                 ret->Append(toWinRT(*it));

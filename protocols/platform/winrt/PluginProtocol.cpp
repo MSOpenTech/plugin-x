@@ -53,9 +53,8 @@ void PluginProtocol::callFuncWithParam(const char* funcName, PluginParam* param,
 
 void PluginProtocol::callFuncWithParam(const char* funcName, std::vector<PluginParam*> params) {
     Platform::String^ platFuncName = util::charArrayToPlatformString(funcName);
-    Vector<PluginParamWinRT^>^ platParams = util::stdVectorToPlatformVector(params);
-    //ProtocolHelper::GlobalCallback->callFuncWithParam(util::charArrayToPlatformString(getPluginName()), platFuncName, platParams);
-    //PluginMap::mapIProtocol[this]->callFuncWithParam(platFuncName, platParams); // TODO
+    IVector<IPluginParam^>^ platParams = util::stdVectorToPlatformVector(params);
+    PluginMap::mapIProtocol[this]->callFuncWithParam(platFuncName, platParams); 
 }
 
 std::string PluginProtocol::callStringFuncWithParam(const char* funcName, PluginParam* param, ...) {
@@ -79,10 +78,8 @@ std::string PluginProtocol::callStringFuncWithParam(const char* funcName, Plugin
 
 std::string PluginProtocol::callStringFuncWithParam(const char* funcName, std::vector<PluginParam*> params) {
     Platform::String^ platFuncName = util::charArrayToPlatformString(funcName);
-    Vector<PluginParamWinRT^>^ platParams = util::stdVectorToPlatformVector(params);
-    //return util::platformStringToCharArray(ProtocolHelper::GlobalCallback->callStringFuncWithParam(util::charArrayToPlatformString(getPluginName()), platFuncName, platParams));
-    //return util::PlatformStringToStdString(PluginMap::mapIProtocol[this]->callStringFuncWithParam(platFuncName, platParams)); // TODO
-    return "";
+    Vector<IPluginParam^>^ platParams = util::stdVectorToPlatformVector(params);
+    return util::PlatformStringToStdString(PluginMap::mapIProtocol[this]->callStringFuncWithParam(platFuncName, platParams));
 }
 
 int PluginProtocol::callIntFuncWithParam(const char* funcName, PluginParam* param, ...) {
@@ -105,10 +102,9 @@ int PluginProtocol::callIntFuncWithParam(const char* funcName, PluginParam* para
 }
 
 int PluginProtocol::callIntFuncWithParam(const char* funcName, std::vector<PluginParam*> params) {
-    //Platform::String^ platFuncName = util::charArrayToPlatformString(funcName);
-    //Vector<PluginParamWinRT^>^ platParams = util::stdVectorToPlatformVector(params);
-    //return ProtocolHelper::GlobalCallback->callIntFuncWithParam(util::charArrayToPlatformString(getPluginName()), platFuncName, platParams);
-    return 0;
+    Platform::String^ platFuncName = util::charArrayToPlatformString(funcName);
+    Vector<IPluginParam^>^ platParams = util::stdVectorToPlatformVector(params);
+    return PluginMap::mapIProtocol[this]->callIntFuncWithParam(platFuncName, platParams);
 }
 
 bool PluginProtocol::callBoolFuncWithParam(const char* funcName, PluginParam* param, ...) {
@@ -131,10 +127,9 @@ bool PluginProtocol::callBoolFuncWithParam(const char* funcName, PluginParam* pa
 }
 
 bool PluginProtocol::callBoolFuncWithParam(const char* funcName, std::vector<PluginParam*> params) {
-    //Platform::String^ platFuncName = util::charArrayToPlatformString(funcName);
-    //Vector<PluginParamWinRT^>^ platParams = util::stdVectorToPlatformVector(params);
-    //return ProtocolHelper::GlobalCallback->callBoolFuncWithParam(util::charArrayToPlatformString(getPluginName()), platFuncName, platParams);
-    return 0;
+    Platform::String^ platFuncName = util::charArrayToPlatformString(funcName);
+    Vector<IPluginParam^>^ platParams = util::stdVectorToPlatformVector(params);
+    return PluginMap::mapIProtocol[this]->callBoolFuncWithParam(platFuncName, platParams);
 }
 
 float PluginProtocol::callFloatFuncWithParam(const char* funcName, PluginParam* param, ...) {
@@ -157,9 +152,8 @@ float PluginProtocol::callFloatFuncWithParam(const char* funcName, PluginParam* 
 }
 
 float PluginProtocol::callFloatFuncWithParam(const char* funcName, std::vector<PluginParam*> params) {
-    //Platform::String^ platFuncName = util::charArrayToPlatformString(funcName);
-    //Vector<PluginParamWinRT^>^ platParams = util::stdVectorToPlatformVector(params);
-    //return ProtocolHelper::GlobalCallback->callFloatFuncWithParam(util::charArrayToPlatformString(getPluginName()), platFuncName, platParams);
-    return 0;
+    Platform::String^ platFuncName = util::charArrayToPlatformString(funcName);
+    Vector<IPluginParam^>^ platParams = util::stdVectorToPlatformVector(params);
+    return PluginMap::mapIProtocol[this]->callFloatFuncWithParam(platFuncName, platParams);
 }
 
