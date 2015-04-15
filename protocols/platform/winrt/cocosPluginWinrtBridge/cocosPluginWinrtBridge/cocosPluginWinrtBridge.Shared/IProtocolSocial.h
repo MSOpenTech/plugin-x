@@ -5,6 +5,7 @@
 
 namespace cocosPluginWinrtBridge {
     
+    // needs to be kept up to date with the SocialRetCode enum in ProtocolSocial.h
     public enum class SocialReturnCode {
         SCORE_SUBMIT_SUCCESS = 1,
         SCORE_SUBMIT_FAILED,

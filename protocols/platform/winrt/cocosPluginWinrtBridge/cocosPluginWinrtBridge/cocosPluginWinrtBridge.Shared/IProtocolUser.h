@@ -5,6 +5,7 @@
 
 namespace cocosPluginWinrtBridge {
     
+    // needs to be kept up to date with the UserActionResultCode enum in ProtocolUser.h
     public enum class UserActionResult {
         kLoginSucceed = 0,
         kLoginFailed,

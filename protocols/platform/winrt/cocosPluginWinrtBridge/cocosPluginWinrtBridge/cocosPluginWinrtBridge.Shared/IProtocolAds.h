@@ -5,7 +5,7 @@
 
 namespace cocosPluginWinrtBridge {
     
-    // needs to be kept up to date with the AdsResultCode inum in ProtocolAds.h
+    // needs to be kept up to date with the AdsResultCode enum in ProtocolAds.h
     public enum class AdsResultCodeEnum {
         kAdsReceived = 0,
         kAdsShown,
@@ -16,6 +16,7 @@ namespace cocosPluginWinrtBridge {
         kUnknownError
     };
 
+    // needs to be kept up to date with the AdsPos enum in ProtocolAds.h
     public enum class AdsPosition {
         kPosCenter = 0,
         kPosTop,

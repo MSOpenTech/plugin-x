@@ -4,6 +4,7 @@
 
 namespace cocosPluginWinrtBridge {
     
+    // needs to be kept up to date with the PayResultCode enum in ProtocolIAP.h
     public enum class PayResultCodeEnum {
         kPaySuccess = 0,
         kPayFail,

@@ -3,6 +3,7 @@
 
 namespace cocosPluginWinrtBridge {
 
+    // needs to be kept up to date with the ParamType enum in PluginParam.h
     public enum class ParamTypeEnum {
         kParamTypeNull = 0,
         kParamTypeInt,
