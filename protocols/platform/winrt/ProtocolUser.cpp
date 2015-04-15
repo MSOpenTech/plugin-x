@@ -33,7 +33,7 @@ void ProtocolUser::login(){
 }
 
 void ProtocolUser::login(ProtocolUserCallback &cb){
-    // TODO need to figure out how cocos wants this callback handled
+    _callback = cb;
     login();
 }
 
@@ -45,7 +45,7 @@ void ProtocolUser::logout(){
 }
 
 void ProtocolUser::logout(ProtocolUserCallback &cb){
-    // TODO need to figure out how cocos wants this callback handled
+    _callback = cb;
     logout();
 }
 

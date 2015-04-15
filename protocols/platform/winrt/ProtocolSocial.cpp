@@ -39,7 +39,7 @@ void ProtocolSocial::submitScore(const char* leadboardID, long score){
 }
 
 void ProtocolSocial::submitScore(const char* leadboardID, long score, ProtocolSocialCallback cb){
-    // TODO should this be the only callback to be called, or should the others be called as well?
+    _callback = cb;
     submitScore(leadboardID, score);
 }
 
@@ -55,7 +55,7 @@ void ProtocolSocial::unlockAchievement(TAchievementInfo achInfo) {
 }
 
 void ProtocolSocial::unlockAchievement(TAchievementInfo achInfo, ProtocolSocialCallback cb) {
-    // TODO should this be the only callback to be called, or should the others be called as well?
+    _callback = cb;
     unlockAchievement(achInfo);
 }
 
