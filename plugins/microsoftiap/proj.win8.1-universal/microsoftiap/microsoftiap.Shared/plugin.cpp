@@ -22,6 +22,7 @@ namespace microsoftiap {
 		bool debugMode;
         Windows::UI::Core::CoreDispatcher^ dispatcher;
         Platform::String^ unfulfilledConsumables;
+        FulfillmentResult fulfillmentResult;
 
 	public:
         virtual event OnPayResultHandler^ OnPayResult;
@@ -51,11 +52,6 @@ namespace microsoftiap {
 
         // TODO
         virtual void callFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
-            if (funcName == "reportConsumableFulfillment") {
-                // params[0] : productId string
-                // params[1] : transactionId string
-                reportFulfilledConsumable(params->GetAt(0)->getStringValue(), params->GetAt(1)->getStringValue());
-            }
             return;
         }
 
@@ -86,6 +82,12 @@ namespace microsoftiap {
             if (funcName == L"isProductPurchased") {
                 Platform::String^ productName = params->GetAt(0)->getStringValue();
                 return isProductPurchased(productName);
+            }
+            if (funcName == "reportConsumableFulfillment") {
+                // params[0] : productId string
+                // params[1] : transactionId string
+                reportFulfilledConsumable(params->GetAt(0)->getStringValue(), params->GetAt(1)->getStringValue());
+                return fulfillmentResult == FulfillmentResult::Succeeded ? true : false;
             }
             return false;
         }
@@ -226,14 +228,18 @@ namespace microsoftiap {
 
         void reportFulfilledConsumable(Platform::String^ productId, Platform::String^ transactionId) {
             GUID guid;
-            CLSIDFromString((LPWSTR)transactionId, (LPCLSID)&guid);
+            HRESULT hresult = CLSIDFromString((LPWSTR)transactionId->Data(), (LPCLSID)&guid);
             Platform::Guid transactionIdGuid = Guid(guid);
+            task<FulfillmentResult> reportingTask;
             if (debugMode) {
-                create_task(CurrentAppSimulator::ReportConsumableFulfillmentAsync(productId, transactionIdGuid)).wait();
+                reportingTask = create_task(CurrentAppSimulator::ReportConsumableFulfillmentAsync(productId, transactionIdGuid));
             }
             else {
-                create_task(CurrentApp::ReportConsumableFulfillmentAsync(productId, transactionIdGuid)).wait();
+                reportingTask = create_task(CurrentApp::ReportConsumableFulfillmentAsync(productId, transactionIdGuid));
             }
+            reportingTask.then([this](FulfillmentResult result) {
+                this->fulfillmentResult = result;
+            }).wait();
         }
 
         void fetchUnfulfilledConsumables() {
