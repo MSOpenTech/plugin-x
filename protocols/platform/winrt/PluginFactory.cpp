@@ -54,9 +54,7 @@ void PluginFactory::purgeFactory() {
 	}
 }
 
-// TODO should return correct protocol object
 PluginProtocol* PluginFactory::createPlugin(const char* name) {
-	//ComPtr<IProtocol> Protocol;
 	std::wstring suffix;
 #if WINAPI_FAMILY==WINAPI_FAMILY_PC_APP
 	suffix = L".Windows.dll";
@@ -65,7 +63,6 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
 #endif
 	std::wstring wname(name, name + strlen(name));
 
-    //Microsoft::WRL::Details::ComPtrRef<IProtocol> plugin = Windows::Foundation::ActivateInstance(wname + suffix);
 	HMODULE module = LoadPackagedLibrary((wname + suffix).c_str(), 0);
 	if (module == nullptr)
 	{
@@ -140,7 +137,6 @@ PluginProtocol* PluginFactory::createPlugin(const char* name) {
         ProtocolSocial* out = new ProtocolSocial();
         PluginMap::mapIProtocol[out] = social;
         PluginMap::mapIProtocolSocial[out] = social;
-        // TODO set up event listeners here
         // unfortunately the whole function needs to be here because ProtocolSocial doesn't have an OnResult function in its header
         social->OnSocialResult += ref new cocosPluginWinrtBridge::SocialResultHandler([out](cocosPluginWinrtBridge::SocialReturnCode retCode) {
             SocialRetCode cocosRetCode = (SocialRetCode)retCode;

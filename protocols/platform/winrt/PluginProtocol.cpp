@@ -17,7 +17,6 @@ using namespace Platform::Collections;
 using namespace pluginparam;
 
 PluginProtocol::~PluginProtocol() {
-    // TODO
 }
 
 std::string PluginProtocol::getPluginVersion() {

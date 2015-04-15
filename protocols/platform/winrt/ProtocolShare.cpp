@@ -10,7 +10,8 @@ ProtocolShare::ProtocolShare(){
 }
 
 ProtocolShare::~ProtocolShare(){
-
+    PluginMap::mapIProtocol.erase(this);
+    PluginMap::mapIProtocolShare.erase(this);
 }
 
   /**
