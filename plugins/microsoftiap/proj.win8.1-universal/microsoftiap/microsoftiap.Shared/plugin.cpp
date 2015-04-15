@@ -50,12 +50,10 @@ namespace microsoftiap {
 			debugMode = bDebug;
 		}
 
-        // TODO
         virtual void callFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
             return;
         }
 
-        // TODO
         virtual Platform::String^ callStringFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
            // if (funcName == L"getAllListingItems") {
                 //LicenseInformation^ licenseInfo = getLicenseInformation();
@@ -72,12 +70,10 @@ namespace microsoftiap {
 
         }
 
-        // TODO
         virtual int callIntFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
             return 0;
         }
 
-        // TODO
         virtual bool callBoolFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
             if (funcName == L"isProductPurchased") {
                 Platform::String^ productName = params->GetAt(0)->getStringValue();
@@ -87,12 +83,11 @@ namespace microsoftiap {
                 // params[0] : productId string
                 // params[1] : transactionId string
                 reportFulfilledConsumable(params->GetAt(0)->getStringValue(), params->GetAt(1)->getStringValue());
-                return fulfillmentResult == FulfillmentResult::Succeeded ? true : false;
+                return fulfillmentResult == FulfillmentResult::Succeeded;
             }
             return false;
         }
 
-        // TODO
         virtual float callFloatFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
             return 0;
         }
@@ -184,7 +179,6 @@ namespace microsoftiap {
 	private:
 		void log(Platform::String^ msg) {
 			if (debugMode) {
-                //std::wcout << msg->Data() << std::endl; // TODO should do real logging, and this doesn't seem to actually be output to console anyway
                 OutputDebugString(msg->Data());
 			}
 		}
@@ -256,10 +250,10 @@ namespace microsoftiap {
             }
             consumablesTask.then([this](IVectorView<UnfulfilledConsumable^>^ consumables) {
                 UnfulfilledConsumable^ c;
-                Platform::String^ xmlString = L"<unfulfilled_consumables>";
+                Platform::String^ xmlString = L"<?xml version=\"1.0\" encoding=\"utf-8\"?><unfulfilled_consumables>";
                 for (int i = 0; i < consumables->Size; ++i) {
                     c = consumables->GetAt(i);
-                    xmlString += L"<consumable product_id='" + c->ProductId + "' transaction_id='" + c->TransactionId + "' />";
+                    xmlString += L"<consumable product_id=\"" + c->ProductId + "\" transaction_id=\"" + c->TransactionId + "\" />";
                 }
                 xmlString += "</unfulfilled_consumables>";
                 this->unfulfilledConsumables = xmlString;
