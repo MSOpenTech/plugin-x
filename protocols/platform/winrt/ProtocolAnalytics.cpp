@@ -24,6 +24,7 @@ using namespace pluginx::util;
 using namespace ABI::Windows::Foundation::Collections;
 using namespace Platform::Collections;
 using namespace Platform;
+
 ProtocolAnalytics::ProtocolAnalytics() {
 
 }

@@ -10,14 +10,12 @@ using namespace pluginx;
 
 ProtocolAds::ProtocolAds() {
     _listener = nullptr;
+    _callback = nullptr;
 }
 
 ProtocolAds::~ProtocolAds() {
     PluginMap::mapIProtocol.erase(this);
     PluginMap::mapIProtocolAds.erase(this);
-	// TODO should I be deleting this?
-    delete _listener;
-    _listener = nullptr;
 }
 
 void ProtocolAds::configDeveloperInfo(TAdsDeveloperInfo devInfo) {

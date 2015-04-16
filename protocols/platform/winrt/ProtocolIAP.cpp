@@ -9,6 +9,7 @@ using namespace cocosPluginWinrtBridge;
 
 ProtocolIAP::ProtocolIAP() {
     _listener = nullptr;
+    _callback = nullptr;
 }
 
 ProtocolIAP::~ProtocolIAP() {

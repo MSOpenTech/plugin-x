@@ -10,7 +10,7 @@ using namespace pluginx;
 
 ProtocolSocial::ProtocolSocial() {
     _listener = nullptr;
-    _callback = nullptr; // TODO should these pointers be deleted in the destructor?
+    _callback = nullptr;
 }
 
 ProtocolSocial::~ProtocolSocial() {
