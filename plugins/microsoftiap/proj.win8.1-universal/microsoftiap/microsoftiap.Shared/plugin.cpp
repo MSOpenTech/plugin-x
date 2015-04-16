@@ -8,6 +8,7 @@ using namespace Windows::Foundation::Collections;
 using namespace Platform;
 using namespace Windows::ApplicationModel::Store;
 using namespace Windows::Storage;
+using namespace Microsoft::WRL;
 
 using namespace cocosPluginWinrtBridge;
 
@@ -53,13 +54,9 @@ namespace microsoftiap {
         }
 
         virtual Platform::String^ callStringFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
-           // if (funcName == L"getAllListingItems") {
-                //LicenseInformation^ licenseInfo = getLicenseInformation();
-                //return magicalListOfProductLicensesToXMLFunction(licenseInfo->ProductLicenses);
-                // TODO IMapView doesn't provide a list of keys, but we might be able to iterate over it with IIterable.
-                // see: http://stackoverflow.com/questions/18331939/iterate-over-imapview-using-wrl
-                //Windows::Foundation::Collections::IIterable<Windows::Foundation::Collections::IKeyValuePair<Platform::String^, ProductLicense^>^> iterable;
-            //}
+            if (funcName == L"getAllListingItems") {
+                return getAllListingItems();
+            }
             if (funcName == L"getUnfulfilledConsumables") {
                 return fetchUnfulfilledConsumables();
             }
@@ -258,6 +255,24 @@ namespace microsoftiap {
             }).wait();
             return xmlString;
         }
+
+        Platform::String^ getAllListingItems() {
+           typedef Windows::Foundation::Collections::IKeyValuePair<Platform::String^, ProductLicense^>  T_item;
+
+           LicenseInformation^ licenseInformation = getLicenseInformation();
+           Windows::Foundation::Collections::IIterator< T_item ^>^ it = (Windows::Foundation::Collections::IIterator< T_item ^>^)licenseInformation->ProductLicenses->First();
+            Platform::String^ xmlString = L"<?xml version=\"1.0\" encoding=\"utf-8\"?><product_ids>";
+            while (it->HasCurrent)
+            {
+                T_item^ item = (T_item^)it->Current;
+                Platform::String^ key = item->Key;
+                xmlString += L"<product_id>" + key + "</product_id>";
+                it->MoveNext();
+            }
+            xmlString += "</product_ids>";
+            return xmlString;
+        }
+
 	};
 } // end namespace
 
