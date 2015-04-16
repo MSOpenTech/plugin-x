@@ -21,8 +21,6 @@ namespace microsoftiap {
 	private:
 		bool debugMode;
         Windows::UI::Core::CoreDispatcher^ dispatcher;
-        Platform::String^ unfulfilledConsumables;
-        FulfillmentResult fulfillmentResult;
 
 	public:
         virtual event OnPayResultHandler^ OnPayResult;
@@ -63,8 +61,7 @@ namespace microsoftiap {
                 //Windows::Foundation::Collections::IIterable<Windows::Foundation::Collections::IKeyValuePair<Platform::String^, ProductLicense^>^> iterable;
             //}
             if (funcName == L"getUnfulfilledConsumables") {
-                fetchUnfulfilledConsumables();
-                return unfulfilledConsumables;
+                return fetchUnfulfilledConsumables();
             }
             return L"";
 
@@ -82,8 +79,7 @@ namespace microsoftiap {
             if (funcName == "reportConsumableFulfillment") {
                 // params[0] : productId string
                 // params[1] : transactionId string
-                reportFulfilledConsumable(params->GetAt(0)->getStringValue(), params->GetAt(1)->getStringValue());
-                return fulfillmentResult == FulfillmentResult::Succeeded;
+                return reportFulfilledConsumable(params->GetAt(0)->getStringValue(), params->GetAt(1)->getStringValue()) == FulfillmentResult::Succeeded;
             }
             return false;
         }
@@ -220,7 +216,7 @@ namespace microsoftiap {
             }).wait();
         }
 
-        void reportFulfilledConsumable(Platform::String^ productId, Platform::String^ transactionId) {
+        FulfillmentResult reportFulfilledConsumable(Platform::String^ productId, Platform::String^ transactionId) {
             GUID guid;
             HRESULT hresult = CLSIDFromString((LPWSTR)transactionId->Data(), (LPCLSID)&guid);
             Platform::Guid transactionIdGuid = Guid(guid);
@@ -231,12 +227,14 @@ namespace microsoftiap {
             else {
                 reportingTask = create_task(CurrentApp::ReportConsumableFulfillmentAsync(productId, transactionIdGuid));
             }
-            reportingTask.then([this](FulfillmentResult result) {
-                this->fulfillmentResult = result;
+            FulfillmentResult ret;
+            reportingTask.then([this, &ret](FulfillmentResult result) {
+                ret = result;
             }).wait();
+            return ret;
         }
 
-        void fetchUnfulfilledConsumables() {
+        Platform::String^ fetchUnfulfilledConsumables() {
             task<IVectorView<UnfulfilledConsumable^>^> consumablesTask;
             if (debugMode) {
                 consumablesTask = create_task(CurrentAppSimulator::GetUnfulfilledConsumablesAsync()).then([this](task<IVectorView<UnfulfilledConsumable^>^> currentTask) {
@@ -248,17 +246,17 @@ namespace microsoftiap {
                     return currentTask;
                 });
             }
-            consumablesTask.then([this](IVectorView<UnfulfilledConsumable^>^ consumables) {
+            Platform::String^ xmlString;
+            consumablesTask.then([this, &xmlString](IVectorView<UnfulfilledConsumable^>^ consumables) {
                 UnfulfilledConsumable^ c;
-                Platform::String^ xmlString = L"<?xml version=\"1.0\" encoding=\"utf-8\"?><unfulfilled_consumables>";
+                xmlString = L"<?xml version=\"1.0\" encoding=\"utf-8\"?><unfulfilled_consumables>";
                 for (int i = 0; i < consumables->Size; ++i) {
                     c = consumables->GetAt(i);
                     xmlString += L"<consumable product_id=\"" + c->ProductId + "\" transaction_id=\"" + c->TransactionId + "\" />";
                 }
                 xmlString += "</unfulfilled_consumables>";
-                this->unfulfilledConsumables = xmlString;
             }).wait();
-
+            return xmlString;
         }
 	};
 } // end namespace
