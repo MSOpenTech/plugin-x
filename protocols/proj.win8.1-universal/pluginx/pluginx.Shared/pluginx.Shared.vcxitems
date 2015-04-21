@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{5419e2ca-4b8f-411d-b6b1-54c415ed17b0}</ItemsProjectGuid>
+    <ItemsRootNamespace>pluginx</ItemsRootNamespace>
+    <ItemsProjectName>pluginx.Shared</ItemsProjectName>
+    <CodeSharingProject>248F659F-DAC5-46E8-AC09-60EC9FC95053</CodeSharingProject>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\FacebookAgent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginFactory.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginParamWinRT.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginProtocol.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolAds.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolAnalytics.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolIAP.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolShare.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolSocial.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\ProtocolUser.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\util.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\PluginManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\PluginParam.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\PluginParamWinRT.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\platform\winrt\util.h" />
+  </ItemGroup>
+</Project>

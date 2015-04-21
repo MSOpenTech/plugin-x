@@ -1,0 +1,134 @@
+
+/****************************************************************************
+Copyright (c) 2012-2013 cocos2d-x.org
+Copyright (c) Microsoft Open Technologies, Inc.
+Copyright (c) Microsoft Corporation. 
+
+http://www.cocos2d-x.org
+ 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+ 
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+ 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+****************************************************************************/
+
+import "inspectable.idl";
+import "Windows.Foundation.idl";
+import "Windows.UI.Core.idl";
+
+#define COMPONENT_VERSION 1.0
+
+
+namespace winrtInterface
+{
+
+	interface IPluginParam;
+	[uuid(DEF6D397-BDCA-49AC-B8E4-01626BCB9C51), version(COMPONENT_VERSION)]
+	interface IPluginParam: IInspectable
+	{
+		//HRESULT getCurrentType([out, retval] int* result);
+	}
+
+
+
+    interface IProtocol;
+    [uuid(64b0eac7-f5e7-4787-90a2-940f5297570a), version(COMPONENT_VERSION)]
+    interface IProtocol : IInspectable
+    {
+        HRESULT getPluginVersion([out, retval] HSTRING *value);
+        HRESULT getSDKVersion([out, retval] HSTRING *value);
+        HRESULT setDebugMode([in] boolean bDebug);
+        HRESULT callFuncWithParam([in] HSTRING funcName, [in] Windows.Foundation.Collections.IVector<IPluginParam*>* params); 
+		HRESULT callStringFuncWithParam([in] HSTRING funcName, [in] Windows.Foundation.Collections.IVector<IPluginParam*>* params, [out, retval] HSTRING* result);
+		HRESULT callIntFuncWithParam([in] HSTRING funcName, [in] Windows.Foundation.Collections.IVector<IPluginParam*>* params, [out, retval] int* result);
+		HRESULT callBoolFuncWithParam([in] HSTRING funcName, [in] Windows.Foundation.Collections.IVector<IPluginParam*>* params, [out, retval] boolean* result);
+		HRESULT callFloatFuncWithParam([in] HSTRING funcName, [in] Windows.Foundation.Collections.IVector<IPluginParam*>* params, [out, retval] float* result);
+    }
+
+    interface IProtocolAnalytics;
+    [uuid(666997f8-53a1-4c9c-b7c7-e7b3f248e9f5), version(COMPONENT_VERSION)]
+    interface IProtocolAnalytics : IInspectable 
+        requires IProtocol
+    {
+        HRESULT startSession([in] HSTRING appKey);
+        HRESULT stopSession();
+        HRESULT setSessionContinueMillis([in] int millis);
+        HRESULT logError([in] HSTRING errorId, [in] HSTRING message);
+        HRESULT logEvent([in] HSTRING eventId, [in] Windows.Foundation.Collections.IMap<HSTRING, HSTRING>* paramMap);
+        HRESULT logTimedEventBegin([in] HSTRING eventId);
+        HRESULT logTimedEventEnd([in] HSTRING eventId);
+        HRESULT setCaptureUncaughtException([in] boolean enabled);
+    }
+
+	// enums need to be kept up to date with their c++ implementations
+    [version(COMPONENT_VERSION)]
+    typedef [v1_enum, public] enum IAPProductRequestEnum {
+            RequestSuccess = 0,
+            RequestFail,
+            RequestTimeout
+    } IAPProductRequestEnum;
+
+    [version(COMPONENT_VERSION)]
+    typedef [v1_enum, public] enum PayResultCodeEnum {
+            kPaySuccess = 0,
+            kPayFail,
+            kPayCancel,
+            kPayTimeOut
+    } PayResultCodeEnum;
+
+    typedef Windows.Foundation.Collections.IMap<HSTRING, HSTRING>* StringMap;
+    // typedef Windows.Foundation.Collections.IVector<StringMap>* StringMapVector;
+
+    [uuid(FDF08C00-28E1-4D10-975D-46F8411581EA), version(COMPONENT_VERSION)]
+    delegate HRESULT OnPayResultHandler(PayResultCodeEnum ret, HSTRING msg);
+
+    interface IProtocolIAP;
+    [uuid(74436BAA-2B54-487B-AA90-A60C1CFBC70F), version(COMPONENT_VERSION)]
+    interface IProtocolIAP : IInspectable 
+        requires IProtocol
+    {
+        [eventadd]
+        HRESULT OnPayResult([in] OnPayResultHandler* eventHandler, [out, retval] EventRegistrationToken* eventCookie);
+        [eventremove]
+        HRESULT OnPayResult([in] EventRegistrationToken eventCookie);
+        HRESULT configDeveloperInfo([in] Windows.Foundation.Collections.IMap<HSTRING, HSTRING>* devInfo);
+        HRESULT payForProduct([in] Windows.Foundation.Collections.IMap<HSTRING, HSTRING>* info);
+        HRESULT setDispatcher([in] Windows.UI.Core.CoreDispatcher* dispatcher);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

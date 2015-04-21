@@ -225,6 +225,7 @@ void TestAnalytics::loadPlugins()
     
     std::string umengKey  = "";
     std::string flurryKey = "";
+    std::string msappinsightskey = "";
     std::string pluginName = "";
     std::string strAppKey = "";
     
@@ -246,7 +247,11 @@ void TestAnalytics::loadPlugins()
         pluginName = "AnalyticsFlurry";
         strAppKey = flurryKey;
     }
-    
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+    pluginName= "microsoftapplicationinsights";
+    strAppKey = MSAPPLICATIONINSIGHTS_KEY_WINDOWS;
+#endif 
     _pluginAnalytics = dynamic_cast<ProtocolAnalytics*> (PluginManager::getInstance()->loadPlugin(pluginName.c_str()));
 
     _pluginAnalytics->setDebugMode(true);

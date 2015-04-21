@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CLCompile Include="$(MSBuildThisFileDirectory)App.xaml.cpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)App.xaml.h" />
+    <CLCompile Include="$(MSBuildThisFileDirectory)pch.cpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)pch.h" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\AppDelegate.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\HelloWorldScene.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Cocos2dRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OpenGLES.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OpenGLESPage.xaml.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestUser\MyUserManager.cpp">
+      <Filter>Classes\TestUser</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestUser\TestUserScene.cpp">
+      <Filter>Classes\TestUser</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestSocial\MySocialManager.cpp">
+      <Filter>Classes\TestSocial</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestSocial\TestSocialScene.cpp">
+      <Filter>Classes\TestSocial</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestShare\MyShareManager.cpp">
+      <Filter>Classes\TestShare</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestShare\TestShareScene.cpp">
+      <Filter>Classes\TestShare</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAPOnline\MyIAPOLManager.cpp">
+      <Filter>Classes\TestIAPOnline</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAPOnline\TestIAPOnlineScene.cpp">
+      <Filter>Classes\TestIAPOnline</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAP\MyPurchase.cpp">
+      <Filter>Classes\TestIAP</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAP\TestIAPScene.cpp">
+      <Filter>Classes\TestIAP</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestFacebookUser\TestFacebookUserScene.cpp">
+      <Filter>Classes\TestFacebookUser</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestFacebookShare\TestFacebookShare.cpp">
+      <Filter>Classes\TestFacebookShare</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestAnalytics\TestAnalyticsScene.cpp">
+      <Filter>Classes\TestAnalytics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\TestAds\TestAdsScene.cpp">
+      <Filter>Classes\TestAdds</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{38ad799c-8c3c-44a2-8e41-516c8f62f556}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\TestAdds">
+      <UniqueIdentifier>{580f8644-b85b-449c-8d89-eadd4f26e6ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\TestAnalytics">
+      <UniqueIdentifier>{45092a2c-e9f2-4301-81a2-9cec4e4d41ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\TestFacebookShare">
+      <UniqueIdentifier>{b3849303-04b0-4443-a6e5-ab7969ec9f4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\TestFacebookUser">
+      <UniqueIdentifier>{001142a7-a408-4344-8e39-8d25fb53b48b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\TestIAP">
+      <UniqueIdentifier>{6d7f7d3b-9527-4f1f-9e73-83ad49c71a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\TestIAPOnline">
+      <UniqueIdentifier>{032ec919-a1c0-44e5-abe4-cf9dec31ac6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\TestShare">
+      <UniqueIdentifier>{e30707dd-ac84-40b5-92b5-bd7b2b4938d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\TestSocial">
+      <UniqueIdentifier>{0139e723-2177-4ec3-b6b7-524a696116d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\TestUser">
+      <UniqueIdentifier>{3655d939-e844-49d7-abc0-06a737a5b611}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\AppDelegate.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\AppMacros.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\HelloWorldScene.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)OpenGLES.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)OpenGLESPage.xaml.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestSocial\MySocialManager.h">
+      <Filter>Classes\TestSocial</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestSocial\TestSocialScene.h">
+      <Filter>Classes\TestSocial</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestUser\MyUserManager.h">
+      <Filter>Classes\TestUser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestUser\TestUserScene.h">
+      <Filter>Classes\TestUser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestShare\MyShareManager.h">
+      <Filter>Classes\TestShare</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestShare\TestShareScene.h">
+      <Filter>Classes\TestShare</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAPOnline\MyIAPOLManager.h">
+      <Filter>Classes\TestIAPOnline</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAPOnline\TestIAPOnlineScene.h">
+      <Filter>Classes\TestIAPOnline</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAP\MyPurchase.h">
+      <Filter>Classes\TestIAP</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestIAP\TestIAPScene.h">
+      <Filter>Classes\TestIAP</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestFacebookUser\TestFacebookUserScene.h">
+      <Filter>Classes\TestFacebookUser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestFacebookShare\TestFacebookShare.h">
+      <Filter>Classes\TestFacebookShare</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestAnalytics\TestAnalyticsScene.h">
+      <Filter>Classes\TestAnalytics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestAds\TestAdsScene.h">
+      <Filter>Classes\TestAdds</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)OpenGLESPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)ApplicationInsights.config" />
+  </ItemGroup>
+</Project>

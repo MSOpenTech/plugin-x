@@ -38,12 +38,15 @@ public:
     /** Destory the instance of PluginFactory */
     static void purgeFactory();
 
+    void setDispatcher(Windows::UI::Core::CoreDispatcher^ d);
+
 private:
     friend class PluginManager;
     PluginFactory(void);
 
     /** create the plugin by name */
     PluginProtocol* createPlugin(const char* name);
+    Windows::UI::Core::CoreDispatcher^ dispatcher;
 };
 
 }} //namespace cocos2d { namespace plugin {
