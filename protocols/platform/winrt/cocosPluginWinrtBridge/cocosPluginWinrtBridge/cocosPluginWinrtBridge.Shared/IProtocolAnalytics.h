@@ -32,7 +32,7 @@ THE SOFTWARE.
 namespace cocosPluginWinrtBridge {
 
     public interface class IProtocolAnalytics : IProtocol {
-        void startSession(Platform::String^ appkey);
+        void startSession(Platform::String^ appKey);
         void stopSession();
         void setSessionContinueMillis(int millis);
         void logError(Platform::String^ errorId, Platform::String^ message);

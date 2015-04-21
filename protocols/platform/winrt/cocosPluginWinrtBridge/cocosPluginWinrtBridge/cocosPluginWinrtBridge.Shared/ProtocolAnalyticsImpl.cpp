@@ -69,7 +69,7 @@ namespace cocosPluginWinrtBridge {
             return 0;
         }
 
-        virtual void startSession(Platform::String^ appkey) {
+        virtual void startSession(Platform::String^ appKey) {
             return;
         }
 
