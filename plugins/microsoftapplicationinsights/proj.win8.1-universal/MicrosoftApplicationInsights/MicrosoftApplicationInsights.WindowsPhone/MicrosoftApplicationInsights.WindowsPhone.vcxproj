@@ -19,17 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\MicrosoftApplicationInsights.Windows\packages.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.ApplicationInsights.Telemetry.WindowsStoreInternal">
-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.Telemetry.WindowsPhone.0.7.1.0\build\wp80\x86\Microsoft.ApplicationInsights.Telemetry.WindowsStoreInternal.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
-    <Reference Include="winrtInterface">
-      <HintPath>..\..\..\..\..\protocols\platform\winrt\winrtInterface.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
+    <ProjectReference Include="T:\Cocos2Dx\plugin\protocols\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.WindowsPhone\cocosPluginWinrtBridge.WindowsPhone.vcxproj">
+      <Project>{35acd56c-dee1-477b-bec0-c963c7937623}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{d70ca2f2-b46a-47f6-bc9f-db5c655266af}</ProjectGuid>
@@ -41,6 +37,9 @@
     <ApplicationTypeRevision>8.1</ApplicationTypeRevision>
     <ConvergedProjectType>CodeSharingWindowsRuntimeComponent</ConvergedProjectType>
     <ProjectName>microsoftapplicationinsights.WindowsPhone</ProjectName>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>561e114b</NuGetPackageImportStamp>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -145,5 +144,20 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+    <Import Project="..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.16-beta\build\native\Microsoft.Diagnostics.Tracing.EventSource.Redist.targets" Condition="Exists('..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.16-beta\build\native\Microsoft.Diagnostics.Tracing.EventSource.Redist.targets')" />
+    <Import Project="..\..\packages\Microsoft.ApplicationInsights.0.14.0-build20632\build\native\Microsoft.ApplicationInsights.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.0.14.0-build20632\build\native\Microsoft.ApplicationInsights.targets')" />
+    <Import Project="..\..\packages\Microsoft.ApplicationInsights.RuntimeTelemetry.0.14.0-build20632\build\native\Microsoft.Applicationinsights.RuntimeTelemetry.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.RuntimeTelemetry.0.14.0-build20632\build\native\Microsoft.Applicationinsights.RuntimeTelemetry.targets')" />
+    <Import Project="..\..\packages\Microsoft.ApplicationInsights.WindowsPhone.0.14.0-build20632\build\native\Microsoft.Applicationinsights.WindowsPhone.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.WindowsPhone.0.14.0-build20632\build\native\Microsoft.Applicationinsights.WindowsPhone.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.16-beta\build\native\Microsoft.Diagnostics.Tracing.EventSource.Redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.16-beta\build\native\Microsoft.Diagnostics.Tracing.EventSource.Redist.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.ApplicationInsights.0.14.0-build20632\build\native\Microsoft.ApplicationInsights.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ApplicationInsights.0.14.0-build20632\build\native\Microsoft.ApplicationInsights.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.ApplicationInsights.RuntimeTelemetry.0.14.0-build20632\build\native\Microsoft.Applicationinsights.RuntimeTelemetry.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ApplicationInsights.RuntimeTelemetry.0.14.0-build20632\build\native\Microsoft.Applicationinsights.RuntimeTelemetry.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.ApplicationInsights.WindowsPhone.0.14.0-build20632\build\native\Microsoft.Applicationinsights.WindowsPhone.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ApplicationInsights.WindowsPhone.0.14.0-build20632\build\native\Microsoft.Applicationinsights.WindowsPhone.targets'))" />
+  </Target>
 </Project>
