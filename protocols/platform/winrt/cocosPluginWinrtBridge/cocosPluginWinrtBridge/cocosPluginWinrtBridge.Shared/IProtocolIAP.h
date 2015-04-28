@@ -40,6 +40,7 @@ namespace cocosPluginWinrtBridge {
 
     public delegate void OnPayResultHandler(PayResultCodeEnum ret, Platform::String^ msg);
 
+    [Windows::Foundation::Metadata::WebHostHidden]
     public interface class IProtocolIAP : IProtocol {
         void configDeveloperInfo(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ devInfo);
         void payForProduct(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ info);

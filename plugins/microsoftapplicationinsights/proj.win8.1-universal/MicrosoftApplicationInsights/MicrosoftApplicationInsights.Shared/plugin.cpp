@@ -58,7 +58,6 @@ namespace microsoftapplicationinsights {
         }
 
         virtual Platform::String^ getSDKVersion() {
-
             return L"0.0.0";
         }
 
@@ -139,7 +138,6 @@ namespace microsoftapplicationinsights {
             }
             Windows::Foundation::TimeSpan* time = new Windows::Foundation::TimeSpan;
             time->Duration = GetTickCount64() * NANOSECONDS_PER_MILLISECOND;
-            OutputDebugString(time->ToString()->Data());
             timedEvents[eventId] = time;
         }
 
