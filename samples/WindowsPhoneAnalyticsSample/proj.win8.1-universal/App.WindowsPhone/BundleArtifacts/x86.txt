@@ -1,0 +1,2 @@
+MainPackage=T:\Cocos2Dx\plugin\samples\WindowsPhoneAnalyticsSample\proj.win8.1-universal\Debug\WindowsPhoneAnalyticsSample.WindowsPhone\WindowsPhoneAnalyticsSample.WindowsPhone_1.0.0.9_Bundle\WindowsPhoneAnalyticsSample.WindowsPhone_1.0.0.9_Win32_Debug.appx
+SymbolPackage=T:\Cocos2Dx\plugin\samples\WindowsPhoneAnalyticsSample\proj.win8.1-universal\AppPackages\WindowsPhoneAnalyticsSample.WindowsPhone\WindowsPhoneAnalyticsSample.WindowsPhone_1.0.0.9_Debug_Test\WindowsPhoneAnalyticsSample.WindowsPhone_1.0.0.9_Win32_Debug.appxsym

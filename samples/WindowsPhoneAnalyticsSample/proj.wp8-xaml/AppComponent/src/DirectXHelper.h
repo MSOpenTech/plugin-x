@@ -1,8 +1,6 @@
-
 /****************************************************************************
-Copyright (c) 2012-2013 cocos2d-x.org
+Copyright (c) 2013 cocos2d-x.org
 Copyright (c) Microsoft Open Technologies, Inc.
-Copyright (c) Microsoft Corporation.
 
 http://www.cocos2d-x.org
 
@@ -24,28 +22,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
+
+//// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+//// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+//// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+//// PARTICULAR PURPOSE.
+////
+//// Copyright (c) Microsoft Corporation. All rights reserved
+
 #pragma once
 
-#include "IProtocol.h"
 
-namespace cocosPluginWinrtBridge {
-    
-    // needs to be kept up to date with the PayResultCode enum in ProtocolIAP.h
-    public enum class PayResultCodeEnum {
-        kPaySuccess = 0,
-        kPayFail,
-        kPayCancel,
-        kPayTimeOut
-    };
-
-    public delegate void OnPayResultHandler(PayResultCodeEnum ret, Platform::String^ msg);
-
-    [Windows::Foundation::Metadata::WebHostHidden]
-    public interface class IProtocolIAP : IProtocol {
-        void configDeveloperInfo(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ devInfo);
-        void payForProduct(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ info);
-        void setDispatcher(Windows::UI::Core::CoreDispatcher^ dispatcher);
-        event OnPayResultHandler^ OnPayResult;
-    };
-
+// This header defines helper utilities to make DirectX APIs work with exceptions.
+namespace DX
+{
+    inline void ThrowIfFailed(HRESULT hr)
+    {
+        if (FAILED(hr))
+        {
+            // Set a breakpoint on this line to catch DX API errors.
+            throw Platform::Exception::CreateException(hr);
+        }
+    }
 }

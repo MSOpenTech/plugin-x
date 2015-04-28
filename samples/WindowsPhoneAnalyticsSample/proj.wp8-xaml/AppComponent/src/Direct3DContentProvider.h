@@ -1,8 +1,6 @@
-
 /****************************************************************************
-Copyright (c) 2012-2013 cocos2d-x.org
+Copyright (c) 2013 cocos2d-x.org
 Copyright (c) Microsoft Open Technologies, Inc.
-Copyright (c) Microsoft Corporation.
 
 http://www.cocos2d-x.org
 
@@ -24,28 +22,31 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
+
 #pragma once
 
-#include "IProtocol.h"
+#include <wrl/module.h>
+#include <Windows.Phone.Graphics.Interop.h>
+#include <DrawingSurfaceNative.h>
 
-namespace cocosPluginWinrtBridge {
-    
-    // needs to be kept up to date with the PayResultCode enum in ProtocolIAP.h
-    public enum class PayResultCodeEnum {
-        kPaySuccess = 0,
-        kPayFail,
-        kPayCancel,
-        kPayTimeOut
-    };
+#include "Direct3DInterop.h"
 
-    public delegate void OnPayResultHandler(PayResultCodeEnum ret, Platform::String^ msg);
+class Direct3DContentProvider : public Microsoft::WRL::RuntimeClass<
+		Microsoft::WRL::RuntimeClassFlags<Microsoft::WRL::WinRtClassicComMix>,
+		ABI::Windows::Phone::Graphics::Interop::IDrawingSurfaceBackgroundContentProvider,
+		IDrawingSurfaceBackgroundContentProviderNative>
+{
+public:
+	Direct3DContentProvider(cocos2d::Direct3DInterop^ controller);
 
-    [Windows::Foundation::Metadata::WebHostHidden]
-    public interface class IProtocolIAP : IProtocol {
-        void configDeveloperInfo(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ devInfo);
-        void payForProduct(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ info);
-        void setDispatcher(Windows::UI::Core::CoreDispatcher^ dispatcher);
-        event OnPayResultHandler^ OnPayResult;
-    };
+	// IDrawingSurfaceContentProviderNative
+	HRESULT STDMETHODCALLTYPE Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device);
+	void STDMETHODCALLTYPE Disconnect();
 
-}
+	HRESULT STDMETHODCALLTYPE PrepareResources(_In_ const LARGE_INTEGER* presentTargetTime, _Inout_ DrawingSurfaceSizeF* desiredRenderTargetSize);
+	HRESULT STDMETHODCALLTYPE Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView);
+
+private:
+	cocos2d::Direct3DInterop^ m_controller;
+	Microsoft::WRL::ComPtr<IDrawingSurfaceRuntimeHostNative> m_host;
+};

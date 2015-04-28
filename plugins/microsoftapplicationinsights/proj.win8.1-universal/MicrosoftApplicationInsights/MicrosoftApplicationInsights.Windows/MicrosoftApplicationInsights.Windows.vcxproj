@@ -27,11 +27,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="T:\Cocos2Dx\plugin\protocols\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Windows\cocosPluginWinrtBridge.Windows.vcxproj">
+      <Project>{491f4851-92ba-4ac1-9a80-241e1ff13229}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="winrtInterface">
-      <HintPath>..\..\..\..\..\protocols\platform\winrt\winrtInterface.winmd</HintPath>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>C:\Users\austdi\Documents\Visual Studio 2013\Projects\App3\packages\Microsoft.ApplicationInsights.0.14.0-build20632\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights.Extensibility.RuntimeTelemetry">
+      <HintPath>C:\Users\austdi\Documents\Visual Studio 2013\Projects\App3\packages\Microsoft.ApplicationInsights.RuntimeTelemetry.0.14.0-build20632\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.Extensibility.RuntimeTelemetry.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights.Extensibility.Windows">
+      <HintPath>C:\Users\austdi\Documents\Visual Studio 2013\Projects\App3\packages\Microsoft.ApplicationInsights.WindowsStore.0.14.0-build20632\lib\win81\Microsoft.ApplicationInsights.Extensibility.Windows.winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
     </Reference>
   </ItemGroup>
@@ -45,6 +55,8 @@
     <ApplicationTypeRevision>8.1</ApplicationTypeRevision>
     <ConvergedProjectType>CodeSharingWindowsRuntimeComponent</ConvergedProjectType>
     <ProjectName>microsoftapplicationinsights.Windows</ProjectName>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -101,7 +113,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros">
-    <NuGetPackageImportStamp>dfbb4af7</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>6ef72db5</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <GenerateManifest>false</GenerateManifest>
@@ -219,12 +231,14 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\..\packages\Microsoft.ApplicationInsights.Telemetry.WindowsStore.0.7.3.0\build\Microsoft.ApplicationInsights.Telemetry.WindowsStore.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.Telemetry.WindowsStore.0.7.3.0\build\Microsoft.ApplicationInsights.Telemetry.WindowsStore.targets')" />
+    <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+    <Import Project="..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.16-beta\build\native\Microsoft.Diagnostics.Tracing.EventSource.Redist.targets" Condition="Exists('..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.16-beta\build\native\Microsoft.Diagnostics.Tracing.EventSource.Redist.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Microsoft.ApplicationInsights.Telemetry.WindowsStore.0.7.3.0\build\Microsoft.ApplicationInsights.Telemetry.WindowsStore.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ApplicationInsights.Telemetry.WindowsStore.0.7.3.0\build\Microsoft.ApplicationInsights.Telemetry.WindowsStore.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.16-beta\build\native\Microsoft.Diagnostics.Tracing.EventSource.Redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.16-beta\build\native\Microsoft.Diagnostics.Tracing.EventSource.Redist.targets'))" />
   </Target>
 </Project>

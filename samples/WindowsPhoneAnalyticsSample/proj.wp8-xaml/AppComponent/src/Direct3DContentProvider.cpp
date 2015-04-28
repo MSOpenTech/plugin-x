@@ -1,8 +1,6 @@
-
 /****************************************************************************
-Copyright (c) 2012-2013 cocos2d-x.org
+Copyright (c) 2013 cocos2d-x.org
 Copyright (c) Microsoft Open Technologies, Inc.
-Copyright (c) Microsoft Corporation.
 
 http://www.cocos2d-x.org
 
@@ -24,28 +22,44 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#pragma once
 
-#include "IProtocol.h"
+#include "Direct3DContentProvider.h"
+#include "Direct3DInterop.h"
 
-namespace cocosPluginWinrtBridge {
-    
-    // needs to be kept up to date with the PayResultCode enum in ProtocolIAP.h
-    public enum class PayResultCodeEnum {
-        kPaySuccess = 0,
-        kPayFail,
-        kPayCancel,
-        kPayTimeOut
-    };
+using namespace cocos2d;
 
-    public delegate void OnPayResultHandler(PayResultCodeEnum ret, Platform::String^ msg);
+Direct3DContentProvider::Direct3DContentProvider(Direct3DInterop^ controller) :
+	m_controller(controller)
+{
+	m_controller->RequestAdditionalFrame += ref new RequestAdditionalFrameHandler([=] ()
+		{
+			if (m_host)
+			{
+				m_host->RequestAdditionalFrame();
+			}
+		});
+}
 
-    [Windows::Foundation::Metadata::WebHostHidden]
-    public interface class IProtocolIAP : IProtocol {
-        void configDeveloperInfo(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ devInfo);
-        void payForProduct(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ info);
-        void setDispatcher(Windows::UI::Core::CoreDispatcher^ dispatcher);
-        event OnPayResultHandler^ OnPayResult;
-    };
+// IDrawingSurfaceContentProviderNative interface
+HRESULT Direct3DContentProvider::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device)
+{
+	m_host = host;
 
+	return m_controller->Connect(host, device);
+}
+
+void Direct3DContentProvider::Disconnect()
+{
+	m_controller->Disconnect();
+	m_host = nullptr;
+}
+
+HRESULT Direct3DContentProvider::PrepareResources(_In_ const LARGE_INTEGER* presentTargetTime, _Inout_ DrawingSurfaceSizeF* desiredRenderTargetSize)
+{
+	return m_controller->PrepareResources(presentTargetTime, desiredRenderTargetSize);
+}
+
+HRESULT Direct3DContentProvider::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
+{
+    return m_controller->Draw(device, context, renderTargetView);
 }

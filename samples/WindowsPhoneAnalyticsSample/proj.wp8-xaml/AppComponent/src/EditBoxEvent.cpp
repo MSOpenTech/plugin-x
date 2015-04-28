@@ -1,8 +1,5 @@
-
 /****************************************************************************
-Copyright (c) 2012-2013 cocos2d-x.org
-Copyright (c) Microsoft Open Technologies, Inc.
-Copyright (c) Microsoft Corporation.
+Copyright (c) 2014 cocos2d-x.org
 
 http://www.cocos2d-x.org
 
@@ -24,28 +21,28 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#pragma once
 
-#include "IProtocol.h"
+#include "EditBoxEvent.h"
 
-namespace cocosPluginWinrtBridge {
-    
-    // needs to be kept up to date with the PayResultCode enum in ProtocolIAP.h
-    public enum class PayResultCodeEnum {
-        kPaySuccess = 0,
-        kPayFail,
-        kPayCancel,
-        kPayTimeOut
-    };
+using namespace Platform;
 
-    public delegate void OnPayResultHandler(PayResultCodeEnum ret, Platform::String^ msg);
+namespace cocos2d
+{
+	EditBoxEvent::EditBoxEvent( Platform::Object^ sender, Platform::String^ arg, Windows::Foundation::EventHandler<Platform::String^>^ handle ):
+		m_sender(sender),
+		m_args(arg),
+		m_handler(handle)
+	{
 
-    [Windows::Foundation::Metadata::WebHostHidden]
-    public interface class IProtocolIAP : IProtocol {
-        void configDeveloperInfo(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ devInfo);
-        void payForProduct(Windows::Foundation::Collections::IMap<Platform::String^, Platform::String^>^ info);
-        void setDispatcher(Windows::UI::Core::CoreDispatcher^ dispatcher);
-        event OnPayResultHandler^ OnPayResult;
-    };
+	}
+
+	void EditBoxEvent::execute()
+	{
+        if(m_handler.Get())
+        {
+		    m_handler.Get()->Invoke(m_sender.Get(), m_args.Get());
+        }
+	}
+
 
 }

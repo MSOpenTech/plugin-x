@@ -34,6 +34,7 @@ THE SOFTWARE.
 using namespace cocosPluginWinrtBridge;
 
 namespace cocosPluginWinrtBridge {
+    [Windows::Foundation::Metadata::WebHostHidden]
     public ref class ProtocolIAPImpl sealed : public cocosPluginWinrtBridge::IProtocolIAP {
     public:
 
