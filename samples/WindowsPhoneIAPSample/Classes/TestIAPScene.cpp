@@ -57,7 +57,7 @@ bool TestIAP::init() {
 	this->addChild(testMenu, 1);
 
     label = LabelTTF::create("new session", "Arial", 20);
-    label->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, label->getContentSize().height));
+    label->setPosition(Vec2(visibleSize.width / 2, label->getContentSize().height));
     this->addChild(label, 1);
 
     this->iap = nullptr;
