@@ -45,6 +45,9 @@
       <IsWinMDFile>true</IsWinMDFile>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ba27f3e5-274c-41bd-aec1-c9e1e409265e}</ProjectGuid>
     <RootNamespace>microsoftapplicationinsights</RootNamespace>
