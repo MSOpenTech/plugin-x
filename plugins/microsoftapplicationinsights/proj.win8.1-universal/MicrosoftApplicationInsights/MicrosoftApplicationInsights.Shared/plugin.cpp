@@ -26,25 +26,36 @@ THE SOFTWARE.
 ****************************************************************************/
 
 #include "pch.h"
+#include "TimedEventHelper.h"
 
 #include <unordered_map>
 #include <Windows.h>
-#include <cstdio>
+#include <string>
 
 
 using namespace cocosPluginWinrtBridge;
 using namespace Microsoft::ApplicationInsights;
 
-#define NANOSECONDS_PER_MILLISECOND 1000000
+#define DURATION_LABEL L"duration"
+#define ELAPSED_TIME_KEY L"elapsed_time"
+#define EVENT_LABEL_KEY L"label"
+
+template <>
+struct std::tr1::hash < std::pair<Platform::String^, Platform::String^> > {
+    size_t operator()(std::pair<Platform::String^, Platform::String^> x) const throw() {
+        return Platform::String::Concat(x.first, x.second)->GetHashCode();
+    }
+};
 
 namespace microsoftapplicationinsights {
+
     public ref class microsoftapplicationinsights sealed : public IProtocolAnalytics {
     private:
-        std::unordered_map<Platform::String^, Windows::Foundation::TimeSpan*> timedEvents;
+        std::unordered_map<std::pair<Platform::String^, Platform::String^>, TimedEventHelper^> timedEvents;
         bool debugMode;
         TelemetryClient^ telemetryClient;
-    public:
 
+    public:
         microsoftapplicationinsights() {
             debugMode = false;
             telemetryClient = nullptr;
@@ -133,12 +144,7 @@ namespace microsoftapplicationinsights {
         @param eventId The identity of event
         */
         virtual void logTimedEventBegin(Platform::String^ eventId) {
-            if (timedEvents.count(eventId)) {
-                delete timedEvents[eventId];
-            }
-            Windows::Foundation::TimeSpan* time = new Windows::Foundation::TimeSpan;
-            time->Duration = GetTickCount64() * NANOSECONDS_PER_MILLISECOND;
-            timedEvents[eventId] = time;
+            logTimedKVEventBegin(eventId, nullptr, nullptr);
         }
 
         /**
@@ -146,21 +152,7 @@ namespace microsoftapplicationinsights {
         @param eventId The identity of event
         */
         virtual void logTimedEventEnd(Platform::String^ eventId) {
-            if (!timedEvents.count(eventId)) {
-                return;
-            }
-            // calculate time difference
-            Windows::Foundation::TimeSpan endTime;
-            endTime.Duration = GetTickCount64() * NANOSECONDS_PER_MILLISECOND;
-            Windows::Foundation::TimeSpan elapsedTime;
-            elapsedTime.Duration = endTime.Duration - timedEvents[eventId]->Duration;
-            // send event
-            Microsoft::ApplicationInsights::DataContracts::EventTelemetry^ eventTelemetry = ref new Microsoft::ApplicationInsights::DataContracts::EventTelemetry();
-            eventTelemetry->Name = eventId;
-            eventTelemetry->Metrics->Insert("elapsed_time", elapsedTime.Duration / NANOSECONDS_PER_MILLISECOND);
-            telemetryClient->TrackEvent(eventTelemetry);
-            delete timedEvents[eventId];
-            timedEvents.erase(eventId);
+            logTimedKVEventEnd(eventId, nullptr);
         }
 
         /**
@@ -172,6 +164,70 @@ namespace microsoftapplicationinsights {
         }
 
         virtual void callFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
+            if (funcName == L"logEventWithDuration") {
+                // params[0] = eventId string
+                // params[1] = duration int
+                logEventWithDuration(params->GetAt(0)->getStringValue(), params->GetAt(1)->getIntValue());
+            }
+            else if (funcName == L"logEventWithDurationLabel") {
+                // params[0] = eventId string
+                // params[1] = duration int
+                // params[2] = label string
+                logEventWithDurationLabel(
+                    params->GetAt(0)->getStringValue(),
+                    params->GetAt(1)->getIntValue(),
+                    params->GetAt(2)->getStringValue());
+            }
+            else if (funcName == L"logEventWithDurationParams") {
+                // params[0] = eventId string
+                // params[1] = duration int
+                // params[2] = paramMap Map<string, string>
+                logEventWithDurationParams(
+                    params->GetAt(0)->getStringValue(),
+                    params->GetAt(1)->getIntValue(),
+                    params->GetAt(2)->getStrMapValue());
+            }
+            else if (funcName == L"logTimedEventWithLabelBegin") {
+                // params[0] = eventId string
+                // params[1] = label string
+                logTimedEventWithLabelBegin(
+                    params->GetAt(0)->getStringValue(),
+                    params->GetAt(1)->getStringValue());
+            }
+            else if (funcName == L"logTimedKVEventBegin") {
+                // params[0] = eventId string
+                // params[1] = label string
+                // params[2] = paramMap Map<string, string>
+                logTimedKVEventBegin(
+                    params->GetAt(0)->getStringValue(),
+                    params->GetAt(1)->getStringValue(),
+                    params->GetAt(2)->getStrMapValue());
+            }
+            else if (funcName == L"logTimedEventBeginWithParams") {
+                // params[0] = eventId string
+                // params[1] = paramMap Map<string, string>
+                logTimedEventBeginWithParams(
+                    params->GetAt(0)->getStringValue(),
+                    params->GetAt(1)->getStrMapValue());
+            }
+            else if (funcName == L"logTimedEventWithLabelEnd") {
+                // params[0] = eventId string
+                // params[1] = label string
+                logTimedEventWithLabelEnd(
+                    params->GetAt(0)->getStringValue(),
+                    params->GetAt(1)->getStringValue());
+            }
+            else if (funcName == L"logTimedKVEventEnd") {
+                // params[0] = eventId string
+                // params[1] = label string
+                logTimedKVEventEnd(
+                    params->GetAt(0)->getStringValue(),
+                    params->GetAt(1)->getStringValue());
+            }
+            else if (funcName == L"logTimedEventEnd") {
+                // params[0] = eventId string
+                logTimedEventEnd(params->GetAt(0)->getStringValue());
+            }
             return;
         }
 
@@ -190,6 +246,81 @@ namespace microsoftapplicationinsights {
         virtual float callFloatFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
             return 0;
         }
+
+    private:
+        Platform::String^ intToPlatString(int i) {
+            std::string s = std::to_string(i);
+            return ref new Platform::String(std::wstring(s.begin(), s.end()).c_str());
+        }
+
+        void logEventWithDuration(Platform::String^ eventId, int duration) {
+            logEventWithDurationLabel(eventId, duration, DURATION_LABEL);
+        }
+
+        void logEventWithDurationLabel(Platform::String^ eventId, int duration, Platform::String^ label) {
+            StringMap paramMap = ref new Platform::Collections::Map<Platform::String^, Platform::String^>();
+            paramMap->Insert(label, intToPlatString(duration));
+            logEvent(eventId, paramMap);
+        }
+
+        void logEventWithDurationParams(Platform::String^ eventId, int duration, IStringMap paramMap) {
+            paramMap->Insert(DURATION_LABEL, intToPlatString(duration)); 
+            logEvent(eventId, paramMap);
+        }
+
+        void logTimedEventWithLabelBegin(Platform::String^ eventId, Platform::String^ label) {
+            logTimedKVEventBegin(eventId, label, nullptr);
+        }
+
+        void logTimedKVEventBegin(Platform::String^ eventId, Platform::String^ label, IStringMap mapData) {
+            TimedEventHelper^ timedEventHelper = ref new TimedEventHelper();
+            timedEventHelper->startTiming();
+            timedEventHelper->setMapData(mapData);
+            std::pair<Platform::String^, Platform::String^> key(eventId, label);
+            timedEvents[key] = timedEventHelper;
+            
+        }
+
+        void logTimedEventBeginWithParams(Platform::String^ eventId, IStringMap mapData) {
+            logTimedKVEventBegin(eventId, nullptr, mapData);
+        }
+
+        void logTimedEventWithLabelEnd(Platform::String^ eventId, Platform::String^ label) {
+            logTimedKVEventEnd(eventId, label);
+        }
+
+        void logTimedKVEventEnd(Platform::String^ eventId, Platform::String^ label) {
+            std::pair<Platform::String^, Platform::String^> key(eventId, label);
+            if (!timedEvents.count(key)) {
+                return;
+            }
+            TimedEventHelper^ timedEventHelper = timedEvents[key];
+            timedEventHelper->stopTiming();
+            // send event
+            Microsoft::ApplicationInsights::DataContracts::EventTelemetry^ eventTelemetry = ref new Microsoft::ApplicationInsights::DataContracts::EventTelemetry();
+            eventTelemetry->Name = eventId;
+            eventTelemetry->Metrics->Insert(ELAPSED_TIME_KEY, timedEventHelper->elapsedTime());
+            copyMapData(eventTelemetry, timedEventHelper->getMapData());
+            eventTelemetry->Properties->Insert(EVENT_LABEL_KEY, label);
+            telemetryClient->TrackEvent(eventTelemetry);
+            timedEvents.erase(key);
+        }
+
+        void copyMapData(Microsoft::ApplicationInsights::DataContracts::EventTelemetry^ eventTelemetry, IStringMap mapData) {
+            if (mapData == nullptr) {
+                return;
+            }
+            typedef Windows::Foundation::Collections::IKeyValuePair<Platform::String^, Platform::String^> T_item;
+
+            Windows::Foundation::Collections::IIterator<T_item^>^ it = (Windows::Foundation::Collections::IIterator<T_item^>^)mapData->First();
+            while (it->HasCurrent) {
+                T_item^ item = (T_item^)it->Current;
+                eventTelemetry->Properties->Insert(item->Key, item->Value);
+                it->MoveNext();
+            }
+        }
+
+
     };
 }
 
