@@ -56,11 +56,15 @@ namespace pluginx {
                 ret->setStringValue(stdStringToPlatformString(param->getStringValue()));
             }
             else if (ret->getCurrentType() == ParamTypeEnum::kParamTypeMap) {
-                IMap<Platform::String^, int>^ pMap = ref new Platform::Collections::Map<Platform::String^, int>();
+                IMap<Platform::String^, IPluginParam^>^ pMap = ref new Platform::Collections::Map<Platform::String^, IPluginParam^>();
                 std::map<std::string, PluginParam*>::iterator it;
                 for (it = param->getMapValue().begin(); it != param->getMapValue().end(); ++it) {
-
+                    pMap->Insert(stdStringToPlatformString(it->first), toWinRT(it->second));
                 }
+                ret->setMapValue(pMap);
+            }
+            else if (ret->getCurrentType() == ParamTypeEnum::kParamTypeStringMap) {
+                ret->setStrMapValue(stdStrMapToPlatformStrMap(&param->getStrMapValue()));
             }
 
             return ret;
