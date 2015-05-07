@@ -45,20 +45,42 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pluginx.Windows", "..\..\..
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pluginx.WindowsPhone", "..\..\..\protocols\proj.win8.1-universal\pluginx\pluginx.WindowsPhone\pluginx.WindowsPhone.vcxproj", "{B9AA6C29-72BC-4607-9F0C-8A68FE84EE0E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cocosWinrtPluginBridge", "cocosWinrtPluginBridge", "{0E4B84A6-43C7-4FC2-BCE2-60EE4761C399}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cocosPluginWinrtBridge.Shared", "..\..\..\protocols\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Shared\cocosPluginWinrtBridge.Shared.vcxitems", "{1B37C3CE-088D-4277-B750-3A1CBEB1884A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cocosPluginWinrtBridge.Windows", "..\..\..\protocols\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Windows\cocosPluginWinrtBridge.Windows.vcxproj", "{491F4851-92BA-4AC1-9A80-241E1FF13229}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cocosPluginWinrtBridge.WindowsPhone", "..\..\..\protocols\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.WindowsPhone\cocosPluginWinrtBridge.WindowsPhone.vcxproj", "{35ACD56C-DEE1-477B-BEC0-C963C7937623}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "microsoftiap", "microsoftiap", "{7C0425D4-5E62-4698-89C2-9FCDA9B896BE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "microsoftiap.Shared", "..\..\..\plugins\microsoftiap\proj.win8.1-universal\microsoftiap\microsoftiap.Shared\microsoftiap.Shared.vcxitems", "{3921BC09-4ECA-41E9-97B4-E0DBF8616776}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "microsoftiap.Windows", "..\..\..\plugins\microsoftiap\proj.win8.1-universal\microsoftiap\microsoftiap.Windows\microsoftiap.Windows.vcxproj", "{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "microsoftiap.WindowsPhone", "..\..\..\plugins\microsoftiap\proj.win8.1-universal\microsoftiap\microsoftiap.WindowsPhone\microsoftiap.WindowsPhone.vcxproj", "{0852A95A-5A0D-401E-B815-1B52342C5F9C}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\..\..\plugins\microsoftiap\proj.win8.1-universal\microsoftiap\microsoftiap.Shared\microsoftiap.Shared.vcxitems*{3921bc09-4eca-41e9-97b4-e0dbf8616776}*SharedItemsImports = 9
 		..\..\..\..\cocos\2d\libcocos2d_8_1\libcocos2d_8_1\libcocos2d_8_1.Shared\libcocos2d_8_1.Shared.vcxitems*{9335005f-678e-4e8e-9b84-50037216aec8}*SharedItemsImports = 4
+		..\..\..\plugins\microsoftiap\proj.win8.1-universal\microsoftiap\microsoftiap.Shared\microsoftiap.Shared.vcxitems*{e6b464ca-8f8b-420a-bc4c-c1f7c1297fa7}*SharedItemsImports = 4
 		App.Shared\HelloPlugins.Shared.vcxitems*{a3ad93e4-0b2f-4c58-9181-69bed2e42e3e}*SharedItemsImports = 9
 		..\..\..\..\cocos\editor-support\spine\proj.win8.1-universal\libSpine.Shared\libSpine.Shared.vcxitems*{cc1da216-a80d-4be4-b309-acb6af313aff}*SharedItemsImports = 4
 		..\..\..\..\external\Box2D\proj.win8.1-universal\libbox2d.Shared\libbox2d.Shared.vcxitems*{4a3c6ba8-c227-498b-aa21-40bda27b461f}*SharedItemsImports = 9
 		App.Shared\HelloPlugins.Shared.vcxitems*{79a8fcda-4b12-4dd1-b676-ff148d651638}*SharedItemsImports = 4
 		..\..\..\..\cocos\editor-support\spine\proj.win8.1-universal\libSpine.Shared\libSpine.Shared.vcxitems*{adafd00d-a0d6-46ef-9f0b-ea2880bfe1de}*SharedItemsImports = 9
+		..\..\..\protocols\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Shared\cocosPluginWinrtBridge.Shared.vcxitems*{491f4851-92ba-4ac1-9a80-241e1ff13229}*SharedItemsImports = 4
 		..\..\..\..\cocos\2d\libcocos2d_8_1\libcocos2d_8_1\libcocos2d_8_1.Shared\libcocos2d_8_1.Shared.vcxitems*{5d6f020f-7e72-4494-90a0-2df11d235df9}*SharedItemsImports = 9
+		..\..\..\protocols\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Shared\cocosPluginWinrtBridge.Shared.vcxitems*{35acd56c-dee1-477b-bec0-c963c7937623}*SharedItemsImports = 4
 		..\..\..\..\external\Box2D\proj.win8.1-universal\libbox2d.Shared\libbox2d.Shared.vcxitems*{3b26a12d-3a44-47ea-82d2-282660fc844d}*SharedItemsImports = 4
+		..\..\..\protocols\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Shared\cocosPluginWinrtBridge.Shared.vcxitems*{1b37c3ce-088d-4277-b750-3a1cbeb1884a}*SharedItemsImports = 9
 		..\..\..\..\cocos\2d\libcocos2d_8_1\libcocos2d_8_1\libcocos2d_8_1.Shared\libcocos2d_8_1.Shared.vcxitems*{22f3b9df-1209-4574-8331-003966f562bf}*SharedItemsImports = 4
 		..\..\..\..\external\Box2D\proj.win8.1-universal\libbox2d.Shared\libbox2d.Shared.vcxitems*{22f798d8-bfff-4754-996f-a5395343d5ec}*SharedItemsImports = 4
 		..\..\..\..\cocos\editor-support\spine\proj.win8.1-universal\libSpine.Shared\libSpine.Shared.vcxitems*{f3550fe0-c795-44f6-8feb-093eb68143ae}*SharedItemsImports = 4
 		..\..\..\protocols\proj.win8.1-universal\pluginx\pluginx.Shared\pluginx.Shared.vcxitems*{b9aa6c29-72bc-4607-9f0c-8a68fe84ee0e}*SharedItemsImports = 4
+		..\..\..\plugins\microsoftiap\proj.win8.1-universal\microsoftiap\microsoftiap.Shared\microsoftiap.Shared.vcxitems*{0852a95a-5a0d-401e-b815-1b52342c5f9c}*SharedItemsImports = 4
 		..\..\..\protocols\proj.win8.1-universal\pluginx\pluginx.Shared\pluginx.Shared.vcxitems*{5419e2ca-4b8f-411d-b6b1-54c415ed17b0}*SharedItemsImports = 9
 		App.Shared\HelloPlugins.Shared.vcxitems*{396fe85e-bb05-4b92-bccb-f89aed4ea41a}*SharedItemsImports = 4
 		..\..\..\protocols\proj.win8.1-universal\pluginx\pluginx.Shared\pluginx.Shared.vcxitems*{c954925a-1a55-49ee-b1be-aecced3f08bf}*SharedItemsImports = 4
@@ -192,6 +214,50 @@ Global
 		{B9AA6C29-72BC-4607-9F0C-8A68FE84EE0E}.Release|Win32.ActiveCfg = Release|Win32
 		{B9AA6C29-72BC-4607-9F0C-8A68FE84EE0E}.Release|Win32.Build.0 = Release|Win32
 		{B9AA6C29-72BC-4607-9F0C-8A68FE84EE0E}.Release|x64.ActiveCfg = Release|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|ARM.ActiveCfg = Debug|ARM
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|ARM.Build.0 = Debug|ARM
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|Win32.ActiveCfg = Debug|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|Win32.Build.0 = Debug|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|x64.ActiveCfg = Debug|x64
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Debug|x64.Build.0 = Debug|x64
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|ARM.ActiveCfg = Release|ARM
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|ARM.Build.0 = Release|ARM
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|Win32.ActiveCfg = Release|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|Win32.Build.0 = Release|Win32
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|x64.ActiveCfg = Release|x64
+		{491F4851-92BA-4AC1-9A80-241E1FF13229}.Release|x64.Build.0 = Release|x64
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|ARM.ActiveCfg = Debug|ARM
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|ARM.Build.0 = Debug|ARM
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|Win32.ActiveCfg = Debug|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|Win32.Build.0 = Debug|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Debug|x64.ActiveCfg = Debug|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|ARM.ActiveCfg = Release|ARM
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|ARM.Build.0 = Release|ARM
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|Win32.ActiveCfg = Release|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|Win32.Build.0 = Release|Win32
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623}.Release|x64.ActiveCfg = Release|Win32
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}.Debug|ARM.ActiveCfg = Debug|ARM
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}.Debug|ARM.Build.0 = Debug|ARM
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}.Debug|Win32.Build.0 = Debug|Win32
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}.Debug|x64.ActiveCfg = Debug|x64
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}.Debug|x64.Build.0 = Debug|x64
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}.Release|ARM.ActiveCfg = Release|ARM
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}.Release|ARM.Build.0 = Release|ARM
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}.Release|Win32.ActiveCfg = Release|Win32
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}.Release|Win32.Build.0 = Release|Win32
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}.Release|x64.ActiveCfg = Release|x64
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7}.Release|x64.Build.0 = Release|x64
+		{0852A95A-5A0D-401E-B815-1B52342C5F9C}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0852A95A-5A0D-401E-B815-1B52342C5F9C}.Debug|ARM.Build.0 = Debug|ARM
+		{0852A95A-5A0D-401E-B815-1B52342C5F9C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0852A95A-5A0D-401E-B815-1B52342C5F9C}.Debug|Win32.Build.0 = Debug|Win32
+		{0852A95A-5A0D-401E-B815-1B52342C5F9C}.Debug|x64.ActiveCfg = Debug|Win32
+		{0852A95A-5A0D-401E-B815-1B52342C5F9C}.Release|ARM.ActiveCfg = Release|ARM
+		{0852A95A-5A0D-401E-B815-1B52342C5F9C}.Release|ARM.Build.0 = Release|ARM
+		{0852A95A-5A0D-401E-B815-1B52342C5F9C}.Release|Win32.ActiveCfg = Release|Win32
+		{0852A95A-5A0D-401E-B815-1B52342C5F9C}.Release|Win32.Build.0 = Release|Win32
+		{0852A95A-5A0D-401E-B815-1B52342C5F9C}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -214,5 +280,11 @@ Global
 		{5419E2CA-4B8F-411D-B6B1-54C415ED17B0} = {EEA8E052-42ED-4B3E-9FC2-126F5ED1452A}
 		{C954925A-1A55-49EE-B1BE-AECCED3F08BF} = {EEA8E052-42ED-4B3E-9FC2-126F5ED1452A}
 		{B9AA6C29-72BC-4607-9F0C-8A68FE84EE0E} = {EEA8E052-42ED-4B3E-9FC2-126F5ED1452A}
+		{1B37C3CE-088D-4277-B750-3A1CBEB1884A} = {0E4B84A6-43C7-4FC2-BCE2-60EE4761C399}
+		{491F4851-92BA-4AC1-9A80-241E1FF13229} = {0E4B84A6-43C7-4FC2-BCE2-60EE4761C399}
+		{35ACD56C-DEE1-477B-BEC0-C963C7937623} = {0E4B84A6-43C7-4FC2-BCE2-60EE4761C399}
+		{3921BC09-4ECA-41E9-97B4-E0DBF8616776} = {7C0425D4-5E62-4698-89C2-9FCDA9B896BE}
+		{E6B464CA-8F8B-420A-BC4C-C1F7C1297FA7} = {7C0425D4-5E62-4698-89C2-9FCDA9B896BE}
+		{0852A95A-5A0D-401E-B815-1B52342C5F9C} = {7C0425D4-5E62-4698-89C2-9FCDA9B896BE}
 	EndGlobalSection
 EndGlobal

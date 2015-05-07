@@ -118,10 +118,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
-      <AdditionalOptions>/bigobj /Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm200 /wd4996 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204;4756;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>../../Classes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)plugin/protocols/include;../../Classes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>pluginx.Windows.lib;libGLESv2.lib;libEGL.lib;ws2_32.lib;libwebsockets.lib;libcurl.lib;libchipmunk.lib;zlib.lib;libpng.lib;libjpeg.lib;libtiff.lib;freetype250.lib;sqlite3.lib;d2d1.lib;d3d11.lib;dxgi.lib;windowscodecs.lib;dwrite.lib;dxguid.lib;xaudio2.lib;mfcore.lib;mfplat.lib;mfreadwrite.lib;mfuuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -130,10 +130,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
-      <AdditionalOptions>/bigobj /Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm200 /wd4996 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204;4756;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>../../Classes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)plugin/protocols/include;../../Classes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>pluginx.Windows.lib;libGLESv2.lib;libEGL.lib;ws2_32.lib;libwebsockets.lib;libcurl.lib;libchipmunk.lib;zlib.lib;libpng.lib;libjpeg.lib;libtiff.lib;freetype250.lib;sqlite3.lib;d2d1.lib;d3d11.lib;dxgi.lib;windowscodecs.lib;dwrite.lib;dxguid.lib;xaudio2.lib;mfcore.lib;mfplat.lib;mfreadwrite.lib;mfuuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -142,10 +142,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalOptions>/bigobj /Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm200 /wd4996 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204;4756;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>../../Classes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)plugin/protocols/include;../../Classes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>pluginx.Windows.lib;libGLESv2.lib;libEGL.lib;ws2_32.lib;libwebsockets.lib;libcurl.lib;libchipmunk.lib;zlib.lib;libpng.lib;libjpeg.lib;libtiff.lib;freetype250.lib;sqlite3.lib;d2d1.lib;d3d11.lib;dxgi.lib;windowscodecs.lib;dwrite.lib;dxguid.lib;xaudio2.lib;mfcore.lib;mfplat.lib;mfreadwrite.lib;mfuuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -154,10 +154,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalOptions>/bigobj /Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm200 /wd4996 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204;4756;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>../../Classes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)plugin/protocols/include;../../Classes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>pluginx.Windows.lib;libGLESv2.lib;libEGL.lib;ws2_32.lib;libwebsockets.lib;libcurl.lib;libchipmunk.lib;zlib.lib;libpng.lib;libjpeg.lib;libtiff.lib;freetype250.lib;sqlite3.lib;d2d1.lib;d3d11.lib;dxgi.lib;windowscodecs.lib;dwrite.lib;dxguid.lib;xaudio2.lib;mfcore.lib;mfplat.lib;mfreadwrite.lib;mfuuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -166,10 +166,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalOptions>/bigobj /Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm200 /wd4996 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204;4756;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>../../Classes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)plugin/protocols/include;../../Classes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>pluginx.Windows.lib;libGLESv2.lib;libEGL.lib;ws2_32.lib;libwebsockets.lib;libcurl.lib;libchipmunk.lib;zlib.lib;libpng.lib;libjpeg.lib;libtiff.lib;freetype250.lib;sqlite3.lib;d2d1.lib;d3d11.lib;dxgi.lib;windowscodecs.lib;dwrite.lib;dxguid.lib;xaudio2.lib;mfcore.lib;mfplat.lib;mfreadwrite.lib;mfuuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -178,10 +178,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalOptions>/bigobj /Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm200 /wd4996 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204;4756;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>../../Classes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)plugin/protocols/include;../../Classes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>pluginx.Windows.lib;libGLESv2.lib;libEGL.lib;ws2_32.lib;libwebsockets.lib;libcurl.lib;libchipmunk.lib;zlib.lib;libpng.lib;libjpeg.lib;libtiff.lib;freetype250.lib;sqlite3.lib;d2d1.lib;d3d11.lib;dxgi.lib;windowscodecs.lib;dwrite.lib;dxguid.lib;xaudio2.lib;mfcore.lib;mfplat.lib;mfreadwrite.lib;mfuuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -192,7 +192,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    
     <None Include="HelloPlugins.Windows_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +210,12 @@
     <ProjectReference Include="..\..\..\..\..\external\Box2D\proj.win8.1-universal\libbox2d.Windows\libbox2d.Windows.vcxproj">
       <Project>{3b26a12d-3a44-47ea-82d2-282660fc844d}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\plugins\microsoftiap\proj.win8.1-universal\microsoftiap\microsoftiap.Windows\microsoftiap.Windows.vcxproj">
+      <Project>{e6b464ca-8f8b-420a-bc4c-c1f7c1297fa7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\protocols\platform\winrt\cocosPluginWinrtBridge\cocosPluginWinrtBridge\cocosPluginWinrtBridge.Windows\cocosPluginWinrtBridge.Windows.vcxproj">
+      <Project>{491f4851-92ba-4ac1-9a80-241e1ff13229}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\protocols\proj.win8.1-universal\pluginx\pluginx.Windows\pluginx.Windows.vcxproj">
       <Project>{c954925a-1a55-49ee-b1be-aecced3f08bf}</Project>
       <Private>true</Private>
@@ -223,28 +228,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ItemGroup Label="pluginx:microsoftapplicationinsights">
-    <Reference Include="microsoftapplicationinsights">
-      <HintPath>..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\Debug\MicrosoftApplicationInsights.Windows\microsoftapplicationinsights.winmd</HintPath>
-      <Implementation>microsoftapplicationinsights.Windows.dll</Implementation>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationInsights">
-      <HintPath>..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\packages\Microsoft.ApplicationInsights.Telemetry.WindowsStore.0.7.3.0\build\win81\x86\Microsoft.applicationInsights.winmd</HintPath>
-      <Implementation>Microsoft.ApplicationInsights.dll</Implementation>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
-  <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\Debug\MicrosoftApplicationInsights.Windows\microsoftapplicationinsights.Windows.dll">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\packages\Microsoft.ApplicationInsights.Telemetry.WindowsStore.0.7.3.0\build\win81\x86\Microsoft.ApplicationInsights.dll">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="winrtInterface">
-      <HintPath>..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\Debug\MicrosoftApplicationInsights.Windows\winrtInterface.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
-  </ItemGroup>
 </Project>

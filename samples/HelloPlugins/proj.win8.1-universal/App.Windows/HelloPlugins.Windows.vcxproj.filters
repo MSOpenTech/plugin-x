@@ -11,8 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="HelloPlugins.Windows_TemporaryKey.pfx" />
-    <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\packages\Microsoft.ApplicationInsights.Telemetry.WindowsStore.0.7.3.0\build\win81\x86\Microsoft.ApplicationInsights.dll" />
-    <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\Debug\MicrosoftApplicationInsights.Windows\microsoftapplicationinsights.Windows.dll" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Logo.scale-100.png">
