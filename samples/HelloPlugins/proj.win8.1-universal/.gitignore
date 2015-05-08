@@ -3,3 +3,4 @@
 *.filters
 App.WindowsPhone/Generated Files
 App.Windows/Generated Files
+packages/

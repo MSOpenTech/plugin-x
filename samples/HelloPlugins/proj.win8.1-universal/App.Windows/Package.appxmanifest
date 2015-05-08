@@ -13,7 +13,6 @@
   <Resources>
     <Resource Language="x-generate" />
   </Resources>
-  
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="cocos2d_Windows.App">
       <m2:VisualElements DisplayName="HelloPlugins.Windows" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="HelloPlugins.Windows" ForegroundText="light" BackgroundColor="#464646">
