@@ -164,6 +164,9 @@
     <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.16-beta\lib\net45\Microsoft.Diagnostics.Tracing.EventSource.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="..\..\..\..\plugins\microsoftiap\proj.win8.1-universal\Debug\microsoftiap.WindowsPhone\microsoftiap.WindowsPhone.dll">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.ApplicationInsights">
@@ -172,6 +175,10 @@
     </Reference>
     <Reference Include="microsoftapplicationinsights">
       <HintPath>..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\Debug\MicrosoftApplicationInsights.WindowsPhone\microsoftapplicationinsights.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
+    <Reference Include="microsoftiap">
+      <HintPath>..\..\..\..\plugins\microsoftiap\proj.win8.1-universal\Debug\microsoftiap.WindowsPhone\microsoftiap.winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
     </Reference>
   </ItemGroup>

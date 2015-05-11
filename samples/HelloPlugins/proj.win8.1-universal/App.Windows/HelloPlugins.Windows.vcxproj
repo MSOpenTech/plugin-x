@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM">
@@ -192,6 +192,9 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="..\..\..\..\plugins\microsoftiap\proj.win8.1-universal\Debug\microsoftiap.Windows\microsoftiap.Windows.dll">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="HelloPlugins.Windows_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +234,10 @@
     <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\Debug\MicrosoftApplicationInsights.Windows\microsoftapplicationinsights.Windows.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <Reference Include="microsoftiap">
+      <HintPath>..\..\..\..\plugins\microsoftiap\proj.win8.1-universal\Debug\microsoftiap.Windows\microsoftiap.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
     <!-- <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\packages\Microsoft.ApplicationInsights.Telemetry.WindowsStore.0.7.3.0\build\win81\x86\Microsoft.ApplicationInsights.dll"> 
       <DeploymentContent>true</DeploymentContent>
     </None> -->
