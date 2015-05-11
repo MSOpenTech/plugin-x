@@ -55,6 +55,7 @@ OpenGLESPage::OpenGLESPage(OpenGLES* openGLES) :
     InitializeComponent();
 
     Windows::UI::Core::CoreWindow^ window = Windows::UI::Xaml::Window::Current->CoreWindow;
+    App::SetDispatcher(window->Dispatcher);
 
     window->VisibilityChanged +=
         ref new Windows::Foundation::TypedEventHandler<Windows::UI::Core::CoreWindow^, Windows::UI::Core::VisibilityChangedEventArgs^>(this, &OpenGLESPage::OnVisibilityChanged);

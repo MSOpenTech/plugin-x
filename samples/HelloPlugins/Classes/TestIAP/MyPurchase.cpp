@@ -26,6 +26,15 @@ THE SOFTWARE.
 #include "cocos2d.h"
 #include "Configs.h"
 
+#define PLUGIN_NAME "IAPGooglePlay"
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+    #include "App.xaml.h"
+    #include "PluginFactory.h"
+    #undef PLUGIN_NAME
+    #define PLUGIN_NAME "microsoftiap"
+#endif
+
 using namespace cocos2d::plugin;
 using namespace cocos2d;
 
@@ -33,7 +42,7 @@ MyPurchase* MyPurchase::s_pPurchase = NULL;
 
 MyPurchase::MyPurchase()
 : s_pRetListener(NULL)
-, s_pGoogle(NULL)
+, iapPlugin(NULL)
 {
 
 }
@@ -74,6 +83,7 @@ void MyPurchase::loadIAPPlugin()
 	}
 
 	//Google IAP
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	{
 		TIAPDeveloperInfo pGoogleInfo;
 		pGoogleInfo["GooglePlayAppKey"] = GOOGLE_APPKEY;
@@ -83,19 +93,30 @@ void MyPurchase::loadIAPPlugin()
 			sprintf(msg, "Google App Key info is empty. PLZ fill your Google App Key info in %s(nearby line %d)", __FILE__, __LINE__);
 			MessageBox(msg, "Google IAP Warning");
 		}
-		s_pGoogle = dynamic_cast<ProtocolIAP*>(PluginManager::getInstance()->loadPlugin("IAPGooglePlay"));
-		s_pGoogle->configDeveloperInfo(pGoogleInfo);
-		s_pGoogle->setResultListener(s_pRetListener);
-		s_pGoogle->setDebugMode(true);
+		iapPlugin = dynamic_cast<ProtocolIAP*>(PluginManager::getInstance()->loadPlugin(PLUGIN_NAME));
+		iapPlugin->configDeveloperInfo(pGoogleInfo);
+		iapPlugin->setResultListener(s_pRetListener);
+		iapPlugin->setDebugMode(true);
 	}
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+    auto dispatcher = App::GetDispatcher();
+    auto factory = plugin::PluginFactory::getInstance();
+    factory->setDispatcher(dispatcher);
+    iapPlugin = dynamic_cast<ProtocolIAP*>(PluginManager::getInstance()->loadPlugin(PLUGIN_NAME));
+    iapPlugin->setDebugMode(true);
+    iapPlugin->setResultListener(s_pRetListener);
+    std::map<std::string, std::string> devInfo;
+    devInfo["windows_store_proxy"] = "WindowsStoreProxy.xml";
+    iapPlugin->configDeveloperInfo(devInfo);
+#endif
 }
 
 void MyPurchase::unloadIAPPlugin()
 {
-	if (s_pGoogle)
+	if (iapPlugin)
 	{
-		PluginManager::getInstance()->unloadPlugin("IAPGooglePlay");
-		s_pGoogle = NULL;
+		PluginManager::getInstance()->unloadPlugin(PLUGIN_NAME);
+		iapPlugin = NULL;
 	}
 }
 
@@ -105,7 +126,7 @@ void MyPurchase::payByMode(TProductInfo info, MyPayMode mode)
 	switch(mode)
 	{
 	case eGoogle:
-		pIAP = s_pGoogle;
+		pIAP = iapPlugin;
 		break;
 	default:
 		CCLOG("Unsupported IAP");
@@ -117,6 +138,8 @@ void MyPurchase::payByMode(TProductInfo info, MyPayMode mode)
 	}
 }
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+
 void MyPurchaseResult::onPayResult(PayResultCode ret, const char* msg, TProductInfo info)
 {
 	char goodInfo[1024] = { 0 };
@@ -126,3 +149,27 @@ void MyPurchaseResult::onPayResult(PayResultCode ret, const char* msg, TProductI
 			info.find("IAPId")->second.c_str());
 	MessageBox(goodInfo , msg);
 }
+
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+
+void MyPurchaseResult::onPayResult(PayResultCode ret, const char* msg, TProductInfo info)
+{
+    std::string title;
+    if (ret == PayResultCode::kPaySuccess) {
+        title = "Purchase Success";
+    }
+    else {
+        title = "Purchase Fail";
+    }
+    MessageBox(msg, title.c_str());
+}
+
+void MyPurchase::reportConsumablePurchase(char* productId, char* transactionId) {
+    plugin::PluginParam productIdParam(productId);
+    plugin::PluginParam transactionIdParam(transactionId);
+    bool reportResult = iapPlugin->callBoolFuncWithParam("reportConsumableFulfillment", &productIdParam, &transactionIdParam, NULL);
+    std::string result = reportResult ? "Success" : "Fail";
+    MessageBox(result.c_str(), "unfulfilled consumables result");
+
+}
+#endif

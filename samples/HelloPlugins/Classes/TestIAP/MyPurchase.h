@@ -46,13 +46,17 @@ public:
 	void unloadIAPPlugin();
     void loadIAPPlugin();
     void payByMode(cocos2d::plugin::TProductInfo info, MyPayMode mode);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+    void reportConsumablePurchase(char* productId, char* transactionId);
+    cocos2d::plugin::ProtocolIAP* getPlugin() { return iapPlugin; }
+#endif
 
 private:
     MyPurchase();
     virtual ~MyPurchase();
 
     static MyPurchase* s_pPurchase;
-    cocos2d::plugin::ProtocolIAP* s_pGoogle;
+    cocos2d::plugin::ProtocolIAP* iapPlugin;
     MyPurchaseResult* s_pRetListener;
 };
 
