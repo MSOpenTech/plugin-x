@@ -17,8 +17,8 @@ std::string g_testCases[] = {
     "Test Share",
     "Test Facebook User",
     "Test Facebook Share",
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     "Test IAP",
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     "Test IAP Online",
     "Test User",
     "Test Social",
