@@ -154,6 +154,27 @@
       <Project>{b9aa6c29-72bc-4607-9f0c-8a68fe84ee0e}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\Debug\MicrosoftApplicationInsights.WindowsPhone\microsoftapplicationinsights.WindowsPhone.dll">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\packages\Microsoft.ApplicationInsights.0.14.0-build20632\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.winmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.16-beta\lib\net45\Microsoft.Diagnostics.Tracing.EventSource.dll">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\packages\Microsoft.ApplicationInsights.0.14.0-build20632\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
+    <Reference Include="microsoftapplicationinsights">
+      <HintPath>..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\Debug\MicrosoftApplicationInsights.WindowsPhone\microsoftapplicationinsights.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

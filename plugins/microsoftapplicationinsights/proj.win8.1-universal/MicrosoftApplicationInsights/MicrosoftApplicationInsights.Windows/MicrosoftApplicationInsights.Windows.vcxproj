@@ -36,14 +36,6 @@
       <HintPath>C:\Users\austdi\Documents\Visual Studio 2013\Projects\App3\packages\Microsoft.ApplicationInsights.0.14.0-build20632\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
     </Reference>
-    <Reference Include="Microsoft.ApplicationInsights.Extensibility.RuntimeTelemetry">
-      <HintPath>C:\Users\austdi\Documents\Visual Studio 2013\Projects\App3\packages\Microsoft.ApplicationInsights.RuntimeTelemetry.0.14.0-build20632\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.Extensibility.RuntimeTelemetry.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationInsights.Extensibility.Windows">
-      <HintPath>C:\Users\austdi\Documents\Visual Studio 2013\Projects\App3\packages\Microsoft.ApplicationInsights.WindowsStore.0.14.0-build20632\lib\win81\Microsoft.ApplicationInsights.Extensibility.Windows.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
