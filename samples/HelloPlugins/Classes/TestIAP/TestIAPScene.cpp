@@ -117,11 +117,11 @@ bool TestIAP::init()
     panel->addChild(allUnfulfilledButton);
 
     auto listingItemsButton = Button::create("btn_normal.png", "btn_pressed.png");
-    listingItemsButton->setTitleText("get product IDs");
+    listingItemsButton->setTitleText("get entitled products");
     listingItemsButton->setScale(2);
     listingItemsButton->setLayoutParameter(llp);
     listingItemsButton->addClickEventListener([](Ref* pSender) {
-        std::string result = MyPurchase::getInstance()->getPlugin()->callStringFuncWithParam("getAllListingItems", NULL);
+        std::string result = MyPurchase::getInstance()->getPlugin()->callStringFuncWithParam("getEntitledProducts", NULL);
         MessageBox(result.c_str(), "Product IDs");
     });
     panel->addChild(listingItemsButton);

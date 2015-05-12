@@ -81,8 +81,8 @@ namespace microsoftiap {
         }
 
         virtual Platform::String^ callStringFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
-            if (funcName == L"getAllListingItems") {
-                return getAllListingItems();
+            if (funcName == L"getEntitledProducts") {
+                return getEntitledProducts();
             }
             if (funcName == L"getUnfulfilledConsumables") {
                 return fetchUnfulfilledConsumables();
@@ -276,14 +276,14 @@ namespace microsoftiap {
                 xmlString = L"<?xml version=\"1.0\" encoding=\"utf-8\"?><unfulfilled_consumables>";
                 for (int i = 0; i < consumables->Size; ++i) {
                     c = consumables->GetAt(i);
-                    xmlString += L"<consumable product_id=\"" + c->ProductId + "\" transaction_id=\"" + c->TransactionId + "\" />";
+                    xmlString += L"<consumable product_id=\"" + c->ProductId + L"\" transaction_id=\"" + c->TransactionId + L"\" />";
                 }
-                xmlString += "</unfulfilled_consumables>";
+                xmlString += L"</unfulfilled_consumables>";
             }).wait();
             return xmlString;
         }
 
-        Platform::String^ getAllListingItems() {
+        Platform::String^ getEntitledProducts() {
            typedef Windows::Foundation::Collections::IKeyValuePair<Platform::String^, ProductLicense^>  T_item;
 
            LicenseInformation^ licenseInformation = getLicenseInformation();
@@ -293,10 +293,10 @@ namespace microsoftiap {
             {
                 T_item^ item = (T_item^)it->Current;
                 Platform::String^ key = item->Key;
-                xmlString += L"<product_id>" + key + "</product_id>";
+                xmlString += L"<product_id>" + key + L"</product_id>";
                 it->MoveNext();
             }
-            xmlString += "</product_ids>";
+            xmlString += L"</product_ids>";
             return xmlString;
         }
 
