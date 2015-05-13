@@ -124,6 +124,7 @@
       <PrecompiledHeaderOutputFile />
       <CallingConvention>Cdecl</CallingConvention>
       <ShowIncludes>false</ShowIncludes>
+      <PreprocessorDefinitions>CC_TARGET_PLATFORM=CC_PLATFORM_WINRT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,6 +144,7 @@
       <PrecompiledHeaderFile />
       <PrecompiledHeaderOutputFile />
       <CallingConvention>Cdecl</CallingConvention>
+      <PreprocessorDefinitions>CC_TARGET_PLATFORM=CC_PLATFORM_WINRT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -164,6 +166,7 @@
       <CallingConvention>Cdecl</CallingConvention>
       <BrowseInformation>true</BrowseInformation>
       <ShowIncludes>false</ShowIncludes>
+      <PreprocessorDefinitions>CC_TARGET_PLATFORM=CC_PLATFORM_WINRT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -186,6 +189,7 @@
       <PrecompiledHeaderFile />
       <PrecompiledHeaderOutputFile />
       <CallingConvention>Cdecl</CallingConvention>
+      <PreprocessorDefinitions>CC_TARGET_PLATFORM=CC_PLATFORM_WINRT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -206,6 +210,7 @@
       <PrecompiledHeaderOutputFile />
       <CallingConvention>Cdecl</CallingConvention>
       <ShowIncludes>false</ShowIncludes>
+      <PreprocessorDefinitions>CC_TARGET_PLATFORM=CC_PLATFORM_WINRT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -225,6 +230,7 @@
       <PrecompiledHeaderFile />
       <PrecompiledHeaderOutputFile />
       <CallingConvention>Cdecl</CallingConvention>
+      <PreprocessorDefinitions>CC_TARGET_PLATFORM=CC_PLATFORM_WINRT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

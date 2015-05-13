@@ -92,6 +92,7 @@
       <PrecompiledHeaderFile />
       <PrecompiledHeaderOutputFile />
       <ShowIncludes>false</ShowIncludes>
+      <PreprocessorDefinitions>CC_TARGET_PLATFORM=CC_PLATFORM_WINRT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -110,6 +111,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\..\include;%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile />
       <PrecompiledHeaderOutputFile />
+      <PreprocessorDefinitions>CC_TARGET_PLATFORM=CC_PLATFORM_WINRT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,6 +132,7 @@
       <PrecompiledHeaderOutputFile />
       <ShowIncludes>false</ShowIncludes>
       <BrowseInformation>true</BrowseInformation>
+      <PreprocessorDefinitions>CC_TARGET_PLATFORM=CC_PLATFORM_WINRT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,6 +154,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)../../../platform/winrt/winrtInterface/winrtInterface/winrtInterface.WindowsPhone/;$(ProjectDir)../../../platform/winrt/winrtInterface/winrtInterface/winrtInterface.Shared/;$(ProjectDir)../../../platform/winrt/winrtInterface/winrtInterface/winrtInterface.WindowsPhone;$(ProjectDir)\..\..\..\include;%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile />
       <PrecompiledHeaderOutputFile />
+      <PreprocessorDefinitions>CC_TARGET_PLATFORM=CC_PLATFORM_WINRT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
