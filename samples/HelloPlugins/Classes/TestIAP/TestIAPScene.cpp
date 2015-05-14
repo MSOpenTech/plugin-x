@@ -117,49 +117,15 @@ bool TestIAP::init()
     panel->addChild(allUnfulfilledButton);
 
     auto listingItemsButton = Button::create("btn_normal.png", "btn_pressed.png");
-    listingItemsButton->setTitleText("get entitled products");
+    listingItemsButton->setTitleText("get entitled durables");
     listingItemsButton->setScale(2);
     listingItemsButton->setLayoutParameter(llp);
     listingItemsButton->addClickEventListener([](Ref* pSender) {
-        std::string result = MyPurchase::getInstance()->getPlugin()->callStringFuncWithParam("getEntitledProducts", NULL);
+        std::string result = MyPurchase::getInstance()->getPlugin()->callStringFuncWithParam("getEntitledDurables", NULL);
         MessageBox(result.c_str(), "Product IDs");
     });
     panel->addChild(listingItemsButton);
 
-
-
 #endif
-    /*
-    //Google IAP button
-    auto btnGoogle = Button::create("btn_normal.png","btn_pressed.png");
-    btnGoogle->setTitleText("Google");
-    btnGoogle->setScale(2);
-    btnGoogle->addClickEventListener([=](Ref* sender){
-    	//Perform IAP callback
-        TProductInfo pInfo;
-        MyPurchase::MyPayMode mode = MyPurchase::MyPayMode::eGoogle;
-    	pInfo["IAPId"] = "android.test.purchased";
-        MyPurchase::getInstance()->payByMode(pInfo, mode);
-
-    });
-    panel->addChild(btnGoogle);    
-    */
-
-    //MenuItemFont* testPluginPurchase = MenuItemFont::create("Test purchase", CC_CALLBACK_1([](Ref* pSender) {}, this));
-    //MenuItemFont* getUnfulfilledConsumables = MenuItemFont::create("Query unfulfilled consumables", CC_CALLBACK_1(TestIAP::queryUnfulfilledConsumables, this));
-    //MenuItemFont* reportFulfillment = MenuItemFont::create("Report fulfillment", CC_CALLBACK_1(TestIAP::reportFulfillment, this));
-    //MenuItemFont* listingItems = MenuItemFont::create("Get all product IDs", CC_CALLBACK_1(TestIAP::getAllListingItems, this));
-
-    //auto testMenu = Menu::create(testPluginPurchase, /*getUnfulfilledConsumables, reportFulfillment, listingItems, */NULL);
-    //testMenu->alignItemsVertically();
-    //testMenu->setPosition(Vec2(winSize.width / 2, winSize.height - (testMenu->getContentSize().height / 2)));
-    //this->addChild(testMenu, 1);
-
-    //label = LabelTTF::create("new session", "Arial", 20);
-    //label->setPosition(Vec2(winSize.width / 2, label->getContentSize().height));
-    //this->addChild(label, 1);
-
-
-
     return true;
 }
