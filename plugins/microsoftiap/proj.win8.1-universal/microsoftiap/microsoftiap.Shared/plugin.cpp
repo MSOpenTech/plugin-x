@@ -302,8 +302,10 @@ namespace microsoftiap {
             while (it->HasCurrent)
             {
                 T_item^ item = (T_item^)it->Current;
-                Platform::String^ key = item->Key;
-                xmlString += L"<product_id>" + key + L"</product_id>";
+                if (item->Value->IsActive) {
+                    Platform::String^ key = item->Key;
+                    xmlString += L"<product_id>" + key + L"</product_id>";
+                }
                 it->MoveNext();
             }
             xmlString += L"</product_ids>";
