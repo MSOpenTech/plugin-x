@@ -244,42 +244,52 @@ namespace microsoftiap {
             GUID guid;
             HRESULT hresult = CLSIDFromString((LPWSTR)transactionId->Data(), (LPCLSID)&guid);
             Platform::Guid transactionIdGuid = Guid(guid);
-            task<FulfillmentResult> reportingTask;
-            if (debugMode) {
-                reportingTask = create_task(CurrentAppSimulator::ReportConsumableFulfillmentAsync(productId, transactionIdGuid));
-            }
-            else {
-                reportingTask = create_task(CurrentApp::ReportConsumableFulfillmentAsync(productId, transactionIdGuid));
-            }
-            FulfillmentResult ret;
-            reportingTask.then([this, &ret](FulfillmentResult result) {
-                ret = result;
+            Windows::Foundation::IAsyncOperation<FulfillmentResult>^ asyncOp = nullptr;
+            Windows::Foundation::IAsyncAction^ asyncAction = dispatcher->RunAsync(
+                Windows::UI::Core::CoreDispatcherPriority::Normal,
+                ref new Windows::UI::Core::DispatchedHandler([this, &asyncOp, &productId, &transactionIdGuid]() {
+                    if (debugMode) {
+                        asyncOp = CurrentAppSimulator::ReportConsumableFulfillmentAsync(productId, transactionIdGuid);
+                    }
+                    else {
+                        asyncOp = CurrentApp::ReportConsumableFulfillmentAsync(productId, transactionIdGuid);
+                    }
+                }
+            ));
+            FulfillmentResult* result = new FulfillmentResult;
+            create_task(asyncAction).wait();
+            create_task(asyncOp).then([&result](FulfillmentResult r) {
+                *result = r;
             }).wait();
+            FulfillmentResult ret = *result;
+            delete result;
             return ret;
         }
 
         Platform::String^ fetchUnfulfilledConsumables() {
-            task<IVectorView<UnfulfilledConsumable^>^> consumablesTask;
-            if (debugMode) {
-                consumablesTask = create_task(CurrentAppSimulator::GetUnfulfilledConsumablesAsync()).then([this](task<IVectorView<UnfulfilledConsumable^>^> currentTask) {
-                    return currentTask;
-                });
-            }
-            else {
-                consumablesTask = create_task(CurrentApp::GetUnfulfilledConsumablesAsync()).then([this](task<IVectorView<UnfulfilledConsumable^>^> currentTask) {
-                    return currentTask;
-                });
-            }
-            Platform::String^ xmlString;
-            consumablesTask.then([this, &xmlString](IVectorView<UnfulfilledConsumable^>^ consumables) {
-                UnfulfilledConsumable^ c;
-                xmlString = L"<?xml version=\"1.0\" encoding=\"utf-8\"?><unfulfilled_consumables>";
-                for (int i = 0; i < consumables->Size; ++i) {
-                    c = consumables->GetAt(i);
-                    xmlString += L"<consumable product_id=\"" + c->ProductId + L"\" transaction_id=\"" + c->TransactionId + L"\" />";
+            Windows::Foundation::IAsyncOperation<IVectorView<UnfulfilledConsumable^>^>^ asyncOp = nullptr;
+            Windows::Foundation::IAsyncAction^ asyncAction = dispatcher->RunAsync(
+                Windows::UI::Core::CoreDispatcherPriority::Normal,
+                ref new Windows::UI::Core::DispatchedHandler([this, &asyncOp]() {
+                    if (debugMode) {
+                        asyncOp = CurrentAppSimulator::GetUnfulfilledConsumablesAsync();
+                    }
+                    else {
+                        asyncOp = CurrentApp::GetUnfulfilledConsumablesAsync();
+                    }
                 }
-                xmlString += L"</unfulfilled_consumables>";
+            ));
+            create_task(asyncAction).wait();
+            IVectorView<UnfulfilledConsumable^>^ consumables = nullptr;
+            create_task(asyncOp).then([&consumables](IVectorView<UnfulfilledConsumable^>^ result) {
+                consumables = result;
             }).wait();
+            UnfulfilledConsumable^ c;
+            Platform::String^ xmlString = L"<?xml version=\"1.0\" encoding=\"utf-8\"?><unfulfilled_consumables>";
+            for (int i = 0; i < consumables->Size; ++i) {
+                c = consumables->GetAt(i);
+                xmlString += L"<consumable product_id=\"" + c->ProductId + L"\" transaction_id=\"" + c->TransactionId + L"\" />";
+            }
             return xmlString;
         }
 
