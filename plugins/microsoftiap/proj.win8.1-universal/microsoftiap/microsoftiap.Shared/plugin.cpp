@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "pch.h"
 #include "plugin.h"
 
+#include <set>
 #include <iostream>
 
 using namespace concurrency;
@@ -81,8 +82,8 @@ namespace microsoftiap {
         }
 
         virtual Platform::String^ callStringFuncWithParam(Platform::String^ funcName, Windows::Foundation::Collections::IVector<IPluginParam^>^ params) {
-            if (funcName == L"getEntitledProducts") {
-                return getEntitledProducts();
+            if (funcName == L"getEntitledDurables") {
+                return getEntitledDurables();
             }
             if (funcName == L"getUnfulfilledConsumables") {
                 return fetchUnfulfilledConsumables();
@@ -266,7 +267,7 @@ namespace microsoftiap {
             return ret;
         }
 
-        Platform::String^ fetchUnfulfilledConsumables() {
+        IVectorView<UnfulfilledConsumable^>^ unfulfilledConsumables() {
             Windows::Foundation::IAsyncOperation<IVectorView<UnfulfilledConsumable^>^>^ asyncOp = nullptr;
             Windows::Foundation::IAsyncAction^ asyncAction = dispatcher->RunAsync(
                 Windows::UI::Core::CoreDispatcherPriority::Normal,
@@ -284,6 +285,11 @@ namespace microsoftiap {
             create_task(asyncOp).then([&consumables](IVectorView<UnfulfilledConsumable^>^ result) {
                 consumables = result;
             }).wait();
+            return consumables;
+        }
+        
+        Platform::String^ fetchUnfulfilledConsumables() {
+            IVectorView<UnfulfilledConsumable^>^ consumables = unfulfilledConsumables();
             UnfulfilledConsumable^ c;
             Platform::String^ xmlString = L"<?xml version=\"1.0\" encoding=\"utf-8\"?><unfulfilled_consumables>";
             for (int i = 0; i < consumables->Size; ++i) {
@@ -293,16 +299,21 @@ namespace microsoftiap {
             return xmlString;
         }
 
-        Platform::String^ getEntitledProducts() {
-           typedef Windows::Foundation::Collections::IKeyValuePair<Platform::String^, ProductLicense^>  T_item;
+        Platform::String^ getEntitledDurables() {
+            std::set<Platform::String^> consumableIds;
+            IVectorView<UnfulfilledConsumable^>^ consumables = unfulfilledConsumables();
+            for (int i = 0; i < consumables->Size; ++i) {
+                consumableIds.insert(consumables->GetAt(i)->ProductId);
+            }
+            typedef Windows::Foundation::Collections::IKeyValuePair<Platform::String^, ProductLicense^>  T_item;
 
-           LicenseInformation^ licenseInformation = getLicenseInformation();
-           Windows::Foundation::Collections::IIterator< T_item ^>^ it = (Windows::Foundation::Collections::IIterator< T_item ^>^)licenseInformation->ProductLicenses->First();
+            LicenseInformation^ licenseInformation = getLicenseInformation();
+            Windows::Foundation::Collections::IIterator< T_item ^>^ it = (Windows::Foundation::Collections::IIterator< T_item ^>^)licenseInformation->ProductLicenses->First();
             Platform::String^ xmlString = L"<?xml version=\"1.0\" encoding=\"utf-8\"?><product_ids>";
             while (it->HasCurrent)
             {
                 T_item^ item = (T_item^)it->Current;
-                if (item->Value->IsActive) {
+                if (!consumableIds.count(item->Key) && item->Value->IsActive) {
                     Platform::String^ key = item->Key;
                     xmlString += L"<product_id>" + key + L"</product_id>";
                 }
