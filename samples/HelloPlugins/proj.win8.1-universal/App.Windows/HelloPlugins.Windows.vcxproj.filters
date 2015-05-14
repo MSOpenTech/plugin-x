@@ -13,6 +13,8 @@
     <None Include="HelloPlugins.Windows_TemporaryKey.pfx" />
     <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\Debug\MicrosoftApplicationInsights.Windows\microsoftapplicationinsights.Windows.dll" />
     <None Include="..\..\..\..\plugins\microsoftiap\proj.win8.1-universal\Debug\microsoftiap.Windows\microsoftiap.Windows.dll" />
+    <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\packages\Microsoft.ApplicationInsights.0.14.0-build20632\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.winmd" />
+    <None Include="..\..\..\..\plugins\microsoftapplicationinsights\proj.win8.1-universal\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.16-beta\lib\net45\Microsoft.Diagnostics.Tracing.EventSource.dll" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Logo.scale-100.png">
@@ -27,5 +29,8 @@
     <Image Include="Assets\SplashScreen.scale-100.png">
       <Filter>Assets</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\Resources\WindowsStoreProxy.xml" />
   </ItemGroup>
 </Project>
