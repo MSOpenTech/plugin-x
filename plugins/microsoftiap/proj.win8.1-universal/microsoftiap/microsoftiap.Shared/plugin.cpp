@@ -46,7 +46,8 @@ using namespace cocosPluginWinrtBridge;
 
 namespace microsoftiap {
 
-    public ref class microsoftiap sealed : public cocosPluginWinrtBridge::IProtocolIAP {
+    [Windows::Foundation::Metadata::WebHostHidden]
+    public ref class microsoftiap sealed : public cocosPluginWinrtBridge::IProtocolIAP{
 	private:
 		bool debugMode;
         Windows::UI::Core::CoreDispatcher^ dispatcher;
