@@ -46,7 +46,8 @@ using namespace cocosPluginWinrtBridge;
 
 namespace microsoftiap {
 
-    public ref class microsoftiap sealed : public cocosPluginWinrtBridge::IProtocolIAP {
+    [Windows::Foundation::Metadata::WebHostHidden]
+    public ref class microsoftiap sealed : public cocosPluginWinrtBridge::IProtocolIAP{
 	private:
 		bool debugMode;
         Windows::UI::Core::CoreDispatcher^ dispatcher;
@@ -285,7 +286,7 @@ namespace microsoftiap {
             IVectorView<UnfulfilledConsumable^>^ consumables = unfulfilledConsumables();
             UnfulfilledConsumable^ c;
             Platform::String^ xmlString = L"<?xml version=\"1.0\" encoding=\"utf-8\"?><unfulfilled_consumables>";
-            for (int i = 0; i < consumables->Size; ++i) {
+            for (unsigned int i = 0; i < consumables->Size; ++i) {
                 c = consumables->GetAt(i);
                 xmlString += L"<consumable product_id=\"" + c->ProductId + L"\" transaction_id=\"" + c->TransactionId + L"\" />";
             }
@@ -295,7 +296,7 @@ namespace microsoftiap {
         Platform::String^ getEntitledDurables() {
             std::set<Platform::String^> consumableIds;
             IVectorView<UnfulfilledConsumable^>^ consumables = unfulfilledConsumables();
-            for (int i = 0; i < consumables->Size; ++i) {
+            for (unsigned int i = 0; i < consumables->Size; ++i) {
                 consumableIds.insert(consumables->GetAt(i)->ProductId);
             }
             typedef Windows::Foundation::Collections::IKeyValuePair<Platform::String^, ProductLicense^>  T_item;
