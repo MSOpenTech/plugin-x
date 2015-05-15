@@ -169,7 +169,7 @@ void MyPurchase::reportConsumablePurchase(char* productId, char* transactionId) 
     plugin::PluginParam transactionIdParam(transactionId);
     bool reportResult = iapPlugin->callBoolFuncWithParam("reportConsumableFulfillment", &productIdParam, &transactionIdParam, NULL);
     std::string result = reportResult ? "Success" : "Fail";
-    MessageBox(result.c_str(), "unfulfilled consumables result");
+    MessageBox(result.c_str(), "consumable fulfillment result");
 
 }
 #endif

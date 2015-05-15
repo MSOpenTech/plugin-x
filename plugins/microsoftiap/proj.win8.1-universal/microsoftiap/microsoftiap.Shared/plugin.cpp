@@ -130,15 +130,9 @@ namespace microsoftiap {
 			if (info->HasKey(PRODUCT_KEY)) {
 				product = info->Lookup(PRODUCT_KEY);
 			}
-			if (product != nullptr && licensingInfo->ProductLicenses->HasKey(product)) {
-				foundProduct = true;
-				activeProduct = licensingInfo->ProductLicenses->Lookup(product)->IsActive;
-			}
+            activeProduct = licensingInfo->ProductLicenses->Lookup(product)->IsActive;
 			if (product == nullptr) {
 				OnPayResult(PayResultCodeEnum::kPayFail, "product key not found");
-			}
-			else if (foundProduct == false) {
-				OnPayResult(PayResultCodeEnum::kPayFail, "product not found");
 			}
 			else if (activeProduct == true) {
 				OnPayResult(PayResultCodeEnum::kPayFail, "product already purchased");
@@ -150,17 +144,16 @@ namespace microsoftiap {
 		}
 
         // waits on async action, then sends result to cocos app
-        void sendResult(Windows::Foundation::IAsyncOperation <Platform::String^> ^ asyncOp, Platform::String^ product) {
+        void sendResult(Windows::Foundation::IAsyncOperation <PurchaseResults^> ^ asyncOp, Platform::String^ product) {
             auto purchaseTask = create_task(asyncOp);
             auto wrapperTask = create_task([purchaseTask]() {
                 return purchaseTask;
             });
-            wrapperTask.then([this, product](task<Platform::String^> t) {
+            wrapperTask.then([this, product](task<PurchaseResults^> t) {
                 try {
-                    Platform::String^ receipt = t.get();
-                    LicenseInformation^ licenseInfo = getLicenseInformation();
-                    if (licenseInfo->ProductLicenses->Lookup(product)->IsActive) {
-                        OnPayResult(PayResultCodeEnum::kPaySuccess, receipt);
+                    PurchaseResults^ purchaseResults = t.get();
+                    if (purchaseResults->Status == ProductPurchaseStatus::Succeeded) {
+                        OnPayResult(PayResultCodeEnum::kPaySuccess, purchaseResults->ReceiptXml);
                     }
                     else {
                         OnPayResult(PayResultCodeEnum::kPayFail, "product was not purchased");
@@ -210,12 +203,12 @@ namespace microsoftiap {
                 Windows::UI::Core::CoreDispatcherPriority::Normal,
                 ref new Windows::UI::Core::DispatchedHandler([this, product]() {
                 try {
-                    Windows::Foundation::IAsyncOperation <Platform::String^>^ asyncOp = nullptr;
+                    Windows::Foundation::IAsyncOperation<PurchaseResults^>^ asyncOp = nullptr;
                     if (this->getDebugMode()) {
-                        asyncOp = CurrentAppSimulator::RequestProductPurchaseAsync(product, true);
+                        asyncOp = CurrentAppSimulator::RequestProductPurchaseAsync(product);
                     }
                     else {
-                        asyncOp = CurrentApp::RequestProductPurchaseAsync(product, true);
+                        asyncOp = CurrentApp::RequestProductPurchaseAsync(product);
                     }
                     this->sendResult(asyncOp, product);
                 }
