@@ -95,6 +95,19 @@ bool TestIAP::init()
     panel->addChild(purchaseButton);
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+
+    auto purchaseConsumableButton = Button::create("btn_normal.png", "btn_pressed.png");
+    purchaseConsumableButton->setTitleText("test purchase consumable");
+    purchaseConsumableButton->setScale(2);
+    purchaseConsumableButton->setLayoutParameter(llp);
+    purchaseConsumableButton->addClickEventListener([](Ref* pSender) {
+        MyPurchase::MyPayMode mode = MyPurchase::MyPayMode::eGoogle;
+        std::map<std::string, std::string> productInfo;
+        productInfo["product"] = "consumable2";
+        MyPurchase::getInstance()->payByMode(productInfo, MyPurchase::MyPayMode::eGoogle);
+    });
+    panel->addChild(purchaseConsumableButton);
+
     auto unfulfilledConsumablesButton = Button::create("btn_normal.png", "btn_pressed.png");
     unfulfilledConsumablesButton->setTitleText("report consumable fulfillment");
     unfulfilledConsumablesButton->setScale(2);
