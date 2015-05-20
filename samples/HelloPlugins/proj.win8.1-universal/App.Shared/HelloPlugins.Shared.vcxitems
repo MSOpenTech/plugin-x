@@ -42,6 +42,7 @@
     </ClCompile>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\AppDelegate.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\AppMacros.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Configs.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\HelloWorldScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestAds\TestAdsScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\TestAnalytics\TestAnalyticsScene.h" />
@@ -82,9 +83,8 @@
     <Page Include="$(MSBuildThisFileDirectory)OpenGLESPage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)ApplicationInsights.config">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
+    <Xml Include="$(MSBuildThisFileDirectory)StoreManifest.xml" />
+    <Xml Include="$(MSBuildThisFileDirectory)WindowsStoreProxy.xml" />
   </ItemGroup>
   <Target Name="_CollectCustomResources" BeforeTargets="AssignTargetPaths">
     <Message Text="Adding resource: %(_CustomResource.Identity) -&gt; %(_CustomResource.Link)" />

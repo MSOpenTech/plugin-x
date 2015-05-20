@@ -99,8 +99,8 @@ void MyPurchase::loadIAPPlugin()
 		iapPlugin->setDebugMode(true);
 	}
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-    auto dispatcher = App::GetDispatcher();
     auto factory = plugin::PluginFactory::getInstance();
+    auto dispatcher = cocos2d::GLViewImpl::sharedOpenGLView()->getDispatcher();
     factory->setDispatcher(dispatcher);
     iapPlugin = dynamic_cast<ProtocolIAP*>(PluginManager::getInstance()->loadPlugin(PLUGIN_NAME));
     iapPlugin->setDebugMode(true);
