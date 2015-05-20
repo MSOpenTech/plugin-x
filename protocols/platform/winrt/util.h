@@ -41,7 +41,7 @@ namespace pluginx {
     namespace util {
         Platform::String^ charArrayToPlatformString(const char* chStr);
         Platform::String^ stdStringToPlatformString(const std::string str);
-        pluginparam::PluginParamWinRT^ toWinRT(cocos2d::plugin::PluginParam* param);
+        cocos2d::pluginparam::PluginParamWinRT^ toWinRT(cocos2d::plugin::PluginParam* param);
         Platform::Collections::Vector<cocosPluginWinrtBridge::IPluginParam^>^ stdVectorToPlatformVector(std::vector<cocos2d::plugin::PluginParam*> vec);
         const char* PlatformStringToCharArray(Platform::String^);
         std::string PlatformStringToStdString(Platform::String^);

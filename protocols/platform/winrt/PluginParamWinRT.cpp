@@ -27,33 +27,36 @@ THE SOFTWARE.
 
 #include "PluginParamWinRT.h"
 
-namespace pluginparam {
+namespace cocos2d {
 
-	void PluginParamWinRT::setCurrentType(cocosPluginWinrtBridge::ParamTypeEnum t) {
-		paramType = t;
-	}
+    namespace pluginparam {
 
-	void PluginParamWinRT::setIntValue(int val) {
-		intValue = val;
-	}
+        void PluginParamWinRT::setCurrentType(cocosPluginWinrtBridge::ParamTypeEnum t) {
+            paramType = t;
+        }
 
-	void PluginParamWinRT::setFloatValue(float val) {
-		floatValue = val;
-	}
+        void PluginParamWinRT::setIntValue(int val) {
+            intValue = val;
+        }
 
-	void PluginParamWinRT::setBoolValue(bool val) {
-		boolValue = val;
-	}
+        void PluginParamWinRT::setFloatValue(float val) {
+            floatValue = val;
+        }
 
-	void PluginParamWinRT::setStringValue(Platform::String^ val) {
-		strValue = val;
-	}
+        void PluginParamWinRT::setBoolValue(bool val) {
+            boolValue = val;
+        }
 
-	void PluginParamWinRT::setMapValue(IMap<Platform::String^, cocosPluginWinrtBridge::IPluginParam^>^ val) {
-		mapValue = val;
-	}
+        void PluginParamWinRT::setStringValue(Platform::String^ val) {
+            strValue = val;
+        }
 
-	void PluginParamWinRT::setStrMapValue(IMap<Platform::String^, Platform::String^>^ val) {
-		strMapValue = val;
-	}
+        void PluginParamWinRT::setMapValue(IMap<Platform::String^, cocosPluginWinrtBridge::IPluginParam^>^ val) {
+            mapValue = val;
+        }
+
+        void PluginParamWinRT::setStrMapValue(IMap<Platform::String^, Platform::String^>^ val) {
+            strMapValue = val;
+        }
+    }
 }

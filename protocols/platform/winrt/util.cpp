@@ -33,7 +33,7 @@ using namespace cocos2d::plugin;
 using namespace Microsoft::WRL;
 using namespace Microsoft::WRL::Wrappers;
 using namespace Platform;
-using namespace pluginparam;
+using namespace cocos2d::pluginparam;
 using namespace Platform::Collections;
 using namespace cocosPluginWinrtBridge;
 

@@ -40,7 +40,7 @@ using namespace Microsoft::WRL::Wrappers;
 using namespace cocosPluginWinrtBridge;
 using namespace pluginx::util;
 using namespace Platform::Collections;
-using namespace pluginparam;
+using namespace cocos2d::pluginparam;
 
 PluginProtocol::~PluginProtocol() {
 }
