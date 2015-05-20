@@ -112,6 +112,7 @@
       <PrecompiledHeaderFile />
       <PrecompiledHeaderOutputFile />
       <PreprocessorDefinitions>CC_TARGET_PLATFORM=CC_PLATFORM_WINRT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,6 +121,7 @@
     </Link>
     <Lib>
       <AdditionalOptions>/IGNORE:4264 %(AdditionalOptions)</AdditionalOptions>
+      <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|arm'">
@@ -155,6 +157,7 @@
       <PrecompiledHeaderFile />
       <PrecompiledHeaderOutputFile />
       <PreprocessorDefinitions>CC_TARGET_PLATFORM=CC_PLATFORM_WINRT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,6 +166,7 @@
     </Link>
     <Lib>
       <AdditionalOptions>/IGNORE:4264 %(AdditionalOptions)</AdditionalOptions>
+      <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

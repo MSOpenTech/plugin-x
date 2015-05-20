@@ -102,10 +102,12 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)/../../../../../protocols/platform/winrt/winrtInterface/winrtInterface/winrtInterface.Shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <LinkTimeCodeGeneration />
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -132,10 +134,12 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)/../../../../../protocols/platform/winrt/winrtInterface/winrtInterface/winrtInterface.Shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <LinkTimeCodeGeneration />
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
