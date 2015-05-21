@@ -23,15 +23,13 @@ THE SOFTWARE.
 ****************************************************************************/
 #include "MyPurchase.h"
 #include "PluginManager.h"
+#include "PluginFactory.h"
 #include "cocos2d.h"
 #include "Configs.h"
 
-#define PLUGIN_NAME "IAPGooglePlay"
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-    #include "App.xaml.h"
-    #include "PluginFactory.h"
-    #undef PLUGIN_NAME
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    #define PLUGIN_NAME "IAPGooglePlay"
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
     #define PLUGIN_NAME "microsoftiap"
 #endif
 
@@ -82,33 +80,32 @@ void MyPurchase::loadIAPPlugin()
 		s_pRetListener = new MyPurchaseResult();
 	}
 
+    TIAPDeveloperInfo pDevInfo;
+
 	//Google IAP
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	{
-		TIAPDeveloperInfo pGoogleInfo;
-		pGoogleInfo["GooglePlayAppKey"] = GOOGLE_APPKEY;
-
-		if(pGoogleInfo.empty()) {
+		pDevInfo["GooglePlayAppKey"] = GOOGLE_APPKEY;
+		if(pDevInfo.empty()) 
+        {
 			char msg[256] = { 0 };
 			sprintf(msg, "Google App Key info is empty. PLZ fill your Google App Key info in %s(nearby line %d)", __FILE__, __LINE__);
 			MessageBox(msg, "Google IAP Warning");
 		}
-		iapPlugin = dynamic_cast<ProtocolIAP*>(PluginManager::getInstance()->loadPlugin(PLUGIN_NAME));
-		iapPlugin->configDeveloperInfo(pGoogleInfo);
-		iapPlugin->setResultListener(s_pRetListener);
-		iapPlugin->setDebugMode(true);
 	}
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-    auto factory = plugin::PluginFactory::getInstance();
-    auto dispatcher = cocos2d::GLViewImpl::sharedOpenGLView()->getDispatcher();
-    factory->setDispatcher(dispatcher);
+    // Windows Store IAP
+    {
+        auto factory = plugin::PluginFactory::getInstance();
+        auto dispatcher = cocos2d::GLViewImpl::sharedOpenGLView()->getDispatcher();
+        factory->setDispatcher(dispatcher);
+        pDevInfo["windows_store_proxy"] = "WindowsStoreProxy.xml";
+    }
+#endif
     iapPlugin = dynamic_cast<ProtocolIAP*>(PluginManager::getInstance()->loadPlugin(PLUGIN_NAME));
     iapPlugin->setDebugMode(true);
     iapPlugin->setResultListener(s_pRetListener);
-    std::map<std::string, std::string> devInfo;
-    devInfo["windows_store_proxy"] = "WindowsStoreProxy.xml";
-    iapPlugin->configDeveloperInfo(devInfo);
-#endif
+    iapPlugin->configDeveloperInfo(pDevInfo);
 }
 
 void MyPurchase::unloadIAPPlugin()
