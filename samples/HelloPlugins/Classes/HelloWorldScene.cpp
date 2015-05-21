@@ -18,11 +18,9 @@ std::string g_testCases[] = {
     "Test Facebook User",
     "Test Facebook Share",
     "Test IAP",
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     "Test IAP Online",
     "Test User",
     "Test Social",
-#endif
 };
 
 Scene* HelloWorld::scene()
@@ -89,6 +87,7 @@ void HelloWorld::menuCallback(Ref* pSender)
     MenuItemFont *pItem = (MenuItemFont*) pSender;
     Scene* newScene = NULL;
     switch (pItem->getTag()) {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     case 0:
         newScene = TestAds::scene();
         break;
@@ -104,9 +103,11 @@ void HelloWorld::menuCallback(Ref* pSender)
     case 4:
         newScene = TestFacebookShare::scene();
         break;
+#endif
     case 5:
         newScene = TestIAP::scene();
         break;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     case 6:
         newScene = TestIAPOnline::scene();
         break;
@@ -116,6 +117,7 @@ void HelloWorld::menuCallback(Ref* pSender)
     case 8:
         newScene = TestSocial::scene();
         break;
+#endif
     case 9:
         break;
     default:
