@@ -29,11 +29,6 @@
 #define UMENG_KEY_ANDROID       ""          // umeng key for android is setted in AndroidManifest.xml
 
 /**
-@brief Developer information of MicrosoftApplicationInsights
-*/
-#define MSAPPLICATIONINSIGHTS_KEY_WINDOWS  "2169ec9b-b3fd-4e27-aed3-150fb42e84a0" //ms app insights defined in ApplicationInsights.config
-
-/**
  @brief Developer information of Admob
  */
 #define ADMOB_ID_IOS            "a1517500cc8f794"
